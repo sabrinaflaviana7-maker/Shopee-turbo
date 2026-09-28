@@ -1,290 +1,437 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#ff5a00">
-  <meta name="mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#ff5a00">
+<link rel="manifest" href="./manifest.json">
+<title>Shopee Turbo</title>
 
-  <link rel="manifest" href="./manifest.json">
-
-  <title>Shopee Turbo</title>
-
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    body {
-      font-family: Arial, sans-serif;
-      background: #f5f5f5;
-      color: #222;
-      padding-bottom: 80px;
-    }
-
-    header {
-      background: linear-gradient(135deg, #ff5a00, #ff7a00);
-      color: white;
-      padding: 28px 20px;
-      border-radius: 0 0 24px 24px;
-    }
-
-    header h1 {
-      font-size: 28px;
-      margin-bottom: 8px;
-    }
-
-    header p {
-      font-size: 15px;
-      opacity: .95;
-    }
-
-    .container {
-      padding: 18px;
-      max-width: 700px;
-      margin: auto;
-    }
-
-    .view {
-      display: none;
-    }
-
-    .view.active {
-      display: block;
-    }
-
-    .section-title {
-      font-size: 22px;
-      margin: 8px 0 16px;
-    }
-
-    .card {
-      background: white;
-      border-radius: 16px;
-      padding: 18px;
-      margin-bottom: 14px;
-      box-shadow: 0 3px 12px rgba(0,0,0,.07);
-    }
-
-    .card h3 {
-      margin-bottom: 8px;
-    }
-
-    .card p {
-      color: #666;
-      font-size: 14px;
-      line-height: 1.5;
-    }
-
-    .price {
-      font-size: 20px;
-      font-weight: bold;
-      color: #ff5a00;
-      margin: 10px 0;
-    }
-
-    .commission {
-      display: inline-block;
-      background: #fff1e8;
-      color: #ff5a00;
-      padding: 6px 10px;
-      border-radius: 20px;
-      font-size: 12px;
-      font-weight: bold;
-    }
-
-    button {
-      border: none;
-      border-radius: 12px;
-      padding: 13px 16px;
-      background: #ff5a00;
-      color: white;
-      font-weight: bold;
-      cursor: pointer;
-      width: 100%;
-      margin-top: 10px;
-    }
-
-    button.secondary {
-      background: #222;
-    }
-
-    input, select, textarea {
-      width: 100%;
-      padding: 13px;
-      margin-top: 7px;
-      margin-bottom: 12px;
-      border: 1px solid #ddd;
-      border-radius: 10px;
-      font-size: 15px;
-      background: white;
-    }
-
-    label {
-      font-size: 13px;
-      font-weight: bold;
-    }
-
-    .stats {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 10px;
-      margin-bottom: 18px;
-    }
-
-    .stat {
-      background: white;
-      border-radius: 14px;
-      padding: 14px 8px;
-      text-align: center;
-      box-shadow: 0 3px 10px rgba(0,0,0,.05);
-    }
-
-    .stat strong {
-      display: block;
-      font-size: 20px;
-      color: #ff5a00;
-      margin-bottom: 5px;
-    }
-
-    .stat span {
-      font-size: 11px;
-      color: #777;
-    }
-
-    .product-list {
-      display: grid;
-      gap: 12px;
-    }
-
-    .empty {
-      text-align: center;
-      padding: 30px 15px;
-      color: #777;
-    }
-
-    .bottom-nav {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      height: 68px;
-      background: white;
-      border-top: 1px solid #ddd;
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      z-index: 1000;
-    }
-
-    .nav-btn {
-      background: transparent;
-      color: #777;
-      border-radius: 0;
-      margin: 0;
-      padding: 7px 2px;
-      font-size: 11px;
-    }
-
-    .nav-btn.active {
-      color: #ff5a00;
-      font-weight: bold;
-    }
-
-    .nav-icon {
-      display: block;
-      font-size: 20px;
-      margin-bottom: 3px;
-    }
-
-    .content-box {
-      background: #fff8f3;
-      border: 1px solid #ffd8c2;
-      border-radius: 14px;
-      padding: 15px;
-      margin-top: 12px;
-      white-space: pre-line;
-      line-height: 1.5;
-      font-size: 14px;
-    }
-
-    .tag {
-      display: inline-block;
-      background: #eee;
-      border-radius: 15px;
-      padding: 5px 8px;
-      margin: 3px;
-      font-size: 12px;
-    }
-
-    .hero-card {
-      background: linear-gradient(135deg, #222, #444);
-      color: white;
-      border-radius: 18px;
-      padding: 20px;
-      margin-bottom: 18px;
-    }
-
-    .hero-card h2 {
-      margin-bottom: 8px;
-    }
-
-    .hero-card p {
-      color: #ddd;
-    }
-
-    .small {
-      font-size: 12px;
-      color: #777;
-      margin-top: 8px;
-    }
-  </style>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:#f5f5f5;color:#222;padding-bottom:80px}
+header{background:linear-gradient(135deg,#ff5a00,#ff7a00);color:#fff;padding:28px 20px;border-radius:0 0 24px 24px}
+header h1{margin:0 0 7px;font-size:28px}
+header p{margin:0;font-size:15px}
+.container{max-width:700px;margin:auto;padding:18px}
+.view{display:none}
+.view.active{display:block}
+.title{font-size:22px;margin:8px 0 16px}
+.card{background:#fff;border-radius:16px;padding:18px;margin-bottom:14px;box-shadow:0 3px 12px rgba(0,0,0,.07)}
+.card h3{margin-top:0}
+.card p{color:#666;line-height:1.5;font-size:14px}
+.hero{background:#222;color:#fff;border-radius:18px;padding:20px;margin-bottom:18px}
+.hero p{color:#ddd}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:18px}
+.stat{background:#fff;border-radius:14px;padding:14px 5px;text-align:center}
+.stat strong{display:block;color:#ff5a00;font-size:20px}
+.stat span{font-size:11px;color:#777}
+button{width:100%;border:0;border-radius:12px;padding:13px;background:#ff5a00;color:#fff;font-weight:bold;margin-top:10px}
+button.dark{background:#222}
+input,select,textarea{width:100%;padding:13px;margin:7px 0 13px;border:1px solid #ddd;border-radius:10px;font-size:15px;background:#fff}
+label{font-size:13px;font-weight:bold}
+.nav{position:fixed;bottom:0;left:0;right:0;height:68px;background:#fff;border-top:1px solid #ddd;display:grid;grid-template-columns:repeat(5,1fr);z-index:10}
+.nav button{background:#fff;color:#777;margin:0;border-radius:0;padding:6px 2px;font-size:11px}
+.nav button.active{color:#ff5a00}
+.icon{display:block;font-size:20px}
+.box{background:#fff8f3;border:1px solid #ffd8c2;border-radius:14px;padding:15px;margin-top:12px;white-space:pre-line;line-height:1.5;font-size:14px}
+.empty{text-align:center;color:#777;padding:25px}
+.small{font-size:12px;color:#777}
+</style>
 </head>
 
 <body>
 
-  <header>
-    <h1>🛍️ Shopee Turbo</h1>
-    <p>Encontre. Crie. Divulgue. Venda.</p>
-  </header>
+<header>
+<h1>🛍️ Shopee Turbo</h1>
+<p>Encontre. Crie. Divulgue. Venda.</p>
+</header>
 
-  <main class="container">
+<main class="container">
 
-    <!-- INÍCIO -->
-    <section id="inicio" class="view active">
+<section id="inicio" class="view active">
+<div class="hero">
+<h2>🚀 Seu painel de afiliado</h2>
+<p>Organize produtos, crie conteúdos e acompanhe seus resultados.</p>
+</div>
 
-      <div class="hero-card">
-        <h2>🚀 Seu painel de afiliado</h2>
-        <p>Organize produtos, crie conteúdos e acompanhe seus resultados.</p>
-      </div>
+<div class="stats">
+<div class="stat"><strong id="totalProdutos">0</strong><span>Produtos</span></div>
+<div class="stat"><strong>0</strong><span>Cliques</span></div>
+<div class="stat"><strong>R$ 0</strong><span>Comissões</span></div>
+</div>
 
-      <div class="stats">
-        <div class="stat">
-          <strong id="homeProducts">0</strong>
-          <span>Produtos</span>
-        </div>
+<h2 class="title">⚡ Acesso rápido</h2>
 
-        <div class="stat">
-          <strong>0</strong>
-          <span>Cliques</span>
-        </div>
+<div class="card">
+<h3>🛒 Produtos</h3>
+<p>Cadastre e organize seus produtos.</p>
+<button onclick="abrir('produtos')">Ver produtos</button>
+</div>
 
-        <div class="stat">
-          <strong>R$ 0</strong>
-          <span>Comissões</span>
-        </div>
-      </div>
+<div class="card">
+<h3>✍️ Criar conteúdo</h3>
+<p>Crie roteiro, legenda, hashtags e CTA.</p>
+<button onclick="abrir('conteudo')">Criar conteúdo</button>
+</div>
 
-      <h2 class="section-title">⚡ Acesso rápido</h2>
+<div class="card">
+<h3>🔗 Meus links</h3>
+<p>Organize seus links de afiliado.</p>
+<button onclick="abrir('links')">Ver meus links</button>
+</div>
+</section>
 
-      <div class="card">
-        <h3>🛒 Produtos</h3>
-        <p>Cadastre e organize os produtos que você deseja divulgar.</p>
-        <button onclick="showView('produtos')">Ver produtos</button>
-      </div>
 
-      <div class="card">
-        <h3>✍️ Criar conteúdo</h3>
+<section id="produtos" class="view">
+<h2 class="title">🛒 Produtos</h2>
+
+<div class="card">
+<h3>Adicionar produto</h3>
+
+<label>Nome do produto</label>
+<input id="nome" placeholder="Ex.: Mini Seladora Portátil">
+
+<label>Preço</label>
+<input id="preco" type="number" step="0.01" placeholder="24.90">
+
+<label>Comissão %</label>
+<input id="comissao" type="number" step="0.1" placeholder="14">
+
+<label>Categoria</label>
+<input id="categoria" placeholder="Ex.: Cozinha">
+
+<label>Link de afiliado</label>
+<input id="link" placeholder="Cole seu link aqui">
+
+<button onclick="adicionar()">➕ Adicionar produto</button>
+</div>
+
+<div id="lista"></div>
+</section>
+
+
+<section id="links" class="view">
+<h2 class="title">🔗 Meus links</h2>
+<div id="listaLinks"></div>
+</section>
+
+
+<section id="conteudo" class="view">
+<h2 class="title">✍️ Criar conteúdo</h2>
+
+<div class="card">
+<label>Produto</label>
+<select id="produtoConteudo"></select>
+
+<label>Tipo</label>
+<select id="tipo">
+<option value="viral">🔥 Achadinho viral</option>
+<option value="oferta">💰 Oferta</option>
+<option value="review">⭐ Review</option>
+<option value="problema">💡 Problema e solução</option>
+</select>
+
+<button onclick="gerar()">✨ Gerar conteúdo</button>
+</div>
+
+<div id="resultadoConteudo"></div>
+</section>
+
+
+<section id="resultados" class="view">
+<h2 class="title">📊 Resultados</h2>
+
+<div class="stats">
+<div class="stat"><strong>0</strong><span>Cliques</span></div>
+<div class="stat"><strong>0</strong><span>Vendas</span></div>
+<div class="stat"><strong>R$ 0</strong><span>Comissões</span></div>
+</div>
+
+<div class="card">
+<h3>📈 Seus resultados</h3>
+<p>Os resultados reais serão mostrados quando houver uma integração autorizada.</p>
+</div>
+</section>
+
+</main>
+
+
+<nav class="nav">
+
+<button onclick="abrir('inicio',this)" class="active">
+<span class="icon">🏠</span>Início
+</button>
+
+<button onclick="abrir('produtos',this)">
+<span class="icon">🛒</span>Produtos
+</button>
+
+<button onclick="abrir('links',this)">
+<span class="icon">🔗</span>Links
+</button>
+
+<button onclick="abrir('conteudo',this)">
+<span class="icon">✍️</span>Conteúdo
+</button>
+
+<button onclick="abrir('resultados',this)">
+<span class="icon">📊</span>Resultados
+</button>
+
+</nav>
+
+
+<script>
+
+let produtos = JSON.parse(localStorage.getItem("shopee_turbo_produtos") || "[]");
+
+function salvar(){
+localStorage.setItem("shopee_turbo_produtos",JSON.stringify(produtos));
+}
+
+function abrir(id,botao){
+
+document.querySelectorAll(".view").forEach(function(v){
+v.classList.remove("active");
+});
+
+document.getElementById(id).classList.add("active");
+
+document.querySelectorAll(".nav button").forEach(function(b){
+b.classList.remove("active");
+});
+
+if(botao) botao.classList.add("active");
+
+atualizar();
+
+window.scrollTo(0,0);
+}
+
+function adicionar(){
+
+let nome=document.getElementById("nome").value.trim();
+let preco=document.getElementById("preco").value;
+let comissao=document.getElementById("comissao").value;
+let categoria=document.getElementById("categoria").value.trim();
+let link=document.getElementById("link").value.trim();
+
+if(!nome){
+alert("Digite o nome do produto.");
+return;
+}
+
+produtos.push({
+id:Date.now(),
+nome:nome,
+preco:preco,
+comissao:comissao || 0,
+categoria:categoria || "Sem categoria",
+link:link
+});
+
+salvar();
+
+document.getElementById("nome").value="";
+document.getElementById("preco").value="";
+document.getElementById("comissao").value="";
+document.getElementById("categoria").value="";
+document.getElementById("link").value="";
+
+alert("Produto adicionado com sucesso!");
+
+atualizar();
+}
+
+function excluir(id){
+
+if(confirm("Excluir este produto?")){
+produtos=produtos.filter(function(p){
+return p.id!==id;
+});
+salvar();
+atualizar();
+}
+}
+
+function atualizar(){
+
+document.getElementById("totalProdutos").textContent=produtos.length;
+
+let lista=document.getElementById("lista");
+
+if(produtos.length===0){
+
+lista.innerHTML='<div class="card empty">Nenhum produto cadastrado.</div>';
+
+}else{
+
+lista.innerHTML=produtos.map(function(p){
+
+return `
+<div class="card">
+<h3>${esc(p.nome)}</h3>
+<div style="font-size:20px;font-weight:bold;color:#ff5a00">
+R$ ${Number(p.preco||0).toFixed(2).replace(".",",")}
+</div>
+<p>${esc(p.categoria)}</p>
+<p>Comissão: ${p.comissao}%</p>
+
+${p.link ? `<button onclick="window.open('${esc(p.link)}','_blank')">🔗 Abrir link</button>` : ""}
+
+<button class="dark" onclick="excluir(${p.id})">🗑️ Excluir</button>
+</div>
+`;
+
+}).join("");
+
+}
+
+let links=document.getElementById("listaLinks");
+
+let comLinks=produtos.filter(function(p){
+return p.link;
+});
+
+if(comLinks.length===0){
+
+links.innerHTML=`
+<div class="card empty">
+<h3>🔗 Nenhum link</h3>
+<p>Adicione um produto com link de afiliado.</p>
+</div>`;
+
+}else{
+
+links.innerHTML=comLinks.map(function(p){
+
+return `
+<div class="card">
+<h3>${esc(p.nome)}</h3>
+<button onclick="window.open('${esc(p.link)}','_blank')">🔗 Abrir link</button>
+</div>
+`;
+
+}).join("");
+
+}
+
+let select=document.getElementById("produtoConteudo");
+
+if(produtos.length===0){
+
+select.innerHTML='<option>Nenhum produto cadastrado</option>';
+
+}else{
+
+select.innerHTML=produtos.map(function(p){
+
+return `<option value="${p.id}">${esc(p.nome)}</option>`;
+
+}).join("");
+
+}
+
+}
+
+function gerar(){
+
+let id=Number(document.getElementById("produtoConteudo").value);
+
+let tipo=document.getElementById("tipo").value;
+
+let p=produtos.find(function(x){
+return x.id===id;
+});
+
+if(!p){
+alert("Cadastre um produto primeiro.");
+return;
+}
+
+let abertura="";
+let texto="";
+let cta="";
+
+if(tipo==="viral"){
+abertura="🚨 OLHA ESSE ACHADINHO!";
+texto=`Encontrei o ${p.nome} por apenas R$ ${Number(p.preco||0).toFixed(2).replace(".",",")}. Uma opção prática para quem quer facilitar a rotina.`;
+cta="🔥 Corre conferir o produto!";
+}
+
+if(tipo==="oferta"){
+abertura="💰 OFERTA QUE VOCÊ PRECISA VER!";
+texto=`O ${p.nome} está por R$ ${Number(p.preco||0).toFixed(2).replace(".",",")}.`;
+cta="🛒 Confira o link e veja a oferta!";
+}
+
+if(tipo==="review"){
+abertura="⭐ SERÁ QUE VALE A PENA?";
+texto=`Hoje vamos falar sobre o ${p.nome} e mostrar os principais detalhes que podem ajudar você a decidir se ele faz sentido para sua rotina.`;
+cta="👇 Confira o produto!";
+}
+
+if(tipo==="problema"){
+abertura="😩 VOCÊ TAMBÉM TEM ESSE PROBLEMA?";
+texto=`O ${p.nome} pode ser uma alternativa prática para ajudar nessa situação e deixar o dia a dia mais simples.`;
+cta="✨ Veja o produto pelo link!";
+}
+
+document.getElementById("resultadoConteudo").innerHTML=`
+
+<div class="card">
+<h3>🎬 Roteiro</h3>
+<div class="box">${abertura}
+
+${texto}
+
+${cta}</div>
+<button onclick="copiarTexto('${encodeURIComponent(abertura+"\n\n"+texto+"\n\n"+cta)}')">📋 Copiar roteiro</button>
+</div>
+
+<div class="card">
+<h3>📝 Legenda</h3>
+<div class="box">${abertura}
+
+${texto}
+
+${cta}
+
+#shopee #achadinhos #ofertas #promoção #compras #viral #dicas</div>
+<button onclick="copiarTexto('${encodeURIComponent(abertura+"\n\n"+texto+"\n\n"+cta+"\n\n#shopee #achadinhos #ofertas #promoção #compras #viral #dicas")}')">📋 Copiar legenda</button>
+</div>
+
+`;
+
+}
+
+function copiarTexto(texto){
+
+navigator.clipboard.writeText(decodeURIComponent(texto))
+.then(function(){
+alert("Copiado!");
+})
+.catch(function(){
+alert("Não foi possível copiar automaticamente.");
+});
+
+}
+
+function esc(texto){
+
+return String(texto)
+.replace(/&/g,"&amp;")
+.replace(/</g,"&lt;")
+.replace(/>/g,"&gt;")
+.replace(/"/g,"&quot;")
+.replace(/'/g,"&#039;");
+
+}
+
+atualizar();
+
+</script>
+
+</body>
+</html>
