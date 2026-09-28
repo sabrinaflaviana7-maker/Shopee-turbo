@@ -1,15 +1,290 @@
-<!doctype html><html lang='pt-BR'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><meta name='theme-color' content='#ff5a00'><link rel='manifest' href='manifest.json'><meta name='mobile-web-app-capable' content='yes'><meta name='apple-mobile-web-app-capable' content='yes'><meta name='apple-mobile-web-app-status-bar-style' content='default'><meta name='apple-mobile-web-app-title' content='Shopee Turbo'><title>Shopee Turbo</title><style>*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:#f5f5f5;color:#222}.app{max-width:430px;margin:auto;min-height:100vh;background:#fff;padding-bottom:72px}.top{background:#ff5a00;color:#fff;padding:22px 18px;border-radius:0 0 24px 24px}.top h1{margin:0;font-size:25px}.top p{margin:6px 0 0;opacity:.9}.content{padding:16px}.stats{display:grid;grid-template-columns:1fr 1fr;gap:10px}.card{background:#fff;border:1px solid #eee;border-radius:16px;padding:14px;box-shadow:0 2px 8px #0000000a}.stat b{font-size:20px}.nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:min(430px,100%);background:#fff;border-top:1px solid #ddd;display:flex;justify-content:space-around;padding:8px 4px;z-index:5}.nav button{border:0;background:none;font-size:11px;color:#555}.nav button.active{color:#ff5a00;font-weight:bold}.actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 0}.actions button,.primary{border:0;border-radius:13px;padding:13px;background:#fff3ed;color:#d94700;font-weight:bold}.section{margin-top:18px}.section h2{font-size:18px;margin:0 0 10px}.product{display:flex;gap:12px;align-items:center;margin-bottom:10px}.pic{width:58px;height:58px;border-radius:12px;background:#ffe6d8;display:grid;place-items:center;font-size:27px}.product h3{font-size:14px;margin:0 0 4px}.muted{color:#777;font-size:12px}.price{font-weight:bold}.row{display:flex;justify-content:space-between;gap:8px}.input{width:100%;padding:12px;border:1px solid #ddd;border-radius:10px;margin:6px 0 10px}.hidden{display:none}.pill{display:inline-block;padding:5px 8px;background:#eee;border-radius:99px;font-size:11px}.copybox{background:#fafafa;border:1px solid #eee;border-radius:12px;padding:12px;white-space:pre-wrap;font-size:13px}.delete{background:none;border:0;color:#d33}.empty{text-align:center;color:#777;padding:30px 10px}</style></head><body><div class='app'><div class='top'><h1>🛍️ Shopee Turbo</h1><p>Encontre. Crie. Divulgue. Venda.</p></div><main class='content' id='app'></main><nav class='nav'><button onclick='show("home")'>🏠<br>Início</button><button onclick='show("products")'>🛍️<br>Produtos</button><button onclick='show("links")'>🔗<br>Links</button><button onclick='show("content")'>🤖<br>Conteúdo</button><button onclick='show("results")'>📊<br>Resultados</button></nav></div><script>
-const key='st_products';let products=JSON.parse(localStorage.getItem(key)||'null')||[{name:'Mini Seladora Portátil',price:24.9,commission:14,cat:'Cozinha & Casa',link:''},{name:'Organizador Giratório 360°',price:49.9,commission:16,cat:'Organização',link:''},{name:'Luminária Pôr do Sol RGB',price:39.9,commission:18,cat:'Decoração',link:''}];let view='home';function save(){localStorage.setItem(key,JSON.stringify(products))}function money(n){return 'R$ '+Number(n).toFixed(2).replace('.',',')}function show(v){view=v;render()}function render(){let a=document.getElementById('app');if(view==='home')a.innerHTML=`<div class='stats'><div class='card stat'><div class='muted'>Produtos</div><b>${products.length}</b></div><div class='card stat'><div class='muted'>Comissão média</div><b>${products.length?(products.reduce((s,p)=>s+Number(p.commission||0),0)/products.length).toFixed(1):0}%</b></div></div><div class='actions'><button onclick='show("products")'>🛍️ Catálogo</button><button onclick='show("content")'>✍️ Roteiro e Copys</button><button onclick='show("links")'>🔗 Meus Links</button><button onclick='show("results")'>🎬 Resultados</button></div><div class='section'><h2>Produtos para divulgar</h2>${products.slice(0,3).map(productHTML).join('')}</div>`;else if(view==='products')a.innerHTML=`<div class='row'><h2>Produtos Afiliados</h2><button class='primary' onclick='addForm()'>+ Produto</button></div><div class='section'>${products.length?products.map(productHTML).join(''):`<div class='empty'>Nenhum produto cadastrado.</div>`}</div>`;else if(view==='links')a.innerHTML=`<h2>Meus Links</h2><p class='muted'>Cadastre o link de afiliado de cada produto.</p>${products.map((p,i)=>`<div class='card' style='margin-bottom:10px'><b>${p.name}</b><div class='muted'>${p.link||'Link ainda não cadastrado'}</div><button class='primary' onclick='copyLink(${i})'>Copiar link</button></div>`).join('')}`;else if(view==='content')a.innerHTML=`<h2>🤖 Criar Conteúdo</h2><label>Produto</label><select class='input' id='cp'>${products.map((p,i)=>`<option value='${i}'>${p.name}</option>`).join('')}</select><label>Estilo</label><select class='input' id='style'><option>Achadinho viral</option><option>Oferta</option><option>Review</option><option>Problema e solução</option></select><button class='primary' onclick='generate()'>Gerar roteiro</button><div id='out'></div>`;else if(view==='results')a.innerHTML=`<h2>📊 Resultados</h2><div class='card'><div class='row'><span>Cliques</span><b>0</b></div><div class='row'><span>Vendas</span><b>0</b></div><div class='row'><span>Comissões</span><b>R$ 0,00</b></div></div><p class='muted'>Os números serão preenchidos quando você conectar seus dados reais.</p>`}function productHTML(p){return `<div class='card product'><div class='pic'>🛍️</div><div style='flex:1'><h3>${p.name}</h3><div class='muted'>${p.cat} · Comissão ${p.commission}%</div><span class='price'>${money(p.price)}</span></div></div>`}function addForm(){document.getElementById('app').innerHTML=`<h2>➕ Adicionar Produto</h2><input class='input' id='n' placeholder='Nome do produto'><input class='input' id='p' type='number' step='0.01' placeholder='Preço'><input class='input' id='c' type='number' step='0.1' placeholder='Comissão %'><input class='input' id='cat' placeholder='Categoria'><input class='input' id='l' placeholder='Link de afiliado'><button class='primary' onclick='add()'>Salvar produto</button>`}function add(){let n=document.getElementById('n').value.trim();if(!n)return alert('Informe o nome do produto.');products.push({name:n,price:Number(document.getElementById('p').value||0),commission:Number(document.getElementById('c').value||0),cat:document.getElementById('cat').value||'Sem categoria',link:document.getElementById('l').value||''});save();show('products')}function copyLink(i){let l=products[i].link;if(!l)return alert('Esse produto ainda não tem link de afiliado.');navigator.clipboard?.writeText(l);alert('Link copiado!')}function generate(){let p=products[Number(document.getElementById('cp').value)],s=document.getElementById('style').value;let text=`ROTEIRO — ${s}\n\nVocê já viu esse achadinho? 👀 ${p.name} por ${money(p.price)}!\n\nMostre o produto, destaque o principal benefício e termine com uma chamada para clicar no seu link.\n\nLEGENDA\nAchadinho que vale conhecer! 🛍️ ${p.name} por ${money(p.price)}. Confira o link e veja se ainda está disponível.\n\nHASHTAGS\n#shopee #achadinhos #ofertas #compras #dicasdecompras #shopeeafiliados`;document.getElementById('out').innerHTML=`<div class='section copybox'>${text}</div>`}render();
-</script><script>if('serviceWorker' in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('service-worker.js').catch(()=>{}));}</script></body><script>
-if ("serviceWorker" in navigator) {
-  window.addEventListener("load", function () {
-    navigator.serviceWorker.register("./service-worker.js")
-      .then(function () {
-        console.log("Shopee Turbo: service worker ativado");
-      })
-      .catch(function (error) {
-        console.log("Erro no service worker:", error);
-      });
-  });
-}
-</script></body></html>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#ff5a00">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+
+  <link rel="manifest" href="./manifest.json">
+
+  <title>Shopee Turbo</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5f5f5;
+      color: #222;
+      padding-bottom: 80px;
+    }
+
+    header {
+      background: linear-gradient(135deg, #ff5a00, #ff7a00);
+      color: white;
+      padding: 28px 20px;
+      border-radius: 0 0 24px 24px;
+    }
+
+    header h1 {
+      font-size: 28px;
+      margin-bottom: 8px;
+    }
+
+    header p {
+      font-size: 15px;
+      opacity: .95;
+    }
+
+    .container {
+      padding: 18px;
+      max-width: 700px;
+      margin: auto;
+    }
+
+    .view {
+      display: none;
+    }
+
+    .view.active {
+      display: block;
+    }
+
+    .section-title {
+      font-size: 22px;
+      margin: 8px 0 16px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 16px;
+      padding: 18px;
+      margin-bottom: 14px;
+      box-shadow: 0 3px 12px rgba(0,0,0,.07);
+    }
+
+    .card h3 {
+      margin-bottom: 8px;
+    }
+
+    .card p {
+      color: #666;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .price {
+      font-size: 20px;
+      font-weight: bold;
+      color: #ff5a00;
+      margin: 10px 0;
+    }
+
+    .commission {
+      display: inline-block;
+      background: #fff1e8;
+      color: #ff5a00;
+      padding: 6px 10px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    button {
+      border: none;
+      border-radius: 12px;
+      padding: 13px 16px;
+      background: #ff5a00;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      width: 100%;
+      margin-top: 10px;
+    }
+
+    button.secondary {
+      background: #222;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 13px;
+      margin-top: 7px;
+      margin-bottom: 12px;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      font-size: 15px;
+      background: white;
+    }
+
+    label {
+      font-size: 13px;
+      font-weight: bold;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+
+    .stat {
+      background: white;
+      border-radius: 14px;
+      padding: 14px 8px;
+      text-align: center;
+      box-shadow: 0 3px 10px rgba(0,0,0,.05);
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 20px;
+      color: #ff5a00;
+      margin-bottom: 5px;
+    }
+
+    .stat span {
+      font-size: 11px;
+      color: #777;
+    }
+
+    .product-list {
+      display: grid;
+      gap: 12px;
+    }
+
+    .empty {
+      text-align: center;
+      padding: 30px 15px;
+      color: #777;
+    }
+
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 68px;
+      background: white;
+      border-top: 1px solid #ddd;
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      z-index: 1000;
+    }
+
+    .nav-btn {
+      background: transparent;
+      color: #777;
+      border-radius: 0;
+      margin: 0;
+      padding: 7px 2px;
+      font-size: 11px;
+    }
+
+    .nav-btn.active {
+      color: #ff5a00;
+      font-weight: bold;
+    }
+
+    .nav-icon {
+      display: block;
+      font-size: 20px;
+      margin-bottom: 3px;
+    }
+
+    .content-box {
+      background: #fff8f3;
+      border: 1px solid #ffd8c2;
+      border-radius: 14px;
+      padding: 15px;
+      margin-top: 12px;
+      white-space: pre-line;
+      line-height: 1.5;
+      font-size: 14px;
+    }
+
+    .tag {
+      display: inline-block;
+      background: #eee;
+      border-radius: 15px;
+      padding: 5px 8px;
+      margin: 3px;
+      font-size: 12px;
+    }
+
+    .hero-card {
+      background: linear-gradient(135deg, #222, #444);
+      color: white;
+      border-radius: 18px;
+      padding: 20px;
+      margin-bottom: 18px;
+    }
+
+    .hero-card h2 {
+      margin-bottom: 8px;
+    }
+
+    .hero-card p {
+      color: #ddd;
+    }
+
+    .small {
+      font-size: 12px;
+      color: #777;
+      margin-top: 8px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <h1>🛍️ Shopee Turbo</h1>
+    <p>Encontre. Crie. Divulgue. Venda.</p>
+  </header>
+
+  <main class="container">
+
+    <!-- INÍCIO -->
+    <section id="inicio" class="view active">
+
+      <div class="hero-card">
+        <h2>🚀 Seu painel de afiliado</h2>
+        <p>Organize produtos, crie conteúdos e acompanhe seus resultados.</p>
+      </div>
+
+      <div class="stats">
+        <div class="stat">
+          <strong id="homeProducts">0</strong>
+          <span>Produtos</span>
+        </div>
+
+        <div class="stat">
+          <strong>0</strong>
+          <span>Cliques</span>
+        </div>
+
+        <div class="stat">
+          <strong>R$ 0</strong>
+          <span>Comissões</span>
+        </div>
+      </div>
+
+      <h2 class="section-title">⚡ Acesso rápido</h2>
+
+      <div class="card">
+        <h3>🛒 Produtos</h3>
+        <p>Cadastre e organize os produtos que você deseja divulgar.</p>
+        <button onclick="showView('produtos')">Ver produtos</button>
+      </div>
+
+      <div class="card">
+        <h3>✍️ Criar conteúdo</h3>
