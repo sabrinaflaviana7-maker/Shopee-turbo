@@ -14,20 +14,18 @@ header{background:linear-gradient(135deg,#ff5a00,#ff7a00);color:#fff;padding:28p
 header h1{margin:0 0 7px;font-size:28px}
 header p{margin:0;font-size:15px}
 .container{max-width:700px;margin:auto;padding:18px}
-.view{display:none}
-.view.active{display:block}
+.view{display:none}.view.active{display:block}
 .title{font-size:22px;margin:8px 0 16px}
 .card{background:#fff;border-radius:16px;padding:18px;margin-bottom:14px;box-shadow:0 3px 12px rgba(0,0,0,.07)}
-.card h3{margin-top:0}
-.card p{color:#666;line-height:1.5;font-size:14px}
+.card h3{margin-top:0}.card p{color:#666;line-height:1.5;font-size:14px}
 .hero{background:#222;color:#fff;border-radius:18px;padding:20px;margin-bottom:18px}
 .hero p{color:#ddd}
 .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:18px}
 .stat{background:#fff;border-radius:14px;padding:14px 5px;text-align:center}
-.stat strong{display:block;color:#ff5a00;font-size:20px}
-.stat span{font-size:11px;color:#777}
+.stat strong{display:block;color:#ff5a00;font-size:20px}.stat span{font-size:11px;color:#777}
 button{width:100%;border:0;border-radius:12px;padding:13px;background:#ff5a00;color:#fff;font-weight:bold;margin-top:10px}
 button.dark{background:#222}
+button.green{background:#168b45}
 input,select,textarea{width:100%;padding:13px;margin:7px 0 13px;border:1px solid #ddd;border-radius:10px;font-size:15px;background:#fff}
 label{font-size:13px;font-weight:bold}
 .nav{position:fixed;bottom:0;left:0;right:0;height:68px;background:#fff;border-top:1px solid #ddd;display:grid;grid-template-columns:repeat(5,1fr);z-index:10}
@@ -36,7 +34,8 @@ label{font-size:13px;font-weight:bold}
 .icon{display:block;font-size:20px}
 .box{background:#fff8f3;border:1px solid #ffd8c2;border-radius:14px;padding:15px;margin-top:12px;white-space:pre-line;line-height:1.5;font-size:14px}
 .empty{text-align:center;color:#777;padding:25px}
-.small{font-size:12px;color:#777}
+.badge{display:inline-block;background:#fff0e8;color:#ff5a00;border-radius:20px;padding:6px 10px;font-size:12px;font-weight:bold;margin:3px}
+.copybox{background:#fafafa;border:1px solid #eee;border-radius:12px;padding:12px;white-space:pre-line;font-size:14px;line-height:1.5;margin-top:10px}
 </style>
 </head>
 
@@ -50,6 +49,7 @@ label{font-size:13px;font-weight:bold}
 <main class="container">
 
 <section id="inicio" class="view active">
+
 <div class="hero">
 <h2>🚀 Seu painel de afiliado</h2>
 <p>Organize produtos, crie conteúdos e acompanhe seus resultados.</p>
@@ -71,7 +71,7 @@ label{font-size:13px;font-weight:bold}
 
 <div class="card">
 <h3>✍️ Criar conteúdo</h3>
-<p>Crie roteiro, legenda, hashtags e CTA.</p>
+<p>Monte roteiros completos para seus vídeos.</p>
 <button onclick="abrir('conteudo')">Criar conteúdo</button>
 </div>
 
@@ -80,13 +80,16 @@ label{font-size:13px;font-weight:bold}
 <p>Organize seus links de afiliado.</p>
 <button onclick="abrir('links')">Ver meus links</button>
 </div>
+
 </section>
 
 
 <section id="produtos" class="view">
+
 <h2 class="title">🛒 Produtos</h2>
 
 <div class="card">
+
 <h3>Adicionar produto</h3>
 
 <label>Nome do produto</label>
@@ -105,26 +108,43 @@ label{font-size:13px;font-weight:bold}
 <input id="link" placeholder="Cole seu link aqui">
 
 <button onclick="adicionar()">➕ Adicionar produto</button>
+
 </div>
 
 <div id="lista"></div>
+
 </section>
 
 
 <section id="links" class="view">
+
 <h2 class="title">🔗 Meus links</h2>
+
 <div id="listaLinks"></div>
+
 </section>
 
 
 <section id="conteudo" class="view">
-<h2 class="title">✍️ Criar conteúdo</h2>
+
+<h2 class="title">✍️ Criar Conteúdo 2.0</h2>
 
 <div class="card">
-<label>Produto</label>
+
+<h3>🎯 Escolha o produto</h3>
+
 <select id="produtoConteudo"></select>
 
-<label>Tipo</label>
+<h3 style="margin-top:18px">⏱️ Duração do vídeo</h3>
+
+<select id="duracao">
+<option value="15">15 segundos</option>
+<option value="30" selected>30 segundos</option>
+<option value="60">60 segundos</option>
+</select>
+
+<h3 style="margin-top:18px">🔥 Estilo do vídeo</h3>
+
 <select id="tipo">
 <option value="viral">🔥 Achadinho viral</option>
 <option value="oferta">💰 Oferta</option>
@@ -133,13 +153,16 @@ label{font-size:13px;font-weight:bold}
 </select>
 
 <button onclick="gerar()">✨ Gerar conteúdo</button>
+
 </div>
 
 <div id="resultadoConteudo"></div>
+
 </section>
 
 
 <section id="resultados" class="view">
+
 <h2 class="title">📊 Resultados</h2>
 
 <div class="stats">
@@ -152,6 +175,7 @@ label{font-size:13px;font-weight:bold}
 <h3>📈 Seus resultados</h3>
 <p>Os resultados reais serão mostrados quando houver uma integração autorizada.</p>
 </div>
+
 </section>
 
 </main>
@@ -184,7 +208,7 @@ label{font-size:13px;font-weight:bold}
 
 <script>
 
-let produtos = JSON.parse(localStorage.getItem("shopee_turbo_produtos") || "[]");
+let produtos=JSON.parse(localStorage.getItem("shopee_turbo_produtos")||"[]");
 
 function salvar(){
 localStorage.setItem("shopee_turbo_produtos",JSON.stringify(produtos));
@@ -202,12 +226,13 @@ document.querySelectorAll(".nav button").forEach(function(b){
 b.classList.remove("active");
 });
 
-if(botao) botao.classList.add("active");
+if(botao)botao.classList.add("active");
 
 atualizar();
 
 window.scrollTo(0,0);
 }
+
 
 function adicionar(){
 
@@ -225,9 +250,9 @@ return;
 produtos.push({
 id:Date.now(),
 nome:nome,
-preco:preco,
-comissao:comissao || 0,
-categoria:categoria || "Sem categoria",
+preco:preco||0,
+comissao:comissao||0,
+categoria:categoria||"Sem categoria",
 link:link
 });
 
@@ -244,16 +269,21 @@ alert("Produto adicionado com sucesso!");
 atualizar();
 }
 
+
 function excluir(id){
 
 if(confirm("Excluir este produto?")){
+
 produtos=produtos.filter(function(p){
 return p.id!==id;
 });
+
 salvar();
 atualizar();
+
 }
 }
+
 
 function atualizar(){
 
@@ -271,22 +301,32 @@ lista.innerHTML=produtos.map(function(p){
 
 return `
 <div class="card">
+
 <h3>${esc(p.nome)}</h3>
+
 <div style="font-size:20px;font-weight:bold;color:#ff5a00">
-R$ ${Number(p.preco||0).toFixed(2).replace(".",",")}
+R$ ${Number(p.preco).toFixed(2).replace(".",",")}
 </div>
-<p>${esc(p.categoria)}</p>
-<p>Comissão: ${p.comissao}%</p>
 
-${p.link ? `<button onclick="window.open('${esc(p.link)}','_blank')">🔗 Abrir link</button>` : ""}
+<span class="badge">Comissão ${p.comissao}%</span>
+<span class="badge">${esc(p.categoria)}</span>
 
-<button class="dark" onclick="excluir(${p.id})">🗑️ Excluir</button>
+${p.link?`
+<button onclick="abrirLink('${encodeURIComponent(p.link)}')">
+🔗 Abrir link
+</button>`:""}
+
+<button class="dark" onclick="excluir(${p.id})">
+🗑️ Excluir
+</button>
+
 </div>
 `;
 
 }).join("");
 
 }
+
 
 let links=document.getElementById("listaLinks");
 
@@ -309,13 +349,16 @@ links.innerHTML=comLinks.map(function(p){
 return `
 <div class="card">
 <h3>${esc(p.nome)}</h3>
-<button onclick="window.open('${esc(p.link)}','_blank')">🔗 Abrir link</button>
+<button onclick="abrirLink('${encodeURIComponent(p.link)}')">
+🔗 Abrir link
+</button>
 </div>
 `;
 
 }).join("");
 
 }
+
 
 let select=document.getElementById("produtoConteudo");
 
@@ -335,9 +378,25 @@ return `<option value="${p.id}">${esc(p.nome)}</option>`;
 
 }
 
+
+function abrirLink(link){
+
+let url=decodeURIComponent(link);
+
+if(url){
+window.open(url,"_blank");
+}else{
+alert("Link não encontrado.");
+}
+
+}
+
+
 function gerar(){
 
 let id=Number(document.getElementById("produtoConteudo").value);
+
+let duracao=document.getElementById("duracao").value;
 
 let tipo=document.getElementById("tipo").value;
 
@@ -346,77 +405,248 @@ return x.id===id;
 });
 
 if(!p){
+
 alert("Cadastre um produto primeiro.");
+
+abrir("produtos");
+
 return;
 }
 
+
 let abertura="";
-let texto="";
+let desenvolvimento="";
 let cta="";
 
+
 if(tipo==="viral"){
-abertura="🚨 OLHA ESSE ACHADINHO!";
-texto=`Encontrei o ${p.nome} por apenas R$ ${Number(p.preco||0).toFixed(2).replace(".",",")}. Uma opção prática para quem quer facilitar a rotina.`;
-cta="🔥 Corre conferir o produto!";
+
+abertura="🚨 GENTE, OLHA O ACHADINHO QUE EU ENCONTREI!";
+
+desenvolvimento=`Esse é o ${p.nome}. Eu encontrei por apenas R$ ${Number(p.preco).toFixed(2).replace(".",",")} e achei uma opção muito interessante para facilitar o dia a dia.`;
+
+cta="🔥 Se você gostou, corre conferir o link!";
+
 }
+
 
 if(tipo==="oferta"){
-abertura="💰 OFERTA QUE VOCÊ PRECISA VER!";
-texto=`O ${p.nome} está por R$ ${Number(p.preco||0).toFixed(2).replace(".",",")}.`;
-cta="🛒 Confira o link e veja a oferta!";
+
+abertura="💰 ATENÇÃO PARA ESSA OFERTA!";
+
+desenvolvimento=`O ${p.nome} está por apenas R$ ${Number(p.preco).toFixed(2).replace(".",",")}. Se você estava procurando algo assim, vale a pena conferir os detalhes e o preço atual.`;
+
+cta="🛒 Clique no link e confira a oferta!";
+
 }
+
 
 if(tipo==="review"){
-abertura="⭐ SERÁ QUE VALE A PENA?";
-texto=`Hoje vamos falar sobre o ${p.nome} e mostrar os principais detalhes que podem ajudar você a decidir se ele faz sentido para sua rotina.`;
-cta="👇 Confira o produto!";
+
+abertura="⭐ SERÁ QUE ESSE PRODUTO VALE A PENA?";
+
+desenvolvimento=`Hoje eu quero mostrar o ${p.nome}. Neste vídeo, destaque os detalhes, a aparência, a utilidade e para quem esse produto pode ser interessante.`;
+
+cta="👇 Confira o produto pelo link e veja todos os detalhes!";
+
 }
 
+
 if(tipo==="problema"){
-abertura="😩 VOCÊ TAMBÉM TEM ESSE PROBLEMA?";
-texto=`O ${p.nome} pode ser uma alternativa prática para ajudar nessa situação e deixar o dia a dia mais simples.`;
-cta="✨ Veja o produto pelo link!";
+
+abertura="😩 VOCÊ TAMBÉM SOFRE COM ESSE PROBLEMA?";
+
+desenvolvimento=`O ${p.nome} pode ser uma alternativa prática para quem procura uma forma mais simples de resolver essa situação no dia a dia.`;
+
+cta="✨ Veja como funciona e confira o produto no link!";
+
 }
+
+
+let roteiro="";
+
+if(duracao==="15"){
+
+roteiro=
+`[0-3s] GANCHO
+${abertura}
+
+[3-10s] PRODUTO
+${desenvolvimento}
+
+[10-15s] CTA
+${cta}`;
+
+}
+
+
+if(duracao==="30"){
+
+roteiro=
+`[0-3s] GANCHO
+${abertura}
+
+[3-10s] APRESENTAÇÃO
+Olha só esse ${p.nome}!
+
+[10-22s] BENEFÍCIO
+${desenvolvimento}
+
+[22-30s] CTA
+${cta}`;
+
+}
+
+
+if(duracao==="60"){
+
+roteiro=
+`[0-5s] GANCHO
+${abertura}
+
+[5-15s] APRESENTAÇÃO
+Olha só esse ${p.nome}! Vou mostrar por que ele pode ser interessante.
+
+[15-40s] DESENVOLVIMENTO
+${desenvolvimento}
+
+Mostre o produto de perto, detalhes, tamanho, funcionamento ou forma de utilização.
+
+[40-52s] REFORÇO
+Mostre novamente o produto e destaque o principal benefício.
+
+[52-60s] CTA
+${cta}`;
+
+}
+
+
+let legenda=
+`🛍️ ${p.nome}
+
+${desenvolvimento}
+
+${cta}
+
+#shopee #shopeeafiliados #achadinhos #ofertas #promoção #comprinhas #dicas #viral`;
+
+
+let hashtags=
+`#shopee
+#shopeeafiliados
+#achadinhos
+#ofertas
+#promoção
+#comprinhas
+#dicas
+#viral
+#achadinhosshopee`;
+
+
+let tudo=
+`🎬 ROTEIRO
+
+${roteiro}
+
+📝 LEGENDA
+
+${legenda}
+
+#️⃣ HASHTAGS
+
+${hashtags}`;
+
 
 document.getElementById("resultadoConteudo").innerHTML=`
 
 <div class="card">
-<h3>🎬 Roteiro</h3>
-<div class="box">${abertura}
 
-${texto}
+<h3>🪝 Gancho</h3>
 
-${cta}</div>
-<button onclick="copiarTexto('${encodeURIComponent(abertura+"\n\n"+texto+"\n\n"+cta)}')">📋 Copiar roteiro</button>
+<div class="copybox">${esc(abertura)}</div>
+
+<button onclick="copiar('${encodeURIComponent(abertura)}')">
+📋 Copiar gancho
+</button>
+
 </div>
 
+
 <div class="card">
+
+<h3>🎬 Roteiro — ${duracao}s</h3>
+
+<div class="copybox">${esc(roteiro)}</div>
+
+</div>
+
+
+<div class="card">
+
 <h3>📝 Legenda</h3>
-<div class="box">${abertura}
 
-${texto}
+<div class="copybox">${esc(legenda)}</div>
 
-${cta}
+</div>
 
-#shopee #achadinhos #ofertas #promoção #compras #viral #dicas</div>
-<button onclick="copiarTexto('${encodeURIComponent(abertura+"\n\n"+texto+"\n\n"+cta+"\n\n#shopee #achadinhos #ofertas #promoção #compras #viral #dicas")}')">📋 Copiar legenda</button>
+
+<div class="card">
+
+<h3>#️⃣ Hashtags</h3>
+
+<div class="copybox">${esc(hashtags)}</div>
+
+</div>
+
+
+<div class="card">
+
+<h3>📢 CTA</h3>
+
+<div class="copybox">${esc(cta)}</div>
+
+</div>
+
+
+<div class="card">
+
+<h3>🚀 Tudo pronto</h3>
+
+<p>Copie o conteúdo completo de uma vez.</p>
+
+<button class="green" onclick="copiar('${encodeURIComponent(tudo)}')">
+📋 COPIAR TUDO
+</button>
+
 </div>
 
 `;
 
 }
 
-function copiarTexto(texto){
 
-navigator.clipboard.writeText(decodeURIComponent(texto))
+function copiar(texto){
+
+let conteudo=decodeURIComponent(texto);
+
+if(navigator.clipboard){
+
+navigator.clipboard.writeText(conteudo)
 .then(function(){
-alert("Copiado!");
+alert("✅ Copiado!");
 })
 .catch(function(){
-alert("Não foi possível copiar automaticamente.");
+alert("Selecione e copie o texto manualmente.");
 });
 
+}else{
+
+alert("Selecione e copie o texto.");
+
 }
+
+}
+
 
 function esc(texto){
 
@@ -428,6 +658,7 @@ return String(texto)
 .replace(/'/g,"&#039;");
 
 }
+
 
 atualizar();
 
