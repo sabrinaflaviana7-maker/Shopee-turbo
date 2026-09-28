@@ -2,667 +2,594 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#ff5a00">
-<link rel="manifest" href="./manifest.json">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#ff6a00">
 <title>Shopee Turbo</title>
 
 <style>
-*{box-sizing:border-box}
-body{margin:0;font-family:Arial,sans-serif;background:#f5f5f5;color:#222;padding-bottom:80px}
-header{background:linear-gradient(135deg,#ff5a00,#ff7a00);color:#fff;padding:28px 20px;border-radius:0 0 24px 24px}
-header h1{margin:0 0 7px;font-size:28px}
-header p{margin:0;font-size:15px}
-.container{max-width:700px;margin:auto;padding:18px}
-.view{display:none}.view.active{display:block}
-.title{font-size:22px;margin:8px 0 16px}
-.card{background:#fff;border-radius:16px;padding:18px;margin-bottom:14px;box-shadow:0 3px 12px rgba(0,0,0,.07)}
-.card h3{margin-top:0}.card p{color:#666;line-height:1.5;font-size:14px}
-.hero{background:#222;color:#fff;border-radius:18px;padding:20px;margin-bottom:18px}
-.hero p{color:#ddd}
-.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:18px}
-.stat{background:#fff;border-radius:14px;padding:14px 5px;text-align:center}
-.stat strong{display:block;color:#ff5a00;font-size:20px}.stat span{font-size:11px;color:#777}
-button{width:100%;border:0;border-radius:12px;padding:13px;background:#ff5a00;color:#fff;font-weight:bold;margin-top:10px}
-button.dark{background:#222}
-button.green{background:#168b45}
-input,select,textarea{width:100%;padding:13px;margin:7px 0 13px;border:1px solid #ddd;border-radius:10px;font-size:15px;background:#fff}
-label{font-size:13px;font-weight:bold}
-.nav{position:fixed;bottom:0;left:0;right:0;height:68px;background:#fff;border-top:1px solid #ddd;display:grid;grid-template-columns:repeat(5,1fr);z-index:10}
-.nav button{background:#fff;color:#777;margin:0;border-radius:0;padding:6px 2px;font-size:11px}
-.nav button.active{color:#ff5a00}
-.icon{display:block;font-size:20px}
-.box{background:#fff8f3;border:1px solid #ffd8c2;border-radius:14px;padding:15px;margin-top:12px;white-space:pre-line;line-height:1.5;font-size:14px}
-.empty{text-align:center;color:#777;padding:25px}
-.badge{display:inline-block;background:#fff0e8;color:#ff5a00;border-radius:20px;padding:6px 10px;font-size:12px;font-weight:bold;margin:3px}
-.copybox{background:#fafafa;border:1px solid #eee;border-radius:12px;padding:12px;white-space:pre-line;font-size:14px;line-height:1.5;margin-top:10px}
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+  font-family:Arial,Helvetica,sans-serif;
+}
+
+body{
+  background:#f5f5f5;
+  color:#222;
+  padding-bottom:80px;
+}
+
+header{
+  background:linear-gradient(135deg,#ff6a00,#ff3d00);
+  color:white;
+  padding:20px 18px;
+  border-radius:0 0 24px 24px;
+}
+
+header h1{
+  font-size:25px;
+}
+
+header p{
+  margin-top:6px;
+  opacity:.9;
+  font-size:14px;
+}
+
+.container{
+  padding:18px;
+  max-width:700px;
+  margin:auto;
+}
+
+.page{
+  display:none;
+}
+
+.page.active{
+  display:block;
+}
+
+.cards{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:10px;
+  margin:16px 0;
+}
+
+.card{
+  background:white;
+  border-radius:16px;
+  padding:15px 10px;
+  text-align:center;
+  box-shadow:0 2px 10px #0000000d;
+}
+
+.card strong{
+  display:block;
+  font-size:22px;
+  color:#ff5a00;
+}
+
+.card span{
+  font-size:12px;
+  color:#777;
+}
+
+.section-title{
+  margin:22px 0 12px;
+  font-size:19px;
+}
+
+.box{
+  background:white;
+  border-radius:18px;
+  padding:16px;
+  margin-bottom:14px;
+  box-shadow:0 2px 10px #0000000d;
+}
+
+input,select,textarea{
+  width:100%;
+  padding:13px;
+  margin:6px 0 12px;
+  border:1px solid #ddd;
+  border-radius:11px;
+  font-size:15px;
+  background:white;
+}
+
+button{
+  border:0;
+  border-radius:12px;
+  padding:13px 16px;
+  font-size:15px;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.btn{
+  background:#ff5a00;
+  color:white;
+  width:100%;
+}
+
+.btn-secondary{
+  background:#eee;
+  color:#222;
+}
+
+.product{
+  background:white;
+  padding:16px;
+  border-radius:17px;
+  margin-bottom:12px;
+  box-shadow:0 2px 10px #0000000d;
+}
+
+.product h3{
+  margin-bottom:8px;
+}
+
+.product-info{
+  font-size:14px;
+  color:#666;
+  line-height:1.7;
+}
+
+.product-actions{
+  display:flex;
+  gap:8px;
+  margin-top:12px;
+}
+
+.product-actions button{
+  flex:1;
+}
+
+.result{
+  background:#fff8f3;
+  border:1px solid #ffd5bc;
+  border-radius:16px;
+  padding:16px;
+  margin-top:15px;
+  white-space:pre-wrap;
+  line-height:1.6;
+}
+
+.result h3{
+  margin-bottom:10px;
+  color:#ff5a00;
+}
+
+.copy-btn{
+  margin-top:10px;
+  background:#222;
+  color:white;
+  width:100%;
+}
+
+.nav{
+  position:fixed;
+  bottom:0;
+  left:0;
+  right:0;
+  background:white;
+  border-top:1px solid #ddd;
+  display:flex;
+  justify-content:space-around;
+  padding:9px 4px;
+  z-index:99;
+}
+
+.nav button{
+  background:none;
+  padding:7px 4px;
+  font-size:11px;
+  color:#666;
+}
+
+.nav button.active{
+  color:#ff5a00;
+  font-weight:bold;
+}
+
+.empty{
+  text-align:center;
+  color:#777;
+  padding:25px 10px;
+}
+
+.small{
+  font-size:12px;
+  color:#777;
+  line-height:1.5;
+}
+
+.badge{
+  display:inline-block;
+  background:#fff0e8;
+  color:#ff5a00;
+  padding:5px 9px;
+  border-radius:20px;
+  font-size:12px;
+  margin-bottom:8px;
+}
 </style>
 </head>
 
 <body>
 
 <header>
-<h1>🛍️ Shopee Turbo</h1>
-<p>Encontre. Crie. Divulgue. Venda.</p>
+  <h1>🛍️ Shopee Turbo</h1>
+  <p>Encontre. Crie. Divulgue. Venda.</p>
 </header>
 
-<main class="container">
+<div class="container">
 
-<section id="inicio" class="view active">
+  <!-- INÍCIO -->
+  <section id="home" class="page active">
 
-<div class="hero">
-<h2>🚀 Seu painel de afiliado</h2>
-<p>Organize produtos, crie conteúdos e acompanhe seus resultados.</p>
+    <h2 class="section-title">🚀 Seu painel</h2>
+
+    <div class="cards">
+      <div class="card">
+        <strong id="totalProdutos">0</strong>
+        <span>Produtos</span>
+      </div>
+
+      <div class="card">
+        <strong id="totalCliques">0</strong>
+        <span>Cliques</span>
+      </div>
+
+      <div class="card">
+        <strong id="totalComissoes">R$ 0</strong>
+        <span>Comissões</span>
+      </div>
+    </div>
+
+    <div class="box">
+      <span class="badge">🔥 Conteúdo 2.0</span>
+      <h2>Crie conteúdo para seus produtos</h2>
+      <p class="small" style="margin:8px 0 15px">
+        Gere roteiros para vídeos de 15, 30 ou 60 segundos,
+        com gancho, legenda, hashtags e CTA.
+      </p>
+      <button class="btn" onclick="abrirPagina('conteudo')">
+        ✨ Criar conteúdo
+      </button>
+    </div>
+
+    <div class="box">
+      <span class="badge">🛒 Produtos</span>
+      <h2>Cadastre seus achadinhos</h2>
+      <p class="small" style="margin:8px 0 15px">
+        Adicione produtos para usar no gerador de conteúdo.
+      </p>
+      <button class="btn" onclick="abrirPagina('produtos')">
+        ➕ Adicionar produto
+      </button>
+    </div>
+
+  </section>
+
+
+  <!-- PRODUTOS -->
+  <section id="produtos" class="page">
+
+    <h2 class="section-title">🛒 Produtos</h2>
+
+    <div class="box">
+
+      <h3>Adicionar produto</h3>
+
+      <input id="nome" placeholder="Nome do produto">
+
+      <input id="preco" type="number" step="0.01" placeholder="Preço">
+
+      <input id="comissao" type="number" placeholder="Comissão %">
+
+      <input id="categoria" placeholder="Categoria">
+
+      <input id="link" placeholder="Link de afiliado">
+
+      <button class="btn" onclick="adicionarProduto()">
+        ➕ Adicionar produto
+      </button>
+
+    </div>
+
+    <h2 class="section-title">📦 Produtos cadastrados</h2>
+
+    <div id="listaProdutos"></div>
+
+  </section>
+
+
+  <!-- LINKS -->
+  <section id="links" class="page">
+
+    <h2 class="section-title">🔗 Meus Links</h2>
+
+    <div id="listaLinks"></div>
+
+  </section>
+
+
+  <!-- CONTEÚDO -->
+  <section id="conteudo" class="page">
+
+    <h2 class="section-title">✍️ Criar Conteúdo 2.0</h2>
+
+    <div class="box">
+
+      <label>Produto</label>
+      <select id="produtoSelect"></select>
+
+      <label>Duração</label>
+      <select id="duracao">
+        <option value="15">15 segundos</option>
+        <option value="30" selected>30 segundos</option>
+        <option value="60">60 segundos</option>
+      </select>
+
+      <label>Tipo de conteúdo</label>
+      <select id="estilo">
+        <option value="viral">🔥 Achadinho Viral</option>
+        <option value="oferta">🏷️ Oferta</option>
+        <option value="review">⭐ Review</option>
+        <option value="problema">💡 Problema e Solução</option>
+      </select>
+
+      <button class="btn" onclick="gerarConteudo()">
+        ✨ Gerar conteúdo
+      </button>
+
+    </div>
+
+    <div id="resultadoConteudo"></div>
+
+  </section>
+
+
+  <!-- RESULTADOS -->
+  <section id="resultados" class="page">
+
+    <h2 class="section-title">📊 Resultados</h2>
+
+    <div class="cards">
+
+      <div class="card">
+        <strong id="resultadoProdutos">0</strong>
+        <span>Produtos</span>
+      </div>
+
+      <div class="card">
+        <strong>0</strong>
+        <span>Cliques</span>
+      </div>
+
+      <div class="card">
+        <strong>R$ 0</strong>
+        <span>Comissões</span>
+      </div>
+
+    </div>
+
+    <div class="box">
+      <h3>📈 Métricas</h3>
+      <p class="small" style="margin-top:8px">
+        As métricas reais poderão ser conectadas posteriormente
+        através de uma integração autorizada.
+      </p>
+    </div>
+
+  </section>
+
 </div>
 
-<div class="stats">
-<div class="stat"><strong id="totalProdutos">0</strong><span>Produtos</span></div>
-<div class="stat"><strong>0</strong><span>Cliques</span></div>
-<div class="stat"><strong>R$ 0</strong><span>Comissões</span></div>
-</div>
 
-<h2 class="title">⚡ Acesso rápido</h2>
-
-<div class="card">
-<h3>🛒 Produtos</h3>
-<p>Cadastre e organize seus produtos.</p>
-<button onclick="abrir('produtos')">Ver produtos</button>
-</div>
-
-<div class="card">
-<h3>✍️ Criar conteúdo</h3>
-<p>Monte roteiros completos para seus vídeos.</p>
-<button onclick="abrir('conteudo')">Criar conteúdo</button>
-</div>
-
-<div class="card">
-<h3>🔗 Meus links</h3>
-<p>Organize seus links de afiliado.</p>
-<button onclick="abrir('links')">Ver meus links</button>
-</div>
-
-</section>
-
-
-<section id="produtos" class="view">
-
-<h2 class="title">🛒 Produtos</h2>
-
-<div class="card">
-
-<h3>Adicionar produto</h3>
-
-<label>Nome do produto</label>
-<input id="nome" placeholder="Ex.: Mini Seladora Portátil">
-
-<label>Preço</label>
-<input id="preco" type="number" step="0.01" placeholder="24.90">
-
-<label>Comissão %</label>
-<input id="comissao" type="number" step="0.1" placeholder="14">
-
-<label>Categoria</label>
-<input id="categoria" placeholder="Ex.: Cozinha">
-
-<label>Link de afiliado</label>
-<input id="link" placeholder="Cole seu link aqui">
-
-<button onclick="adicionar()">➕ Adicionar produto</button>
-
-</div>
-
-<div id="lista"></div>
-
-</section>
-
-
-<section id="links" class="view">
-
-<h2 class="title">🔗 Meus links</h2>
-
-<div id="listaLinks"></div>
-
-</section>
-
-
-<section id="conteudo" class="view">
-
-<h2 class="title">✍️ Criar Conteúdo 2.0</h2>
-
-<div class="card">
-
-<h3>🎯 Escolha o produto</h3>
-
-<select id="produtoConteudo"></select>
-
-<h3 style="margin-top:18px">⏱️ Duração do vídeo</h3>
-
-<select id="duracao">
-<option value="15">15 segundos</option>
-<option value="30" selected>30 segundos</option>
-<option value="60">60 segundos</option>
-</select>
-
-<h3 style="margin-top:18px">🔥 Estilo do vídeo</h3>
-
-<select id="tipo">
-<option value="viral">🔥 Achadinho viral</option>
-<option value="oferta">💰 Oferta</option>
-<option value="review">⭐ Review</option>
-<option value="problema">💡 Problema e solução</option>
-</select>
-
-<button onclick="gerar()">✨ Gerar conteúdo</button>
-
-</div>
-
-<div id="resultadoConteudo"></div>
-
-</section>
-
-
-<section id="resultados" class="view">
-
-<h2 class="title">📊 Resultados</h2>
-
-<div class="stats">
-<div class="stat"><strong>0</strong><span>Cliques</span></div>
-<div class="stat"><strong>0</strong><span>Vendas</span></div>
-<div class="stat"><strong>R$ 0</strong><span>Comissões</span></div>
-</div>
-
-<div class="card">
-<h3>📈 Seus resultados</h3>
-<p>Os resultados reais serão mostrados quando houver uma integração autorizada.</p>
-</div>
-
-</section>
-
-</main>
-
-
+<!-- MENU -->
 <nav class="nav">
 
-<button onclick="abrir('inicio',this)" class="active">
-<span class="icon">🏠</span>Início
-</button>
+  <button onclick="abrirPagina('home')" id="navHome">
+    🏠<br>Início
+  </button>
 
-<button onclick="abrir('produtos',this)">
-<span class="icon">🛒</span>Produtos
-</button>
+  <button onclick="abrirPagina('produtos')" id="navProdutos">
+    🛒<br>Produtos
+  </button>
 
-<button onclick="abrir('links',this)">
-<span class="icon">🔗</span>Links
-</button>
+  <button onclick="abrirPagina('links')" id="navLinks">
+    🔗<br>Links
+  </button>
 
-<button onclick="abrir('conteudo',this)">
-<span class="icon">✍️</span>Conteúdo
-</button>
+  <button onclick="abrirPagina('conteudo')" id="navConteudo">
+    ✍️<br>Conteúdo
+  </button>
 
-<button onclick="abrir('resultados',this)">
-<span class="icon">📊</span>Resultados
-</button>
+  <button onclick="abrirPagina('resultados')" id="navResultados">
+    📊<br>Resultados
+  </button>
 
 </nav>
 
 
 <script>
 
-let produtos=JSON.parse(localStorage.getItem("shopee_turbo_produtos")||"[]");
+const chaveProdutos = "shopee_turbo_produtos";
 
-function salvar(){
-localStorage.setItem("shopee_turbo_produtos",JSON.stringify(produtos));
-}
-
-function abrir(id,botao){
-
-document.querySelectorAll(".view").forEach(function(v){
-v.classList.remove("active");
-});
-
-document.getElementById(id).classList.add("active");
-
-document.querySelectorAll(".nav button").forEach(function(b){
-b.classList.remove("active");
-});
-
-if(botao)botao.classList.add("active");
-
-atualizar();
-
-window.scrollTo(0,0);
-}
+let produtos = JSON.parse(
+  localStorage.getItem(chaveProdutos) || "[]"
+);
 
 
-function adicionar(){
+function salvarProdutos(){
 
-let nome=document.getElementById("nome").value.trim();
-let preco=document.getElementById("preco").value;
-let comissao=document.getElementById("comissao").value;
-let categoria=document.getElementById("categoria").value.trim();
-let link=document.getElementById("link").value.trim();
-
-if(!nome){
-alert("Digite o nome do produto.");
-return;
-}
-
-produtos.push({
-id:Date.now(),
-nome:nome,
-preco:preco||0,
-comissao:comissao||0,
-categoria:categoria||"Sem categoria",
-link:link
-});
-
-salvar();
-
-document.getElementById("nome").value="";
-document.getElementById("preco").value="";
-document.getElementById("comissao").value="";
-document.getElementById("categoria").value="";
-document.getElementById("link").value="";
-
-alert("Produto adicionado com sucesso!");
-
-atualizar();
-}
-
-
-function excluir(id){
-
-if(confirm("Excluir este produto?")){
-
-produtos=produtos.filter(function(p){
-return p.id!==id;
-});
-
-salvar();
-atualizar();
-
-}
-}
-
-
-function atualizar(){
-
-document.getElementById("totalProdutos").textContent=produtos.length;
-
-let lista=document.getElementById("lista");
-
-if(produtos.length===0){
-
-lista.innerHTML='<div class="card empty">Nenhum produto cadastrado.</div>';
-
-}else{
-
-lista.innerHTML=produtos.map(function(p){
-
-return `
-<div class="card">
-
-<h3>${esc(p.nome)}</h3>
-
-<div style="font-size:20px;font-weight:bold;color:#ff5a00">
-R$ ${Number(p.preco).toFixed(2).replace(".",",")}
-</div>
-
-<span class="badge">Comissão ${p.comissao}%</span>
-<span class="badge">${esc(p.categoria)}</span>
-
-${p.link?`
-<button onclick="abrirLink('${encodeURIComponent(p.link)}')">
-🔗 Abrir link
-</button>`:""}
-
-<button class="dark" onclick="excluir(${p.id})">
-🗑️ Excluir
-</button>
-
-</div>
-`;
-
-}).join("");
+  localStorage.setItem(
+    chaveProdutos,
+    JSON.stringify(produtos)
+  );
 
 }
 
 
-let links=document.getElementById("listaLinks");
+function dinheiro(valor){
 
-let comLinks=produtos.filter(function(p){
-return p.link;
-});
+  let numero = Number(valor || 0);
 
-if(comLinks.length===0){
-
-links.innerHTML=`
-<div class="card empty">
-<h3>🔗 Nenhum link</h3>
-<p>Adicione um produto com link de afiliado.</p>
-</div>`;
-
-}else{
-
-links.innerHTML=comLinks.map(function(p){
-
-return `
-<div class="card">
-<h3>${esc(p.nome)}</h3>
-<button onclick="abrirLink('${encodeURIComponent(p.link)}')">
-🔗 Abrir link
-</button>
-</div>
-`;
-
-}).join("");
+  return numero.toLocaleString("pt-BR",{
+    style:"currency",
+    currency:"BRL"
+  });
 
 }
 
 
-let select=document.getElementById("produtoConteudo");
+function abrirPagina(pagina){
 
-if(produtos.length===0){
+  document.querySelectorAll(".page").forEach(function(el){
+    el.classList.remove("active");
+  });
 
-select.innerHTML='<option>Nenhum produto cadastrado</option>';
+  document.getElementById(pagina).classList.add("active");
 
-}else{
+  document.querySelectorAll(".nav button").forEach(function(el){
+    el.classList.remove("active");
+  });
 
-select.innerHTML=produtos.map(function(p){
+  let nav = document.getElementById(
+    "nav" + pagina.charAt(0).toUpperCase() + pagina.slice(1)
+  );
 
-return `<option value="${p.id}">${esc(p.nome)}</option>`;
+  if(nav){
+    nav.classList.add("active");
+  }
 
-}).join("");
+  if(pagina === "produtos"){
+    renderProdutos();
+  }
 
-}
+  if(pagina === "links"){
+    renderLinks();
+  }
 
-}
+  if(pagina === "conteudo"){
+    atualizarSelectProdutos();
+  }
 
+  atualizarPainel();
 
-function abrirLink(link){
-
-let url=decodeURIComponent(link);
-
-if(url){
-window.open(url,"_blank");
-}else{
-alert("Link não encontrado.");
-}
-
-}
-
-
-function gerar(){
-
-let id=Number(document.getElementById("produtoConteudo").value);
-
-let duracao=document.getElementById("duracao").value;
-
-let tipo=document.getElementById("tipo").value;
-
-let p=produtos.find(function(x){
-return x.id===id;
-});
-
-if(!p){
-
-alert("Cadastre um produto primeiro.");
-
-abrir("produtos");
-
-return;
-}
-
-
-let abertura="";
-let desenvolvimento="";
-let cta="";
-
-
-if(tipo==="viral"){
-
-abertura="🚨 GENTE, OLHA O ACHADINHO QUE EU ENCONTREI!";
-
-desenvolvimento=`Esse é o ${p.nome}. Eu encontrei por apenas R$ ${Number(p.preco).toFixed(2).replace(".",",")} e achei uma opção muito interessante para facilitar o dia a dia.`;
-
-cta="🔥 Se você gostou, corre conferir o link!";
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
 
 }
 
 
-if(tipo==="oferta"){
+function adicionarProduto(){
 
-abertura="💰 ATENÇÃO PARA ESSA OFERTA!";
+  const nome = document
+    .getElementById("nome")
+    .value
+    .trim();
 
-desenvolvimento=`O ${p.nome} está por apenas R$ ${Number(p.preco).toFixed(2).replace(".",",")}. Se você estava procurando algo assim, vale a pena conferir os detalhes e o preço atual.`;
+  const preco = document
+    .getElementById("preco")
+    .value;
 
-cta="🛒 Clique no link e confira a oferta!";
+  const comissao = document
+    .getElementById("comissao")
+    .value;
+
+  const categoria = document
+    .getElementById("categoria")
+    .value
+    .trim();
+
+  const link = document
+    .getElementById("link")
+    .value
+    .trim();
+
+
+  if(!nome){
+
+    alert("Digite o nome do produto.");
+
+    return;
+
+  }
+
+
+  produtos.push({
+
+    id:Date.now(),
+
+    nome:nome,
+
+    preco:preco || 0,
+
+    comissao:comissao || 0,
+
+    categoria:categoria || "Sem categoria",
+
+    link:link
+
+  });
+
+
+  salvarProdutos();
+
+  document.getElementById("nome").value="";
+  document.getElementById("preco").value="";
+  document.getElementById("comissao").value="";
+  document.getElementById("categoria").value="";
+  document.getElementById("link").value="";
+
+
+  renderProdutos();
+
+  atualizarSelectProdutos();
+
+  atualizarPainel();
+
+  alert("Produto adicionado com sucesso!");
+
 
 }
 
 
-if(tipo==="review"){
+function excluirProduto(id){
 
-abertura="⭐ SERÁ QUE ESSE PRODUTO VALE A PENA?";
+  if(!confirm("Excluir este produto?")){
+    return;
+  }
 
-desenvolvimento=`Hoje eu quero mostrar o ${p.nome}. Neste vídeo, destaque os detalhes, a aparência, a utilidade e para quem esse produto pode ser interessante.`;
+  produtos = produtos.filter(function(p){
+    return p.id !== id;
+  });
 
-cta="👇 Confira o produto pelo link e veja todos os detalhes!";
+  salvarProdutos();
 
-}
+  renderProdutos();
 
+  atualizarSelectProdutos();
 
-if(tipo==="problema"){
-
-abertura="😩 VOCÊ TAMBÉM SOFRE COM ESSE PROBLEMA?";
-
-desenvolvimento=`O ${p.nome} pode ser uma alternativa prática para quem procura uma forma mais simples de resolver essa situação no dia a dia.`;
-
-cta="✨ Veja como funciona e confira o produto no link!";
-
-}
-
-
-let roteiro="";
-
-if(duracao==="15"){
-
-roteiro=
-`[0-3s] GANCHO
-${abertura}
-
-[3-10s] PRODUTO
-${desenvolvimento}
-
-[10-15s] CTA
-${cta}`;
+  atualizarPainel();
 
 }
 
 
-if(duracao==="30"){
+function renderProdutos(){
 
-roteiro=
-`[0-3s] GANCHO
-${abertura}
+  const lista =
+    document.getElementById("listaProdutos");
 
-[3-10s] APRESENTAÇÃO
-Olha só esse ${p.nome}!
+  if(!produtos.length){
 
-[10-22s] BENEFÍCIO
-${desenvolvimento}
-
-[22-30s] CTA
-${cta}`;
-
-}
-
-
-if(duracao==="60"){
-
-roteiro=
-`[0-5s] GANCHO
-${abertura}
-
-[5-15s] APRESENTAÇÃO
-Olha só esse ${p.nome}! Vou mostrar por que ele pode ser interessante.
-
-[15-40s] DESENVOLVIMENTO
-${desenvolvimento}
-
-Mostre o produto de perto, detalhes, tamanho, funcionamento ou forma de utilização.
-
-[40-52s] REFORÇO
-Mostre novamente o produto e destaque o principal benefício.
-
-[52-60s] CTA
-${cta}`;
-
-}
-
-
-let legenda=
-`🛍️ ${p.nome}
-
-${desenvolvimento}
-
-${cta}
-
-#shopee #shopeeafiliados #achadinhos #ofertas #promoção #comprinhas #dicas #viral`;
-
-
-let hashtags=
-`#shopee
-#shopeeafiliados
-#achadinhos
-#ofertas
-#promoção
-#comprinhas
-#dicas
-#viral
-#achadinhosshopee`;
-
-
-let tudo=
-`🎬 ROTEIRO
-
-${roteiro}
-
-📝 LEGENDA
-
-${legenda}
-
-#️⃣ HASHTAGS
-
-${hashtags}`;
-
-
-document.getElementById("resultadoConteudo").innerHTML=`
-
-<div class="card">
-
-<h3>🪝 Gancho</h3>
-
-<div class="copybox">${esc(abertura)}</div>
-
-<button onclick="copiar('${encodeURIComponent(abertura)}')">
-📋 Copiar gancho
-</button>
-
-</div>
-
-
-<div class="card">
-
-<h3>🎬 Roteiro — ${duracao}s</h3>
-
-<div class="copybox">${esc(roteiro)}</div>
-
-</div>
-
-
-<div class="card">
-
-<h3>📝 Legenda</h3>
-
-<div class="copybox">${esc(legenda)}</div>
-
-</div>
-
-
-<div class="card">
-
-<h3>#️⃣ Hashtags</h3>
-
-<div class="copybox">${esc(hashtags)}</div>
-
-</div>
-
-
-<div class="card">
-
-<h3>📢 CTA</h3>
-
-<div class="copybox">${esc(cta)}</div>
-
-</div>
-
-
-<div class="card">
-
-<h3>🚀 Tudo pronto</h3>
-
-<p>Copie o conteúdo completo de uma vez.</p>
-
-<button class="green" onclick="copiar('${encodeURIComponent(tudo)}')">
-📋 COPIAR TUDO
-</button>
-
-</div>
-
-`;
-
-}
-
-
-function copiar(texto){
-
-let conteudo=decodeURIComponent(texto);
-
-if(navigator.clipboard){
-
-navigator.clipboard.writeText(conteudo)
-.then(function(){
-alert("✅ Copiado!");
-})
-.catch(function(){
-alert("Selecione e copie o texto manualmente.");
-});
-
-}else{
-
-alert("Selecione e copie o texto.");
-
-}
-
-}
-
-
-function esc(texto){
-
-return String(texto)
-.replace(/&/g,"&amp;")
-.replace(/</g,"&lt;")
-.replace(/>/g,"&gt;")
-.replace(/"/g,"&quot;")
-.replace(/'/g,"&#039;");
-
-}
-
-
-atualizar();
-
-</script>
-
-</body>
-</html>
+    lista.innerHTML =
+      '<div class="box
