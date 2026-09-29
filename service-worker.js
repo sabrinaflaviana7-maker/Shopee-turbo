@@ -1,50 +1,61 @@
-const CACHE_NAME = "shopee-turbo-v1";
+const CACHE_NAME = "shopee-turbo-v3";
 
 const APP_SHELL = [
   "./",
+  "./index.html",
   "./shopee_turbo.html",
   "./manifest.json"
 ];
 
-self.addEventListener("install", (event) => {
+self.addEventListener("install", function(event) {
   event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => cache.addAll(APP_SHELL))
+    caches.open(CACHE_NAME).then(function(cache) {
+      return cache.addAll(APP_SHELL);
+    })
   );
+
   self.skipWaiting();
 });
 
-self.addEventListener("activate", (event) => {
+self.addEventListener("activate", function(event) {
   event.waitUntil(
-    caches.keys().then((keys) =>
-      Promise.all(
+    caches.keys().then(function(keys) {
+      return Promise.all(
         keys
-          .filter((key) => key !== CACHE_NAME)
-          .map((key) => caches.delete(key))
-      )
-    )
+          .filter(function(key) {
+            return key !== CACHE_NAME;
+          })
+          .map(function(key) {
+            return caches.delete(key);
+          })
+      );
+    }).then(function() {
+      return self.clients.claim();
+    })
   );
-
-  self.clients.claim();
 });
 
-self.addEventListener("fetch", (event) => {
+self.addEventListener("fetch", function(event) {
   if (event.request.method !== "GET") return;
 
   event.respondWith(
-    caches.match(event.request).then((cached) => {
-      if (cached) return cached;
+    fetch(event.request)
+      .then(function(response) {
 
-      return fetch(event.request)
-        .then((response) => {
-          const copy = response.clone();
+        if (response && response.ok) {
+          const copia = response.clone();
 
-          caches.open(CACHE_NAME).then((cache) => {
-            cache.put(event.request, copy);
+          caches.open(CACHE_NAME).then(function(cache) {
+            cache.put(event.request, copia);
           });
+        }
 
-          return response;
-        })
-        .catch(() => caches.match("./"));
-    })
+        return response;
+      })
+      .catch(function() {
+        return caches.match(event.request).then(function(cached) {
+          return cached || caches.match("./shopee_turbo.html");
+        });
+      })
   );
 });
