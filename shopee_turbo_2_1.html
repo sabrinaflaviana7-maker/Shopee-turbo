@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#ff5a00"><title>Shopee Turbo</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#f5f5f5;color:#222;font-family:Arial,sans-serif;padding-bottom:78px}header{background:linear-gradient(135deg,#ff6a00,#ff3d00);color:#fff;padding:22px 18px;border-radius:0 0 24px 24px}header h1{margin:0;font-size:28px}header p{margin:6px 0 0}.wrap{max-width:700px;margin:auto;padding:18px}.page{display:none}.page.active{display:block}.title{font-size:22px;margin:18px 0 14px}.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.card,.box,.product,.result{background:#fff;border-radius:18px;padding:16px;margin-bottom:14px;box-shadow:0 2px 10px #0001}.card{text-align:center}.card strong{display:block;color:#ff5a00;font-size:22px}.card span{font-size:12px;color:#777}.badge{display:inline-block;background:#fff0e8;color:#ff5a00;border-radius:20px;padding:6px 10px;font-size:12px;margin-bottom:8px}input,select{width:100%;padding:13px;margin:6px 0 12px;border:1px solid #ddd;border-radius:11px;font-size:15px;background:#fff}button{border:0;border-radius:12px;padding:13px 16px;font-weight:bold;font-size:15px}.btn{width:100%;background:#ff5a00;color:#fff}.dark{background:#222;color:#fff;width:100%;margin-top:10px}.gray{background:#eee;color:#222}.small{color:#777;font-size:13px;line-height:1.5}.actions{display:flex;gap:8px}.actions button{flex:1}.result{background:#fff8f3;border:1px solid #ffd5bc;white-space:pre-wrap;line-height:1.55}.result h3{color:#ff5a00}.empty{text-align:center;color:#777}.nav{position:fixed;z-index:9;left:0;right:0;bottom:0;background:#fff;border-top:1px solid #ddd;display:flex;justify-content:space-around;padding:8px 3px}.nav button{background:none;color:#666;font-size:11px;padding:6px 3px}.nav button.active{color:#ff5a00}
+</style></head><body>
+<header><h1>🛍️ Shopee Turbo</h1><p>Encontre. Crie. Divulgue. Venda.</p></header>
+<div class="wrap">
+<section id="home" class="page active"><h2 class="title">🚀 Seu painel</h2><div class="cards"><div class="card"><strong id="total">0</strong><span>Produtos</span></div><div class="card"><strong>0</strong><span>Cliques</span></div><div class="card"><strong>R$ 0</strong><span>Comissões</span></div></div><div class="box"><span class="badge">🔥 Conteúdo 2.0</span><h2>Crie conteúdo para seus produtos</h2><p class="small">Gere roteiros para vídeos de 15, 30 ou 60 segundos.</p><button class="btn" data-go="conteudo">✨ Criar conteúdo</button></div><div class="box"><span class="badge">🛒 Produtos</span><h2>Cadastre seus achadinhos</h2><p class="small">Adicione produtos para usar no gerador.</p><button class="btn" data-go="produtos">➕ Adicionar produto</button></div></section>
+<section id="produtos" class="page"><h2 class="title">🛒 Produtos</h2><div class="box"><h3>Adicionar produto</h3><input id="nome" placeholder="Nome do produto"><input id="preco" inputmode="decimal" placeholder="Preço"><input id="comissao" inputmode="decimal" placeholder="Comissão %"><input id="categoria" placeholder="Categoria"><input id="link" placeholder="Link de afiliado"><button class="btn" id="add">➕ Adicionar produto</button></div><h2 class="title">📦 Produtos cadastrados</h2><div id="lista"></div></section>
+<section id="links" class="page"><h2 class="title">🔗 Meus Links</h2><div id="linksList"></div></section>
+<section id="conteudo" class="page"><h2 class="title">✍️ Criar Conteúdo 2.0</h2><div class="box"><label>Produto</label><select id="produto"></select><label>Duração</label><select id="duracao"><option value="15">15 segundos</option><option value="30" selected>30 segundos</option><option value="60">60 segundos</option></select><label>Estilo</label><select id="estilo"><option value="viral">🔥 Achadinho Viral</option><option value="oferta">🏷️ Oferta</option><option value="review">⭐ Review</option><option value="problema">💡 Problema e Solução</option></select><button class="btn" id="gerar">✨ Gerar conteúdo</button></div><div id="resultado"></div></section>
+<section id="resultados" class="page"><h2 class="title">📊 Resultados</h2><div class="box"><h3>📈 Métricas</h3><p class="small">As métricas reais poderão ser conectadas posteriormente por integração autorizada.</p></div></section>
+</div>
+<nav class="nav"><button data-go="home">🏠<br>Início</button><button data-go="produtos">🛒<br>Produtos</button><button data-go="links">🔗<br>Links</button><button data-go="conteudo">✍️<br>Conteúdo</button><button data-go="resultados">📊<br>Resultados</button></nav>
+<script>
+(function(){'use strict';
+var KEY='shopee_turbo_produtos',products=[];try{products=JSON.parse(localStorage.getItem(KEY)||'[]');if(!Array.isArray(products))products=[]}catch(e){products=[]}
+function $(id){return document.getElementById(id)}function save(){localStorage.setItem(KEY,JSON.stringify(products))}function esc(s){return String(s??'').replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}function money(v){return (parseFloat(String(v||0).replace(',','.'))||0).toLocaleString('pt-BR',{style:'currency',currency:'BRL'})}
+function show(id){document.querySelectorAll('.page').forEach(function(p){p.classList.remove('active')});$(id).classList.add('active');document.querySelectorAll('.nav button').forEach(function(b){b.classList.toggle('active',b.dataset.go===id)});if(id==='produtos')renderProducts();if(id==='links')renderLinks();if(id==='conteudo')renderSelect();window.scrollTo(0,0)}
+document.querySelectorAll('[data-go]').forEach(function(b){b.addEventListener('click',function(){show(b.dataset.go)})});
+function counts(){$('total').textContent=products.length}
+function renderProducts(){var el=$('lista');if(!products.length){el.innerHTML='<div class="box empty">Nenhum produto cadastrado ainda.</div>';return}el.innerHTML=products.map(function(p){return '<div class="product"><h3>🛍️ '+esc(p.nome)+'</h3><p class="small">💰 '+money(p.preco)+'<br>💵 Comissão: '+esc(p.comissao)+'%<br>📂 '+esc(p.categoria||'Sem categoria')+'</p><div class="actions">'+(p.link?'<button class="btn open" data-id="'+p.id+'">🔗 Abrir link</button>':'<button class="gray">🔗 Sem link</button>')+'<button class="gray del" data-id="'+p.id+'">🗑️ Excluir</button></div></div>'}).join('');el.querySelectorAll('.del').forEach(function(b){b.onclick=function(){products=products.filter(function(p){return String(p.id)!==String(b.dataset.id)});save();renderProducts();renderSelect();counts()}});el.querySelectorAll('.open').forEach(function(b){b.onclick=function(){var p=products.find(function(x){return String(x.id)===String(b.dataset.id)});if(p&&p.link)window.open(p.link,'_blank')}})}
+function renderLinks(){var el=$('linksList'),a=products.filter(function(p){return p.link});if(!a.length){el.innerHTML='<div class="box empty">Nenhum link de afiliado cadastrado.</div>';return}el.innerHTML=a.map(function(p){return '<div class="product"><h3>🔗 '+esc(p.nome)+'</h3><p class="small">'+esc(p.link)+'</p><button class="btn open" data-id="'+p.id+'">🔗 Abrir link</button></div>'}).join('');el.querySelectorAll('.open').forEach(function(b){b.onclick=function(){var p=products.find(function(x){return String(x.id)===String(b.dataset.id)});if(p)window.open(p.link,'_blank')}})}
+function renderSelect(){var s=$('produto');if(!products.length){s.innerHTML='<option value="">Nenhum produto cadastrado</option>';return}s.innerHTML=products.map(function(p){return '<option value="'+p.id+'">'+esc(p.nome)+'</option>'}).join('')}
+$('add').onclick=function(){var n=$('nome').value.trim();if(!n){alert('Digite o nome do produto.');return}products.push({id:Date.now(),nome:n,preco:$('preco').value||0,comissao:$('comissao').value||0,categoria:$('categoria').value.trim()||'Sem categoria',link:$('link').value.trim()});save();['nome','preco','comissao','categoria','link'].forEach(function(id){$(id).value=''}) ;renderProducts();renderSelect();counts();alert('Produto adicionado com sucesso!')};
+function selected(){return products.find(function(p){return String(p.id)===String($('produto').value)})}
+function build(){
+var p=selected();
+if(!p){alert('Cadastre um produto primeiro.');return null}
+var d=parseInt($('duracao').value,10)||30;
+var n=p.nome.trim();
+var pr=money(p.preco);
+var cat=(p.categoria||'').trim();
+var s=$('estilo').value;
+var low=(n+' '+cat).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+var tipo='produto';
+var beneficio='uma opção prática para facilitar o dia a dia';
+var problema='uma tarefa do dia a dia que poderia ser mais prática';
+var uso='no dia a dia';
+if(/seladora|selador/.test(low)){
+ tipo='seladora';
+ beneficio='ajudar a fechar embalagens abertas de forma mais prática';
+ problema='aquele pacote de alimento que você abriu e depois fica difícil fechar';
+ uso='para ajudar a fechar embalagens abertas';
+}else if(/cozinha|culinaria|casa|utilidades domesticas/.test(low)){
+ tipo='casa';
+ beneficio='facilitar tarefas e trazer mais praticidade para a rotina';
+ problema='uma tarefa doméstica que acaba tomando mais tempo do que deveria';
+ uso='em tarefas do dia a dia';
+}else if(/beleza|maquiagem|cabelo|skincare/.test(low)){
+ tipo='beleza';
+ beneficio='facilitar a rotina de cuidados pessoais';
+ problema='uma etapa da rotina de beleza que poderia ser mais prática';
+ uso='na rotina de cuidados pessoais';
+}else if(/fitness|academia|treino|esporte/.test(low)){
+ tipo='fitness';
+ beneficio='dar mais praticidade para a rotina de treino';
+ problema='uma situação da rotina de treino que poderia ser mais prática';
+ uso='na rotina de treino';
+}else if(/eletron|celular|informat|gadget|tecnologia/.test(low)){
+ tipo='tecnologia';
+ beneficio='trazer mais praticidade para o uso diário';
+ problema='uma tarefa com tecnologia que poderia ser mais simples';
+ uso='no uso do dia a dia';
+}
+var cleanCat=cat.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,'');
+var tags='#shopee #shopeeafiliados #achadinhos #achadinhosshopee #comprinhas #dicas';
+if(cleanCat) tags+=' #'+cleanCat;
+if(tipo==='seladora') tags+=' #seladora #utilidadesdomesticas';
+else if(tipo==='beleza') tags+=' #beleza #autocuidado';
+else if(tipo==='fitness') tags+=' #fitness #treino';
+else if(tipo==='tecnologia') tags+=' #tecnologia #gadgets';
+else if(tipo==='casa') tags+=' #casa #utilidadesdomesticas';
+else tags+=' #achadinho';
+var t;
+if(d===15)t={a:'0-3',b:'3-7',c:'7-11',e:'11-15'};
+else if(d===60)t={a:'0-5',b:'5-15',c:'15-45',e:'45-60'};
+else t={a:'0-3',b:'3-8',c:'8-22',e:'22-30'};
+var g,r,l,c;
+if(s==='viral'){
+ g='🚨 GENTE, OLHA ESSE ACHADINHO QUE EU ENCONTREI!';
+ r='['+t.a+'s] GANCHO\n'+g+'\n\n['+t.b+'s] DESCOBERTA\nOlha essa '+n+'! 😱\n\n['+t.c+'s] BENEFÍCIO\n'+(tipo==='seladora'?'Sabe aquele pacote que você abriu? Ela pode ajudar a fechar a embalagem de forma mais prática.':('Uma opção para quem procura '+beneficio+'.'))+' 👀\n\n['+t.e+'s] PREÇO + CTA\nEncontrei por '+pr+'! 🔥\n🛒 Confira o produto pelo link e veja os detalhes!';
+ l='🚨 OLHA ESSE ACHADINHO! 😱\n\n'+n+' por '+pr+'! 🔥\n\n'+(tipo==='seladora'?'Uma opção prática para ajudar a fechar embalagens abertas.':('Uma opção para '+beneficio+'.'))+'\n\n🛒 Confira os detalhes pelo link!';
+ c='🛒 Confira o produto pelo link e veja os detalhes!';
+}else if(s==='oferta'){
+ g='💰 ACHADINHO QUE MERECE SUA ATENÇÃO!';
+ r='['+t.a+'s] GANCHO\n'+g+'\n\n['+t.b+'s] APRESENTAÇÃO\nEssa é a '+n+'! 👀\n\n['+t.c+'s] DESTAQUE\n'+(tipo==='seladora'?'Ela pode ajudar a fechar embalagens abertas com mais praticidade.':('Uma opção para '+beneficio+'.'))+'\n\n['+t.e+'s] PREÇO + CTA\nO preço informado é '+pr+'. 💰\n🛒 Confira o preço atual e os detalhes pelo link!';
+ l='🏷️ ACHADINHO DO DIA!\n\n'+n+' por '+pr+'. 👀\n\n'+(tipo==='seladora'?'Pode ajudar a fechar embalagens abertas de forma mais prática.':('Uma opção para '+beneficio+'.'))+'\n\n🛒 Confira o preço atual pelo link!';
+ c='🛒 Confira o preço atual e os detalhes pelo link!';
+}else if(s==='review'){
+ g='⭐ SERÁ QUE ESSE PRODUTO VALE A PENA?';
+ r='['+t.a+'s] GANCHO\n'+g+'\n\n['+t.b+'s] APRESENTAÇÃO\nOlha só essa '+n+'! 👀\n\n['+t.c+'s] ANÁLISE\n'+(tipo==='seladora'?'A proposta é ajudar a fechar embalagens abertas, sendo uma opção compacta para ter por perto.':('A proposta é '+beneficio+'.'))+'\n\n['+t.e+'s] PREÇO + CONCLUSÃO\nO valor informado é '+pr+'.\n👇 Confira os detalhes do produto pelo link!';
+ l='⭐ SERÁ QUE VALE A PENA?\n\nHoje é dia de conhecer a '+n+'. 🛍️\n\n'+(tipo==='seladora'?'A proposta é ajudar a fechar embalagens abertas de forma prática.':('A proposta é '+beneficio+'.'))+'\n\n💰 '+pr+'\n\n👇 Confira os detalhes pelo link!';
+ c='👇 Confira os detalhes do produto pelo link!';
+}else{
+ g='😩 VOCÊ TAMBÉM PASSA POR ISSO NO DIA A DIA?';
+ r='['+t.a+'s] PROBLEMA\n'+g+'\n\n['+t.b+'s] SITUAÇÃO\n'+problema+'? 😩\n\n['+t.c+'s] SOLUÇÃO\nOlha essa '+n+'! 👀\n'+(tipo==='seladora'?'Ela pode ajudar a fechar a embalagem de forma mais prática.':('Ela foi pensada para ajudar em '+uso+'.'))+'\n\n['+t.e+'s] PREÇO + CTA\nO valor informado é '+pr+'.\n🛒 Confira o produto pelo link!';
+ l='😩 PRECISA DE UMA SOLUÇÃO MAIS PRÁTICA?\n\n'+problema+'?\n\nOlha essa '+n+'! 👀\n\n'+(tipo==='seladora'?'Ela pode ajudar a fechar embalagens abertas de forma mais prática.':('Uma opção para '+beneficio+'.'))+'\n\n💰 '+pr+'\n\n🛒 Confira os detalhes pelo link!';
+ c='🛒 Confira o produto pelo link e veja os detalhes!';
+}
+h=tags;
+return{g:g,r:r,l:l,h:h,c:c}
+}
+function copy(t){if(navigator.clipboard){navigator.clipboard.writeText(t).then(function(){alert('Copiado! 📋')}).catch(function(){fallback(t)})}else fallback(t)}function fallback(t){var x=document.createElement('textarea');x.value=t;document.body.appendChild(x);x.select();document.execCommand('copy');x.remove();alert('Copiado! 📋')}
+$('gerar').onclick=function(){var x=build();if(!x)return;var all='GANCHO\n'+x.g+'\n\nROTEIRO\n'+x.r+'\n\nLEGENDA\n'+x.l+'\n\nHASHTAGS\n'+x.h+'\n\nCTA\n'+x.c;$('resultado').innerHTML='<div class="result"><h3>🎯 Gancho</h3><p>'+esc(x.g)+'</p><button class="dark cp" data-t="'+esc(x.g)+'">📋 Copiar</button></div><div class="result"><h3>🎬 Roteiro</h3><p>'+esc(x.r)+'</p><button class="dark cp" data-t="'+esc(x.r)+'">📋 Copiar roteiro</button></div><div class="result"><h3>📝 Legenda</h3><p>'+esc(x.l)+'</p><button class="dark cp" data-t="'+esc(x.l)+'">📋 Copiar legenda</button></div><div class="result"><h3>#️⃣ Hashtags</h3><p>'+esc(x.h)+'</p><button class="dark cp" data-t="'+esc(x.h)+'">📋 Copiar hashtags</button></div><div class="result"><h3>📢 CTA</h3><p>'+esc(x.c)+'</p><button class="btn all">📋 COPIAR TUDO</button></div>';document.querySelectorAll('.cp').forEach(function(b){b.onclick=function(){copy(b.dataset.t)}});document.querySelector('.all').onclick=function(){copy(all)}};
+counts();renderProducts();renderSelect();
+})();
+</script></body></html>
