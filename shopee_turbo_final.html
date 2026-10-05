@@ -1,51 +1,484 @@
 <!doctype html>
-<html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#ff5a00"><title>Shopee Turbo</title>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#ff5a00">
+<link rel="manifest" href="./manifest.json">
+<link rel="apple-touch-icon" href="./icon-192.png">
+<title>Shopee Turbo</title>
+
 <style>
-*{box-sizing:border-box}body{margin:0;background:#f5f5f5;color:#222;font-family:Arial,sans-serif;padding-bottom:78px}header{background:linear-gradient(135deg,#ff6a00,#ff3d00);color:#fff;padding:22px 18px;border-radius:0 0 24px 24px}header h1{margin:0;font-size:28px}header p{margin:6px 0 0}.wrap{max-width:700px;margin:auto;padding:18px}.page{display:none}.page.active{display:block}.title{font-size:22px;margin:18px 0 14px}.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.card,.box,.product,.result{background:#fff;border-radius:18px;padding:16px;margin-bottom:14px;box-shadow:0 2px 10px #0001}.card{text-align:center}.card strong{display:block;color:#ff5a00;font-size:22px}.card span{font-size:12px;color:#777}.badge{display:inline-block;background:#fff0e8;color:#ff5a00;border-radius:20px;padding:6px 10px;font-size:12px;margin-bottom:8px}input,select{width:100%;padding:13px;margin:6px 0 12px;border:1px solid #ddd;border-radius:11px;font-size:15px;background:#fff}button{border:0;border-radius:12px;padding:13px 16px;font-weight:bold;font-size:15px}.btn{width:100%;background:#ff5a00;color:#fff}.dark{background:#222;color:#fff;width:100%;margin-top:10px}.gray{background:#eee;color:#222}.small{color:#777;font-size:13px;line-height:1.5}.actions{display:flex;gap:8px}.actions button{flex:1}.result{background:#fff8f3;border:1px solid #ffd5bc;white-space:pre-wrap;line-height:1.55}.result h3{color:#ff5a00}.empty{text-align:center;color:#777}.nav{position:fixed;z-index:9;left:0;right:0;bottom:0;background:#fff;border-top:1px solid #ddd;display:flex;justify-content:space-around;padding:8px 3px}.nav button{background:none;color:#666;font-size:11px;padding:6px 3px}.nav button.active{color:#ff5a00}
-</style></head><body>
-<header><h1>🛍️ Shopee Turbo</h1><p>Encontre. Crie. Divulgue. Venda.</p></header>
+*{box-sizing:border-box}
+body{margin:0;background:#f5f5f5;color:#222;font-family:Arial,sans-serif;padding-bottom:78px}
+header{background:linear-gradient(135deg,#ff6a00,#ff3d00);color:#fff;padding:22px 18px;border-radius:0 0 24px 24px}
+header h1{margin:0;font-size:28px}
+header p{margin:6px 0 0}
+.wrap{max-width:700px;margin:auto;padding:18px}
+.page{display:none}
+.page.active{display:block}
+.title{font-size:22px;margin:18px 0 14px}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.card,.box,.product,.result{background:#fff;border-radius:18px;padding:16px;margin-bottom:14px;box-shadow:0 2px 10px #0001}
+.card{text-align:center}
+.card strong{display:block;color:#ff5a00;font-size:22px}
+.card span{font-size:12px;color:#777}
+.badge{display:inline-block;background:#fff0e8;color:#ff5a00;border-radius:20px;padding:6px 10px;font-size:12px;margin-bottom:8px}
+input,select{width:100%;padding:13px;margin:6px 0 12px;border:1px solid #ddd;border-radius:11px;font-size:15px;background:#fff}
+button{border:0;border-radius:12px;padding:13px 16px;font-weight:bold;font-size:15px}
+.btn{width:100%;background:#ff5a00;color:#fff}
+.dark{background:#222;color:#fff;width:100%;margin-top:10px}
+.gray{background:#eee;color:#222}
+.small{color:#777;font-size:13px;line-height:1.5}
+.actions{display:flex;gap:8px}
+.actions button{flex:1}
+.result{background:#fff8f3;border:1px solid #ffd5bc;white-space:pre-wrap;line-height:1.55}
+.result h3{color:#ff5a00}
+.empty{text-align:center;color:#777}
+.nav{position:fixed;z-index:9;left:0;right:0;bottom:0;background:#fff;border-top:1px solid #ddd;display:flex;justify-content:space-around;padding:8px 3px}
+.nav button{background:none;color:#666;font-size:11px;padding:6px 3px}
+.nav button.active{color:#ff5a00}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>🛍️ Shopee Turbo</h1>
+<p>Encontre. Crie. Divulgue. Venda.</p>
+</header>
+
 <div class="wrap">
-<section id="home" class="page active"><h2 class="title">🚀 Seu painel</h2><div class="cards"><div class="card"><strong id="total">0</strong><span>Produtos</span></div><div class="card"><strong>0</strong><span>Cliques</span></div><div class="card"><strong>R$ 0</strong><span>Comissões</span></div></div><div class="box"><span class="badge">🔥 Conteúdo 2.0</span><h2>Crie conteúdo para seus produtos</h2><p class="small">Gere roteiros para vídeos de 15, 30 ou 60 segundos.</p><button class="btn" data-go="conteudo">✨ Criar conteúdo</button></div><div class="box"><span class="badge">🛒 Produtos</span><h2>Cadastre seus achadinhos</h2><p class="small">Adicione produtos para usar no gerador.</p><button class="btn" data-go="produtos">➕ Adicionar produto</button></div></section>
-<section id="produtos" class="page"><h2 class="title">🛒 Produtos</h2><div class="box"><h3>Adicionar produto</h3><input id="nome" placeholder="Nome do produto"><input id="preco" inputmode="decimal" placeholder="Preço"><input id="comissao" inputmode="decimal" placeholder="Comissão %"><input id="categoria" placeholder="Categoria"><input id="link" placeholder="Link de afiliado"><button class="btn" id="add">➕ Adicionar produto</button></div><h2 class="title">📦 Produtos cadastrados</h2><div id="lista"></div></section>
-<section id="links" class="page"><h2 class="title">🔗 Meus Links</h2><div id="linksList"></div></section>
-<section id="conteudo" class="page"><h2 class="title">✍️ Criar Conteúdo 2.0</h2><div class="box"><label>Produto</label><select id="produto"></select><label>Duração</label><select id="duracao"><option value="15">15 segundos</option><option value="30" selected>30 segundos</option><option value="60">60 segundos</option></select><label>Estilo</label><select id="estilo"><option value="viral">🔥 Achadinho Viral</option><option value="oferta">🏷️ Oferta</option><option value="review">⭐ Review</option><option value="problema">💡 Problema e Solução</option></select><button class="btn" id="gerar">✨ Gerar conteúdo</button></div><div id="resultado"></div></section>
-<section id="resultados" class="page"><h2 class="title">📊 Resultados</h2><div class="box"><h3>📈 Métricas</h3><p class="small">As métricas reais poderão ser conectadas posteriormente por integração autorizada.</p></div></section>
+
+<section id="home" class="page active">
+<h2 class="title">🚀 Seu painel</h2>
+
+<div class="cards">
+<div class="card"><strong id="total">0</strong><span>Produtos</span></div>
+<div class="card"><strong>0</strong><span>Cliques</span></div>
+<div class="card"><strong>R$ 0</strong><span>Comissões</span></div>
 </div>
-<nav class="nav"><button data-go="home">🏠<br>Início</button><button data-go="produtos">🛒<br>Produtos</button><button data-go="links">🔗<br>Links</button><button data-go="conteudo">✍️<br>Conteúdo</button><button data-go="resultados">📊<br>Resultados</button></nav>
+
+<div class="box">
+<span class="badge">🔥 Conteúdo 2.0</span>
+<h2>Crie conteúdo para seus produtos</h2>
+<p class="small">Gere roteiros para vídeos de 15, 30 ou 60 segundos.</p>
+<button class="btn" data-go="conteudo">✨ Criar conteúdo</button>
+</div>
+
+<div class="box">
+<span class="badge">🛒 Produtos</span>
+<h2>Cadastre seus achadinhos</h2>
+<p class="small">Adicione produtos para usar no gerador.</p>
+<button class="btn" data-go="produtos">➕ Adicionar produto</button>
+</div>
+</section>
+
+<section id="produtos" class="page">
+<h2 class="title">🛒 Produtos</h2>
+
+<div class="box">
+<h3>Adicionar produto</h3>
+<input id="nome" placeholder="Nome do produto">
+<input id="preco" inputmode="decimal" placeholder="Preço">
+<input id="comissao" inputmode="decimal" placeholder="Comissão %">
+<input id="categoria" placeholder="Categoria">
+<input id="link" placeholder="Link de afiliado">
+<button class="btn" id="add">➕ Adicionar produto</button>
+</div>
+
+<h2 class="title">📦 Produtos cadastrados</h2>
+<div id="lista"></div>
+</section>
+
+<section id="links" class="page">
+<h2 class="title">🔗 Meus Links</h2>
+<div id="linksList"></div>
+</section>
+
+<section id="conteudo" class="page">
+<h2 class="title">✍️ Criar Conteúdo 2.0</h2>
+
+<div class="box">
+<label>Produto</label>
+<select id="produto"></select>
+
+<label>Duração</label>
+<select id="duracao">
+<option value="15">15 segundos</option>
+<option value="30" selected>30 segundos</option>
+<option value="60">60 segundos</option>
+</select>
+
+<label>Estilo</label>
+<select id="estilo">
+<option value="viral">🔥 Achadinho Viral</option>
+<option value="oferta">🏷️ Oferta</option>
+<option value="review">⭐ Review</option>
+<option value="problema">💡 Problema e Solução</option>
+</select>
+
+<button class="btn" id="gerar">✨ Gerar conteúdo</button>
+</div>
+
+<div id="resultado"></div>
+</section>
+
+<section id="resultados" class="page">
+<h2 class="title">📊 Resultados</h2>
+
+<div class="box">
+<h3>📈 Métricas</h3>
+<p class="small">
+As métricas reais poderão ser conectadas posteriormente por integração autorizada.
+</p>
+</div>
+</section>
+
+</div>
+
+<nav class="nav">
+<button data-go="home">🏠<br>Início</button>
+<button data-go="produtos">🛒<br>Produtos</button>
+<button data-go="links">🔗<br>Links</button>
+<button data-go="conteudo">✍️<br>Conteúdo</button>
+<button data-go="resultados">📊<br>Resultados</button>
+</nav>
+
 <script>
-(function(){'use strict';
-var KEY='shopee_turbo_produtos',products=[];try{products=JSON.parse(localStorage.getItem(KEY)||'[]');if(!Array.isArray(products))products=[]}catch(e){products=[]}
-function $(id){return document.getElementById(id)}function save(){localStorage.setItem(KEY,JSON.stringify(products))}function esc(s){return String(s??'').replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}function money(v){return (parseFloat(String(v||0).replace(',','.'))||0).toLocaleString('pt-BR',{style:'currency',currency:'BRL'})}
-function show(id){document.querySelectorAll('.page').forEach(function(p){p.classList.remove('active')});$(id).classList.add('active');document.querySelectorAll('.nav button').forEach(function(b){b.classList.toggle('active',b.dataset.go===id)});if(id==='produtos')renderProducts();if(id==='links')renderLinks();if(id==='conteudo')renderSelect();window.scrollTo(0,0)}
-document.querySelectorAll('[data-go]').forEach(function(b){b.addEventListener('click',function(){show(b.dataset.go)})});
-function counts(){$('total').textContent=products.length}
-function renderProducts(){var el=$('lista');if(!products.length){el.innerHTML='<div class="box empty">Nenhum produto cadastrado ainda.</div>';return}el.innerHTML=products.map(function(p){return '<div class="product"><h3>🛍️ '+esc(p.nome)+'</h3><p class="small">💰 '+money(p.preco)+'<br>💵 Comissão: '+esc(p.comissao)+'%<br>📂 '+esc(p.categoria||'Sem categoria')+'</p><div class="actions">'+(p.link?'<button class="btn open" data-id="'+p.id+'">🔗 Abrir link</button>':'<button class="gray">🔗 Sem link</button>')+'<button class="gray del" data-id="'+p.id+'">🗑️ Excluir</button></div></div>'}).join('');el.querySelectorAll('.del').forEach(function(b){b.onclick=function(){products=products.filter(function(p){return String(p.id)!==String(b.dataset.id)});save();renderProducts();renderSelect();counts()}});el.querySelectorAll('.open').forEach(function(b){b.onclick=function(){var p=products.find(function(x){return String(x.id)===String(b.dataset.id)});if(p&&p.link)window.open(p.link,'_blank')}})}
-function renderLinks(){var el=$('linksList'),a=products.filter(function(p){return p.link});if(!a.length){el.innerHTML='<div class="box empty">Nenhum link de afiliado cadastrado.</div>';return}el.innerHTML=a.map(function(p){return '<div class="product"><h3>🔗 '+esc(p.nome)+'</h3><p class="small">'+esc(p.link)+'</p><button class="btn open" data-id="'+p.id+'">🔗 Abrir link</button></div>'}).join('');el.querySelectorAll('.open').forEach(function(b){b.onclick=function(){var p=products.find(function(x){return String(x.id)===String(b.dataset.id)});if(p)window.open(p.link,'_blank')}})}
-function renderSelect(){var s=$('produto');if(!products.length){s.innerHTML='<option value="">Nenhum produto cadastrado</option>';return}s.innerHTML=products.map(function(p){return '<option value="'+p.id+'">'+esc(p.nome)+'</option>'}).join('')}
-$('add').onclick=function(){var n=$('nome').value.trim();if(!n){alert('Digite o nome do produto.');return}products.push({id:Date.now(),nome:n,preco:$('preco').value||0,comissao:$('comissao').value||0,categoria:$('categoria').value.trim()||'Sem categoria',link:$('link').value.trim()});save();['nome','preco','comissao','categoria','link'].forEach(function(id){$(id).value=''}) ;renderProducts();renderSelect();counts();alert('Produto adicionado com sucesso!')};
-function selected(){return products.find(function(p){return String(p.id)===String($('produto').value)})}
+(function(){
+'use strict';
+
+var KEY='shopee_turbo_produtos',products=[];
+
+try{
+products=JSON.parse(localStorage.getItem(KEY)||'[]');
+if(!Array.isArray(products))products=[];
+}catch(e){
+products=[];
+}
+
+function $(id){
+return document.getElementById(id);
+}
+
+function save(){
+localStorage.setItem(KEY,JSON.stringify(products));
+}
+
+function esc(s){
+return String(s??'').replace(/[&<>"']/g,function(c){
+return {
+'&':'&amp;',
+'<':'&lt;',
+'>':'&gt;',
+'"':'&quot;',
+"'":'&#39;'
+}[c];
+});
+}
+
+function money(v){
+return (parseFloat(String(v||0).replace(',','.'))||0).toLocaleString('pt-BR',{
+style:'currency',
+currency:'BRL'
+});
+}
+
+function show(id){
+document.querySelectorAll('.page').forEach(function(p){
+p.classList.remove('active');
+});
+
+$(id).classList.add('active');
+
+document.querySelectorAll('.nav button').forEach(function(b){
+b.classList.toggle('active',b.dataset.go===id);
+});
+
+if(id==='produtos')renderProducts();
+if(id==='links')renderLinks();
+if(id==='conteudo')renderSelect();
+
+window.scrollTo(0,0);
+}
+
+document.querySelectorAll('[data-go]').forEach(function(b){
+b.addEventListener('click',function(){
+show(b.dataset.go);
+});
+});
+
+function counts(){
+$('total').textContent=products.length;
+}
+
+function renderProducts(){
+var el=$('lista');
+
+if(!products.length){
+el.innerHTML='<div class="box empty">Nenhum produto cadastrado ainda.</div>';
+return;
+}
+
+el.innerHTML=products.map(function(p){
+return '<div class="product">'+
+'<h3>🛍️ '+esc(p.nome)+'</h3>'+
+'<p class="small">💰 '+money(p.preco)+
+'<br>💵 Comissão: '+esc(p.comissao)+'%'+
+'<br>📂 '+esc(p.categoria||'Sem categoria')+
+'</p>'+
+'<div class="actions">'+
+(p.link?
+'<button class="btn open" data-id="'+p.id+'">🔗 Abrir link</button>':
+'<button class="gray">🔗 Sem link</button>')+
+'<button class="gray del" data-id="'+p.id+'">🗑️ Excluir</button>'+
+'</div></div>';
+}).join('');
+
+el.querySelectorAll('.del').forEach(function(b){
+b.onclick=function(){
+products=products.filter(function(p){
+return String(p.id)!==String(b.dataset.id);
+});
+
+save();
+renderProducts();
+renderSelect();
+counts();
+};
+});
+
+el.querySelectorAll('.open').forEach(function(b){
+b.onclick=function(){
+var p=products.find(function(x){
+return String(x.id)===String(b.dataset.id);
+});
+
+if(p&&p.link)window.open(p.link,'_blank');
+};
+});
+}
+
+function renderLinks(){
+var el=$('linksList');
+var a=products.filter(function(p){
+return p.link;
+});
+
+if(!a.length){
+el.innerHTML='<div class="box empty">Nenhum link de afiliado cadastrado.</div>';
+return;
+}
+
+el.innerHTML=a.map(function(p){
+return '<div class="product">'+
+'<h3>🔗 '+esc(p.nome)+'</h3>'+
+'<p class="small">'+esc(p.link)+'</p>'+
+'<button class="btn open" data-id="'+p.id+'">🔗 Abrir link</button>'+
+'</div>';
+}).join('');
+
+el.querySelectorAll('.open').forEach(function(b){
+b.onclick=function(){
+var p=products.find(function(x){
+return String(x.id)===String(b.dataset.id);
+});
+
+if(p)window.open(p.link,'_blank');
+};
+});
+}
+
+function renderSelect(){
+var s=$('produto');
+
+if(!products.length){
+s.innerHTML='<option value="">Nenhum produto cadastrado</option>';
+return;
+}
+
+s.innerHTML=products.map(function(p){
+return '<option value="'+p.id+'">'+esc(p.nome)+'</option>';
+}).join('');
+}
+
+$('add').onclick=function(){
+
+var n=$('nome').value.trim();
+
+if(!n){
+alert('Digite o nome do produto.');
+return;
+}
+
+products.push({
+id:Date.now(),
+nome:n,
+preco:$('preco').value||0,
+comissao:$('comissao').value||0,
+categoria:$('categoria').value.trim()||'Sem categoria',
+link:$('link').value.trim()
+});
+
+save();
+
+['nome','preco','comissao','categoria','link'].forEach(function(id){
+$(id).value='';
+});
+
+renderProducts();
+renderSelect();
+counts();
+
+alert('Produto adicionado com sucesso!');
+};
+
+function selected(){
+return products.find(function(p){
+return String(p.id)===String($('produto').value);
+});
+}
+
 function analyzeProduct(p){
-var text=(p.nome+' '+(p.categoria||'')).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
-var a={type:'geral',subject:'o dia a dia',benefit:'trazer mais praticidade para o dia a dia',tags:['#utilidades','#dicasdecompras']};
-function has(){for(var i=0;i<arguments.length;i++)if(text.indexOf(arguments[i])>-1)return true;return false}
-if(has('vaso','cachepot','suculenta','cacto','planta','jardim','jardinagem'))a={type:'plantas',subject:'suas plantas e a decoração',benefit:'organizar e valorizar suas plantinhas na decoração',tags:['#plantas','#suculentas','#cactos','#jardinagem','#decoracao']};
-else if(has('taca','copo','caneca','xicara','garrafa','mesa posta'))a={type:'mesa',subject:'sua mesa e seus momentos especiais',benefit:'deixar a mesa mais bonita e compor diferentes ocasiões',tags:['#mesaposta','#cozinha','#decoracao','#casa']};
-else if(has('seladora','selador','embalagem','saco','fechador','lacrador'))a={type:'cozinha',subject:'a organização das embalagens na cozinha',benefit:'ajudar a fechar embalagens abertas de forma mais prática',tags:['#cozinha','#organizacao','#utilidadesdomesticas','#seladora']};
-else if(has('organizador','organizacao','gaveta','prateleira','porta objetos','portaobjetos'))a={type:'organizacao',subject:'a organização da casa',benefit:'organizar objetos e aproveitar melhor os espaços',tags:['#organizacao','#casa','#utilidadesdomesticas','#organizador']};
-else if(has('luminaria','abajur','luz','led','lampada'))a={type:'iluminacao',subject:'a iluminação do ambiente',benefit:'criar um detalhe diferente na iluminação e decoração',tags:['#iluminacao','#decoracao','#casa','#led']};
-else if(has('maquiagem','maqui','batom','base','blush','esmalte','cabelo','skincare','serum','creme'))a={type:'beleza',subject:'sua rotina de beleza',benefit:'complementar sua rotina de cuidados pessoais',tags:['#beleza','#autocuidado','#maquiagem','#skincare']};
-else if(has('fitness','academia','treino','halter','elastico','yoga','esporte'))a={type:'fitness',subject:'sua rotina de treino',benefit:'complementar a rotina de exercícios',tags:['#fitness','#treino','#academia','#esporte']};
-else if(has('celular','smartphone','iphone','android','fone','headset','carregador','cabo','eletronico','tecnologia'))a={type:'tecnologia',subject:'seus dispositivos',benefit:'facilitar o uso dos dispositivos no dia a dia',tags:['#tecnologia','#celular','#acessorios','#gadgets']};
-else if(has('pet','cachorro','gato','animal'))a={type:'pet',subject:'a rotina do seu pet',benefit:'facilitar alguns cuidados e momentos da rotina do seu pet',tags:['#pet','#pets','#cachorro','#gato']};
-else if(has('bebe','infantil','crianca','brinquedo'))a={type:'infantil',subject:'a rotina infantil',benefit:'facilitar a rotina e trazer praticidade para o dia a dia',tags:['#infantil','#criancas','#maternidade','#dicas']};
-else if(has('roupa','vestido','blusa','calca','short','tenis','sandalia','bolsa'))a={type:'moda',subject:'seus looks e acessórios',benefit:'complementar seus looks do dia a dia',tags:['#moda','#look','#estilo','#achadinhos']};
+
+var text=(p.nome+' '+(p.categoria||''))
+.toLowerCase()
+.normalize('NFD')
+.replace(/[\u0300-\u036f]/g,'');
+
+var a={
+type:'geral',
+subject:'o dia a dia',
+benefit:'trazer mais praticidade para o dia a dia',
+tags:['#utilidades','#dicasdecompras']
+};
+
+function has(){
+for(var i=0;i<arguments.length;i++)
+if(text.indexOf(arguments[i])>-1)return true;
+return false;
+}
+
+if(has('vaso','cachepot','suculenta','cacto','planta','jardim','jardinagem'))
+
+a={
+type:'plantas',
+subject:'suas plantas e a decoração',
+benefit:'organizar e valorizar suas plantinhas na decoração',
+tags:['#plantas','#suculentas','#cactos','#jardinagem','#decoracao']
+};
+
+else if(has('taca','copo','caneca','xicara','garrafa','mesa posta'))
+
+a={
+type:'mesa',
+subject:'sua mesa e seus momentos especiais',
+benefit:'deixar a mesa mais bonita e compor diferentes ocasiões',
+tags:['#mesaposta','#cozinha','#decoracao','#casa']
+};
+
+else if(has('seladora','selador','embalagem','saco','fechador','lacrador'))
+
+a={
+type:'cozinha',
+subject:'a organização das embalagens na cozinha',
+benefit:'ajudar a fechar embalagens abertas de forma mais prática',
+tags:['#cozinha','#organizacao','#utilidadesdomesticas','#seladora']
+};
+
+else if(has('organizador','organizacao','gaveta','prateleira','porta objetos','portaobjetos'))
+
+a={
+type:'organizacao',
+subject:'a organização da casa',
+benefit:'organizar objetos e aproveitar melhor os espaços',
+tags:['#organizacao','#casa','#utilidadesdomesticas','#organizador']
+};
+
+else if(has('luminaria','abajur','luz','led','lampada'))
+
+a={
+type:'iluminacao',
+subject:'a iluminação do ambiente',
+benefit:'criar um detalhe diferente na iluminação e decoração',
+tags:['#iluminacao','#decoracao','#casa','#led']
+};
+
+else if(has('maquiagem','maqui','batom','base','blush','esmalte','cabelo','skincare','serum','creme'))
+
+a={
+type:'beleza',
+subject:'sua rotina de beleza',
+benefit:'complementar sua rotina de cuidados pessoais',
+tags:['#beleza','#autocuidado','#maquiagem','#skincare']
+};
+
+else if(has('fitness','academia','treino','halter','elastico','yoga','esporte'))
+
+a={
+type:'fitness',
+subject:'sua rotina de treino',
+benefit:'complementar a rotina de exercícios',
+tags:['#fitness','#treino','#academia','#esporte']
+};
+
+else if(has('celular','smartphone','iphone','android','fone','headset','carregador','cabo','eletronico','tecnologia'))
+
+a={
+type:'tecnologia',
+subject:'seus dispositivos',
+benefit:'facilitar o uso dos dispositivos no dia a dia',
+tags:['#tecnologia','#celular','#acessorios','#gadgets']
+};
+
+else if(has('pet','cachorro','gato','animal'))
+
+a={
+type:'pet',
+subject:'a rotina do seu pet',
+benefit:'facilitar alguns cuidados e momentos da rotina do seu pet',
+tags:['#pet','#pets','#cachorro','#gato']
+};
+
+else if(has('bebe','infantil','crianca','brinquedo'))
+
+a={
+type:'infantil',
+subject:'a rotina infantil',
+benefit:'facilitar a rotina e trazer praticidade para o dia a dia',
+tags:['#infantil','#criancas','#maternidade','#dicas']
+};
+
+else if(has('roupa','vestido','blusa','calca','short','tenis','sandalia','bolsa'))
+
+a={
+type:'moda',
+subject:'seus looks e acessórios',
+benefit:'complementar seus looks do dia a dia',
+tags:['#moda','#look','#estilo','#achadinhos']
+};
+
 return a;
 }
+
 function build(){
+
 var p=selected();
-if(!p){alert('Cadastre um produto primeiro.');return null}
-var d=parseInt($('duracao').value,10)||30,n=p.nome.trim(),pr=money(p.preco),info=analyzeProduct(p),s=$('estilo').value;
-var h='#shopee #shopeeafiliados #achadinhos #achadinhosshopee #comprinhas '+info.tags.join(' '),g,r,l,c;
+
+if(!p){
+alert('Cadastre um produto primeiro.');
+return null;
+}
+
+var d=parseInt($('duracao').value,10)||30,
+n=p.nome.trim(),
+pr=money(p.preco),
+info=analyzeProduct(p),
+s=$('estilo').value;
+
+var h='#shopee #shopeeafiliados #achadinhos #achadinhosshopee #comprinhas '+info.tags.join(' '),
+g,r,l,c;
 
 var spoken={
 plantas:'esse trio de vasos com suporte para cactos e suculentas',
@@ -90,97 +523,244 @@ g='✨ Olha esse achadinho para deixar qualquer look ainda mais bonito!';
 g='🚨 Olha esse achadinho que eu encontrei!';
 }
 
-if(s==='oferta') g=info.type==='mesa'?'🏷️ Olha esse preço para deixar a mesa ainda mais bonita!':'🏷️ Olha o preço desse achadinho!';
-else if(s==='review') g='⭐ Vem conhecer esse achadinho comigo!';
-else if(s==='problema') g='💡 Sabe quando você procura uma solução simples para o dia a dia?';
+if(s==='oferta')
+g=info.type==='mesa'
+?'🏷️ Olha esse preço para deixar a mesa ainda mais bonita!'
+:'🏷️ Olha o preço desse achadinho!';
+else if(s==='review')
+g='⭐ Vem conhecer esse achadinho comigo!';
+else if(s==='problema')
+g='💡 Sabe quando você procura uma solução simples para o dia a dia?';
 
 if(d===15){
+
 var destaque=
-info.type==='plantas'?'Fica lindo na decoração e deixa aquele cantinho muito mais charmoso. 🪴✨':
-info.type==='mesa'?'Perfeito para deixar qualquer mesa muito mais bonita. ✨':
-info.type==='cozinha'?'Uma opção prática para deixar a rotina mais simples.':
-info.type==='organizacao'?'Uma opção para deixar tudo no lugar e aproveitar melhor o espaço.':
-info.type==='iluminacao'?'Um detalhe simples que pode mudar completamente o ambiente. ✨':
-info.type==='beleza'?'Uma opção para deixar sua rotina de cuidados ainda mais prática.':
-info.type==='fitness'?'Uma opção para complementar seus treinos e sua rotina.':
-info.type==='tecnologia'?'Uma opção prática para facilitar o dia a dia.':
-info.type==='pet'?'Uma opção para deixar alguns cuidados do seu pet mais práticos.':
-info.type==='infantil'?'Uma opção para facilitar diferentes momentos da rotina das crianças.':
-info.type==='moda'?'Um detalhe que pode deixar a produção ainda mais bonita.':
+info.type==='plantas'
+?'Fica lindo na decoração e deixa aquele cantinho muito mais charmoso. 🪴✨':
+info.type==='mesa'
+?'Perfeito para deixar qualquer mesa muito mais bonita. ✨':
+info.type==='cozinha'
+?'Uma opção prática para deixar a rotina mais simples.':
+info.type==='organizacao'
+?'Uma opção para deixar tudo no lugar e aproveitar melhor o espaço.':
+info.type==='iluminacao'
+?'Um detalhe simples que pode mudar completamente o ambiente. ✨':
+info.type==='beleza'
+?'Uma opção para deixar sua rotina de cuidados ainda mais prática.':
+info.type==='fitness'
+?'Uma opção para complementar seus treinos e sua rotina.':
+info.type==='tecnologia'
+?'Uma opção prática para facilitar o dia a dia.':
+info.type==='pet'
+?'Uma opção para deixar alguns cuidados do seu pet mais práticos.':
+info.type==='infantil'
+?'Uma opção para facilitar diferentes momentos da rotina das crianças.':
+info.type==='moda'
+?'Um detalhe que pode deixar a produção ainda mais bonita.':
 'Uma opção prática que pode facilitar o dia a dia.';
 
-r='[0–3s] GANCHO\n'+g+'\n\n[3–8s] PRODUTO\n'+item+'! 😍\n\n[8–12s] DESTAQUE\n'+destaque+'\n\n[12–15s] CTA\n🛒 Gostou? O link está aqui!';
+r='[0–3s] GANCHO\n'+g+
+'\n\n[3–8s] PRODUTO\n'+item+'! 😍'+
+'\n\n[8–12s] DESTAQUE\n'+destaque+
+'\n\n[12–15s] CTA\n🛒 Gostou? O link está aqui!';
 
 }else if(d===30){
+
 var detail=
-info.type==='plantas'?'São três vasos com suporte, perfeitos para destacar cactos e suculentas e criar um cantinho especial. 🪴✨':
-info.type==='mesa'?'O design é supercharmoso e combina com almoços, jantares e momentos especiais. ✨':
-info.type==='cozinha'?'Uma ajuda prática para deixar as tarefas da cozinha mais simples e organizadas.':
-info.type==='organizacao'?'Uma forma prática de organizar os objetos e aproveitar melhor cada espaço.':
-info.type==='iluminacao'?'Uma maneira simples de criar um clima diferente e deixar a decoração mais bonita.':
-info.type==='beleza'?'Uma opção para complementar os cuidados e deixar a rotina de beleza ainda mais prática.':
-info.type==='fitness'?'Uma opção para complementar os exercícios e deixar a rotina de treino mais completa.':
-info.type==='tecnologia'?'Uma opção prática para facilitar o uso dos dispositivos no dia a dia.':
-info.type==='pet'?'Uma opção pensada para trazer mais praticidade para a rotina do seu pet.':
-info.type==='infantil'?'Uma opção para deixar alguns momentos da rotina das crianças mais práticos.':
-info.type==='moda'?'Um detalhe que pode deixar a produção ainda mais bonita e completar diferentes looks.':
+info.type==='plantas'
+?'São três vasos com suporte, perfeitos para destacar cactos e suculentas e criar um cantinho especial. 🪴✨':
+info.type==='mesa'
+?'O design é supercharmoso e combina com almoços, jantares e momentos especiais. ✨':
+info.type==='cozinha'
+?'Uma ajuda prática para deixar as tarefas da cozinha mais simples e organizadas.':
+info.type==='organizacao'
+?'Uma forma prática de organizar os objetos e aproveitar melhor cada espaço.':
+info.type==='iluminacao'
+?'Uma maneira simples de criar um clima diferente e deixar a decoração mais bonita.':
+info.type==='beleza'
+?'Uma opção para complementar os cuidados e deixar a rotina de beleza ainda mais prática.':
+info.type==='fitness'
+?'Uma opção para complementar os exercícios e deixar a rotina de treino mais completa.':
+info.type==='tecnologia'
+?'Uma opção prática para facilitar o uso dos dispositivos no dia a dia.':
+info.type==='pet'
+?'Uma opção pensada para trazer mais praticidade para a rotina do seu pet.':
+info.type==='infantil'
+?'Uma opção para deixar alguns momentos da rotina das crianças mais práticos.':
+info.type==='moda'
+?'Um detalhe que pode deixar a produção ainda mais bonita e completar diferentes looks.':
 'Uma opção prática para facilitar o dia a dia.';
 
-r='[0–3s] GANCHO\n'+g+'\n\n[3–8s] PRODUTO\n'+item+'! 😍\n\n[8–18s] DESTAQUE\n'+detail+'\n\n[18–25s] PREÇO\nO valor cadastrado está em '+pr+'. 💰\n\n[25–30s] CTA\n🛒 Gostou? Acesse o link e confira!';
+r='[0–3s] GANCHO\n'+g+
+'\n\n[3–8s] PRODUTO\n'+item+'! 😍'+
+'\n\n[8–18s] DESTAQUE\n'+detail+
+'\n\n[18–25s] PREÇO\nO valor cadastrado está em '+pr+'. 💰'+
+'\n\n[25–30s] CTA\n🛒 Gostou? Acesse o link e confira!';
 
 }else{
+
 var detail60=
-info.type==='plantas'?'São três vasos com suporte, uma combinação linda para destacar cactos e suculentas e criar um cantinho especial. 🪴✨':
-info.type==='mesa'?'Sabe aquele detalhe que faz diferença na hora de montar uma mesa bonita? Esse jogo de taças traz um toque elegante para almoços, jantares e ocasiões especiais. ✨':
-info.type==='cozinha'?'Uma opção para quem busca mais praticidade e organização nas tarefas da cozinha.':
-info.type==='organizacao'?'Uma opção para organizar objetos, deixar tudo mais fácil de encontrar e aproveitar melhor os espaços.':
-info.type==='iluminacao'?'Uma opção para criar um detalhe especial na iluminação e deixar o ambiente mais aconchegante.':
-info.type==='beleza'?'Uma opção para complementar sua rotina de cuidados e deixar os momentos de autocuidado ainda mais práticos.':
-info.type==='fitness'?'Uma opção para complementar sua rotina de exercícios e treinos.':
-info.type==='tecnologia'?'Uma opção para facilitar tarefas do dia a dia e aproveitar melhor seus dispositivos.':
-info.type==='pet'?'Uma opção para deixar alguns cuidados e momentos da rotina do seu pet mais práticos.':
-info.type==='infantil'?'Uma opção para trazer mais praticidade para diferentes momentos da rotina das crianças.':
-info.type==='moda'?'Uma opção versátil para complementar diferentes produções e deixar o look ainda mais bonito.':
+info.type==='plantas'
+?'São três vasos com suporte, uma combinação linda para destacar cactos e suculentas e criar um cantinho especial. 🪴✨':
+info.type==='mesa'
+?'Sabe aquele detalhe que faz diferença na hora de montar uma mesa bonita? Esse jogo de taças traz um toque elegante para almoços, jantares e ocasiões especiais. ✨':
+info.type==='cozinha'
+?'Uma opção para quem busca mais praticidade e organização nas tarefas da cozinha.':
+info.type==='organizacao'
+?'Uma opção para organizar objetos, deixar tudo mais fácil de encontrar e aproveitar melhor os espaços.':
+info.type==='iluminacao'
+?'Uma opção para criar um detalhe especial na iluminação e deixar o ambiente mais aconchegante.':
+info.type==='beleza'
+?'Uma opção para complementar sua rotina de cuidados e deixar os momentos de autocuidado ainda mais práticos.':
+info.type==='fitness'
+?'Uma opção para complementar sua rotina de exercícios e treinos.':
+info.type==='tecnologia'
+?'Uma opção para facilitar tarefas do dia a dia e aproveitar melhor seus dispositivos.':
+info.type==='pet'
+?'Uma opção para deixar alguns cuidados e momentos da rotina do seu pet mais práticos.':
+info.type==='infantil'
+?'Uma opção para trazer mais praticidade para diferentes momentos da rotina das crianças.':
+info.type==='moda'
+?'Uma opção versátil para complementar diferentes produções e deixar o look ainda mais bonito.':
 'Uma opção para quem busca praticidade no dia a dia.';
 
-r='[0–5s] GANCHO\n'+g+'\n\n[5–15s] APRESENTAÇÃO\n'+item+'! 😍\nUma ideia simples para deixar tudo ainda mais bonito ou prático.\n\n[15–30s] DESTAQUE\n'+detail60+'\n\n[30–42s] PREÇO\nE o valor cadastrado está em '+pr+'. 💰\n\n[42–55s] CONFERÊNCIA\nSe você gostou, confira as fotos, avaliações, descrição, variações e condições disponíveis no anúncio antes de comprar.\n\n[55–60s] CTA\n🛒 Gostou? Acesse o link e confira todos os detalhes!';
+r='[0–5s] GANCHO\n'+g+
+'\n\n[5–15s] APRESENTAÇÃO\n'+item+'! 😍'+
+'\nUma ideia simples para deixar tudo ainda mais bonito ou prático.'+
+'\n\n[15–30s] DESTAQUE\n'+detail60+
+'\n\n[30–42s] PREÇO\nE o valor cadastrado está em '+pr+'. 💰'+
+'\n\n[42–55s] CONFERÊNCIA\nSe você gostou, confira as fotos, avaliações, descrição, variações e condições disponíveis no anúncio antes de comprar.'+
+'\n\n[55–60s] CTA\n🛒 Gostou? Acesse o link e confira todos os detalhes!';
 }
 
 var legIntro=
-info.type==='plantas'?'🌵 Um achadinho lindo para quem ama plantinhas!':
-info.type==='mesa'?'✨ Um detalhe que pode deixar a mesa muito mais bonita!':
-info.type==='cozinha'?'🍳 Um achadinho para deixar a rotina da cozinha mais prática!':
-info.type==='organizacao'?'🛍️ Um achadinho para ajudar a deixar tudo mais organizado!':
-info.type==='iluminacao'?'✨ Um detalhe que pode transformar o ambiente!':
-info.type==='beleza'?'💄 Um achadinho para deixar a rotina de cuidados ainda melhor!':
-info.type==='fitness'?'🔥 Um achadinho para complementar sua rotina de treino!':
-info.type==='tecnologia'?'📱 Um achadinho prático para o dia a dia!':
-info.type==='pet'?'🐾 Um achadinho para facilitar a rotina do seu pet!':
-info.type==='infantil'?'🧸 Um achadinho para facilitar a rotina das crianças!':
-info.type==='moda'?'✨ Um achadinho para completar seus looks!':
+info.type==='plantas'
+?'🌵 Um achadinho lindo para quem ama plantinhas!':
+info.type==='mesa'
+?'✨ Um detalhe que pode deixar a mesa muito mais bonita!':
+info.type==='cozinha'
+?'🍳 Um achadinho para deixar a rotina da cozinha mais prática!':
+info.type==='organizacao'
+?'🛍️ Um achadinho para ajudar a deixar tudo mais organizado!':
+info.type==='iluminacao'
+?'✨ Um detalhe que pode transformar o ambiente!':
+info.type==='beleza'
+?'💄 Um achadinho para deixar a rotina de cuidados ainda melhor!':
+info.type==='fitness'
+?'🔥 Um achadinho para complementar sua rotina de treino!':
+info.type==='tecnologia'
+?'📱 Um achadinho prático para o dia a dia!':
+info.type==='pet'
+?'🐾 Um achadinho para facilitar a rotina do seu pet!':
+info.type==='infantil'
+?'🧸 Um achadinho para facilitar a rotina das crianças!':
+info.type==='moda'
+?'✨ Um achadinho para completar seus looks!':
 '🚨 Olha esse achadinho!';
 
 var legBody=
-info.type==='plantas'?'Uma opção simples para deixar aquele cantinho da casa mais bonito e cheio de personalidade.':
-info.type==='mesa'?'Um jogo com design charmoso para servir em diferentes ocasiões e deixar a composição da mesa mais elegante.':
-info.type==='cozinha'?'Uma opção prática para ajudar em diferentes tarefas do dia a dia.':
-info.type==='organizacao'?'Uma opção para deixar a casa mais organizada e funcional.':
-info.type==='iluminacao'?'Um detalhe que pode deixar a iluminação e a decoração ainda mais bonitas.':
-info.type==='beleza'?'Uma opção para complementar sua rotina de cuidados.':
-info.type==='fitness'?'Uma opção para complementar sua rotina de treino.':
-info.type==='tecnologia'?'Uma opção prática para facilitar o dia a dia.':
-info.type==='pet'?'Uma opção para facilitar alguns momentos da rotina do seu pet.':
-info.type==='infantil'?'Uma opção para trazer mais praticidade para a rotina das crianças.':
-info.type==='moda'?'Uma opção para complementar diferentes looks.':
+info.type==='plantas'
+?'Uma opção simples para deixar aquele cantinho da casa mais bonito e cheio de personalidade.':
+info.type==='mesa'
+?'Um jogo com design charmoso para servir em diferentes ocasiões e deixar a composição da mesa mais elegante.':
+info.type==='cozinha'
+?'Uma opção prática para ajudar em diferentes tarefas do dia a dia.':
+info.type==='organizacao'
+?'Uma opção para deixar a casa mais organizada e funcional.':
+info.type==='iluminacao'
+?'Um detalhe que pode deixar a iluminação e a decoração ainda mais bonitas.':
+info.type==='beleza'
+?'Uma opção para complementar sua rotina de cuidados.':
+info.type==='fitness'
+?'Uma opção para complementar sua rotina de treino.':
+info.type==='tecnologia'
+?'Uma opção prática para facilitar o dia a dia.':
+info.type==='pet'
+?'Uma opção para facilitar alguns momentos da rotina do seu pet.':
+info.type==='infantil'
+?'Uma opção para trazer mais praticidade para a rotina das crianças.':
+info.type==='moda'
+?'Uma opção para complementar diferentes looks.':
 'Uma opção prática para o dia a dia.';
 
-l=legIntro+'\n\n'+n+' por '+pr+'.\n\n'+legBody+'\n\n🛒 Confira fotos, avaliações e detalhes no anúncio!';
+l=legIntro+'\n\n'+n+' por '+pr+'.\n\n'+legBody+
+'\n\n🛒 Confira fotos, avaliações e detalhes no anúncio!';
+
 c='🛒 Confira o produto pelo link!';
 
 return{g:g,r:r,l:l,h:h,c:c,d:d};
 }
-function copy(t){if(navigator.clipboard){navigator.clipboard.writeText(t).then(function(){alert('Copiado! 📋')}).catch(function(){fallback(t)})}else fallback(t)}function fallback(t){var x=document.createElement('textarea');x.value=t;document.body.appendChild(x);x.select();document.execCommand('copy');x.remove();alert('Copiado! 📋')}
-$('gerar').onclick=function(){var x=build();if(!x)return;var all='GANCHO\n'+x.g+'\n\nROTEIRO\n'+x.r+'\n\nLEGENDA\n'+x.l+'\n\nHASHTAGS\n'+x.h+'\n\nCTA\n'+x.c;$('resultado').innerHTML='<div class="result"><h3>🎯 Gancho</h3><p>'+esc(x.g)+'</p><button class="dark cp" data-t="'+esc(x.g)+'">📋 Copiar</button></div><div class="result"><h3>🎬 Roteiro</h3><p>'+esc(x.r)+'</p><button class="dark cp" data-t="'+esc(x.r)+'">📋 Copiar roteiro</button></div><div class="result"><h3>📝 Legenda</h3><p>'+esc(x.l)+'</p><button class="dark cp" data-t="'+esc(x.l)+'">📋 Copiar legenda</button></div><div class="result"><h3>#️⃣ Hashtags</h3><p>'+esc(x.h)+'</p><button class="dark cp" data-t="'+esc(x.h)+'">📋 Copiar hashtags</button></div><div class="result"><h3>📢 CTA</h3><p>'+esc(x.c)+'</p><button class="btn all">📋 COPIAR TUDO</button></div>';document.querySelectorAll('.cp').forEach(function(b){b.onclick=function(){copy(b.dataset.t)}});document.querySelector('.all').onclick=function(){copy(all)}};
-counts();renderProducts();renderSelect();
+
+function copy(t){
+if(navigator.clipboard){
+navigator.clipboard.writeText(t)
+.then(function(){alert('Copiado! 📋')})
+.catch(function(){fallback(t)});
+}else{
+fallback(t);
+}
+}
+
+function fallback(t){
+var x=document.createElement('textarea');
+x.value=t;
+document.body.appendChild(x);
+x.select();
+document.execCommand('copy');
+x.remove();
+alert('Copiado! 📋');
+}
+
+$('gerar').onclick=function(){
+
+var x=build();
+
+if(!x)return;
+
+var all='GANCHO\n'+x.g+
+'\n\nROTEIRO\n'+x.r+
+'\n\nLEGENDA\n'+x.l+
+'\n\nHASHTAGS\n'+x.h+
+'\n\nCTA\n'+x.c;
+
+$('resultado').innerHTML=
+'<div class="result"><h3>🎯 Gancho</h3><p>'+esc(x.g)+'</p><button class="dark cp" data-t="'+esc(x.g)+'">📋 Copiar</button></div>'+
+'<div class="result"><h3>🎬 Roteiro</h3><p>'+esc(x.r)+'</p><button class="dark cp" data-t="'+esc(x.r)+'">📋 Copiar roteiro</button></div>'+
+'<div class="result"><h3>📝 Legenda</h3><p>'+esc(x.l)+'</p><button class="dark cp" data-t="'+esc(x.l)+'">📋 Copiar legenda</button></div>'+
+'<div class="result"><h3>#️⃣ Hashtags</h3><p>'+esc(x.h)+'</p><button class="dark cp" data-t="'+esc(x.h)+'">📋 Copiar hashtags</button></div>'+
+'<div class="result"><h3>📢 CTA</h3><p>'+esc(x.c)+'</p><button class="btn all">📋 COPIAR TUDO</button></div>';
+
+document.querySelectorAll('.cp').forEach(function(b){
+b.onclick=function(){
+copy(b.dataset.t);
+};
+});
+
+document.querySelector('.all').onclick=function(){
+copy(all);
+};
+};
+
+counts();
+renderProducts();
+renderSelect();
+
 })();
-</script></body></html>
+</script>
+
+<script>
+if("serviceWorker" in navigator){
+window.addEventListener("load",function(){
+navigator.serviceWorker.register("./service-worker.js")
+.then(function(){
+console.log("Shopee Turbo atualizado.");
+})
+.catch(function(error){
+console.log("Service Worker:",error);
+});
+});
+}
+</script>
+
+</body>
+</html>
