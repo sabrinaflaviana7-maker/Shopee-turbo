@@ -1,9 +1,12 @@
-const CACHE_NAME = "shopee-turbo-v4";
+const CACHE_NAME = "shopee-turbo-v5";
 
 const APP_SHELL = [
   "./",
   "./index.html",
-  "./manifest.json"
+  "./shopee_turbo_final.html",
+  "./manifest.json",
+  "./icon-192.png",
+  "./icon-512.png"
 ];
 
 self.addEventListener("install", function(event) {
@@ -52,7 +55,7 @@ self.addEventListener("fetch", function(event) {
       })
       .catch(function() {
         return caches.match(event.request).then(function(cached) {
-          return cached || caches.match("./index.html");
+          return cached || caches.match("./shopee_turbo_final.html");
         });
       })
   );
