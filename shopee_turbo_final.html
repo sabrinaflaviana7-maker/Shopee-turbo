@@ -1,2810 +1,1088 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#ff5a00">
-<meta name="description" content="Shopee Turbo - encontre, crie e divulgue produtos como afiliado.">
+<meta name="description" content="Shopee Turbo - aplicativo para afiliados">
 <link rel="manifest" href="./manifest.json">
 <link rel="apple-touch-icon" href="./icon-192.png">
+
 <title>Shopee Turbo</title>
 
 <style>
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
 body{
-margin:0;
-background:#f5f5f5;
-color:#222;
-font-family:Arial,Helvetica,sans-serif;
-padding-bottom:82px
+  font-family:Arial,Helvetica,sans-serif;
+  background:#f5f5f5;
+  color:#222;
+  min-height:100vh;
 }
-button,input,select,textarea{font-family:inherit}
-button{cursor:pointer}
-header{
-background:linear-gradient(135deg,#ff7200,#ff3d00);
-color:#fff;
-padding:22px 18px;
-border-radius:0 0 26px 26px;
-box-shadow:0 5px 18px #ff5a0033
+
+button,
+input,
+select,
+textarea{
+  font:inherit;
 }
-header h1{margin:0;font-size:27px}
-header p{margin:7px 0 0;font-size:14px;opacity:.95}
-.wrap{max-width:720px;margin:auto;padding:17px}
-.page{display:none}
-.page.active{display:block}
-.title{font-size:22px;font-weight:800;margin:18px 0 14px}
-.subtitle{color:#777;font-size:13px;line-height:1.5;margin-top:-7px;margin-bottom:15px}
-.cards{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
-.card,.box,.product,.result,.auto-card{
-background:#fff;
-border-radius:18px;
-padding:16px;
-margin-bottom:14px;
-box-shadow:0 2px 11px #00000010
+
+button{
+  cursor:pointer;
 }
-.card{text-align:center}
-.card strong{display:block;color:#ff5a00;font-size:24px;margin-bottom:5px}
-.card span{font-size:12px;color:#777}
-.badge{
-display:inline-block;
-background:#fff0e8;
-color:#ff5a00;
-border-radius:20px;
-padding:6px 10px;
-font-size:12px;
-font-weight:bold;
-margin-bottom:8px
+
+.hidden{
+  display:none!important;
 }
-input,select,textarea{
-width:100%;
-padding:13px;
-margin:5px 0 11px;
-border:1px solid #ddd;
-border-radius:12px;
-font-size:15px;
-background:#fff;
-outline:none
+
+/* LOGIN */
+
+#loginScreen{
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+  background:linear-gradient(145deg,#ff5a00,#ff7a00);
 }
-textarea{min-height:130px;resize:vertical;line-height:1.5}
-input:focus,select:focus,textarea:focus{
-border-color:#ff5a00;
-box-shadow:0 0 0 3px #ff5a0018
+
+.login-box{
+  width:100%;
+  max-width:380px;
+  background:white;
+  border-radius:24px;
+  padding:30px 24px;
+  box-shadow:0 15px 45px rgba(0,0,0,.25);
+  text-align:center;
 }
-label{display:block;font-size:13px;font-weight:bold;margin-top:7px}
-.btn{
-width:100%;
-background:#ff5a00;
-color:#fff;
-border:0;
-border-radius:12px;
-padding:13px 16px;
-font-weight:bold;
-font-size:15px;
-margin-top:4px
+
+.logo{
+  width:75px;
+  height:75px;
+  margin:0 auto 15px;
+  border-radius:20px;
+  background:#ff5a00;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:white;
+  font-size:35px;
+  font-weight:900;
 }
-.dark{background:#222;color:#fff;width:100%;margin-top:9px}
-.gray{background:#eee;color:#222}
-.red{background:#d93636;color:#fff}
-.small{color:#777;font-size:12px;line-height:1.5}
-.actions{display:flex;gap:8px;flex-wrap:wrap}
-.actions button{flex:1;min-width:120px}
-.product{position:relative;overflow:hidden}
-.product h3{margin:2px 0 8px;font-size:17px;line-height:1.3}
-.product .price{color:#ff5a00;font-size:21px;font-weight:800}
-.product .commission{
-display:inline-block;
-background:#eaf8ef;
-color:#168b48;
-padding:5px 9px;
-border-radius:15px;
-font-size:12px;
-font-weight:bold;
-margin:5px 0
+
+.login-box h1{
+  font-size:28px;
+  margin-bottom:8px;
 }
-.product a{
-display:block;
-text-decoration:none;
-text-align:center;
-background:#ff5a00;
-color:#fff;
-padding:12px;
-border-radius:11px;
-font-weight:bold;
-margin-top:10px
+
+.login-box p{
+  color:#777;
+  margin-bottom:25px;
 }
-.result{
-background:#fff8f3;
-border:1px solid #ffd5bc;
-white-space:pre-wrap;
-line-height:1.55
+
+.login-box input{
+  width:100%;
+  padding:15px;
+  border:1px solid #ddd;
+  border-radius:12px;
+  text-align:center;
+  font-size:20px;
+  letter-spacing:5px;
+  outline:none;
+  margin-bottom:12px;
 }
-.result h3{color:#ff5a00;margin-top:0}
-.empty{text-align:center;color:#777;padding:20px}
-.nav{
-position:fixed;
-z-index:20;
-left:0;
-right:0;
-bottom:0;
-background:#fff;
-border-top:1px solid #ddd;
-display:flex;
-justify-content:space-around;
-padding:7px 2px calc(7px + env(safe-area-inset-bottom));
-box-shadow:0 -3px 12px #0000000d;
-overflow-x:auto
+
+.login-box input:focus{
+  border-color:#ff5a00;
 }
-.nav button{
-background:none;
-color:#666;
-border:0;
-font-size:10px;
-padding:6px 5px;
-font-weight:bold;
-min-width:58px
+
+.btn-primary{
+  width:100%;
+  border:0;
+  border-radius:12px;
+  padding:15px;
+  background:#ff5a00;
+  color:white;
+  font-weight:bold;
+  font-size:16px;
 }
-.nav button.active{color:#ff5a00}
-.nav .ico{display:block;font-size:20px;line-height:22px;margin-bottom:2px}
-.pin-screen{
-min-height:100vh;
-display:flex;
-align-items:center;
-justify-content:center;
-padding:20px;
-background:linear-gradient(145deg,#ff7200,#ff3d00)
+
+.btn-primary:active{
+  transform:scale(.98);
 }
-.pin-box{
-width:100%;
-max-width:390px;
-background:#fff;
-border-radius:25px;
-padding:27px 22px;
-text-align:center;
-box-shadow:0 12px 40px #0004
+
+.login-error{
+  color:#d00;
+  font-size:14px;
+  margin-top:12px;
+  min-height:18px;
 }
-.pin-logo{
-width:70px;
-height:70px;
-margin:auto auto 13px;
-border-radius:20px;
-background:#fff0e8;
-display:flex;
-align-items:center;
-justify-content:center;
-font-size:38px
+
+/* APP */
+
+#app{
+  min-height:100vh;
+  padding-bottom:80px;
 }
-.pin-box h1{margin:5px 0 7px}
-.pin-box p{color:#777;font-size:13px;line-height:1.5}
-.pin-error{color:#d93636;font-size:13px;font-weight:bold;min-height:20px}
-.top-actions{display:flex;gap:8px;margin-top:12px}
-.top-actions button{
-flex:1;
-background:#ffffff22;
-border:1px solid #ffffff55;
-color:#fff;
-border-radius:10px;
-padding:9px;
-font-weight:bold
+
+.topbar{
+  background:#ff5a00;
+  color:white;
+  padding:18px 16px;
+  position:sticky;
+  top:0;
+  z-index:20;
 }
-.switch-row{
-display:flex;
-align-items:center;
-justify-content:space-between;
-background:#fff;
-padding:14px;
-border-radius:14px;
-margin-bottom:12px
+
+.topbar-content{
+  max-width:900px;
+  margin:auto;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
 }
-.switch{width:52px;height:29px;position:relative}
-.switch input{display:none}
-.slider{
-position:absolute;
-inset:0;
-background:#ddd;
-border-radius:30px;
-cursor:pointer
+
+.topbar h1{
+  font-size:21px;
 }
-.slider:before{
-content:"";
-position:absolute;
-width:23px;
-height:23px;
-left:3px;
-top:3px;
-background:#fff;
-border-radius:50%;
-transition:.2s
-}
-.switch input:checked+.slider{background:#ff5a00}
-.switch input:checked+.slider:before{transform:translateX(23px)}
-.time-list{display:grid;grid-template-columns:repeat(2,1fr);gap:9px}
-.time{
-padding:12px;
-border:1px solid #ddd;
-border-radius:11px;
-background:#fafafa
-}
-.time input{width:auto;margin:0}
-.feature{display:flex;gap:12px;align-items:flex-start;margin:10px 0}
-.feature-icon{
-width:42px;
-height:42px;
-min-width:42px;
-border-radius:12px;
-background:#fff0e8;
-display:flex;
-align-items:center;
-justify-content:center;
-font-size:21px
-}
-.feature strong{display:block;margin-bottom:3px}
-.public{
-min-height:100vh;
-background:#f5f5f5
-}
-.public-header{
-background:linear-gradient(135deg,#ff7200,#ff3d00);
-color:#fff;
-padding:30px 18px;
-text-align:center;
-border-radius:0 0 28px 28px
-}
-.public-header h1{margin:0;font-size:27px}
-.public-header p{margin:7px 0 0;font-size:13px}
-.public-wrap{max-width:720px;margin:auto;padding:18px}
-.public-product{
-background:#fff;
-border-radius:20px;
-padding:17px;
-margin-bottom:14px;
-box-shadow:0 2px 11px #0001
-}
-.public-product h2{margin:0 0 9px;font-size:17px;line-height:1.35}
-.public-price{color:#ff5a00;font-weight:900;font-size:23px;margin:8px 0}
-.public-category{color:#777;font-size:12px;margin-bottom:10px}
-.public-buy{
-display:block;
-text-align:center;
-background:#ff5a00;
-color:#fff;
-text-decoration:none;
-border-radius:12px;
-padding:14px;
-font-weight:bold
-}
-.notice{
-background:#fff7ed;
-border:1px solid #ffd9b8;
-color:#7a4b28;
-padding:12px;
-border-radius:13px;
-font-size:12px;
-line-height:1.5;
-margin-bottom:14px
-}
+
 .version{
-display:inline-block;
-font-size:10px;
-padding:4px 8px;
-border-radius:10px;
-background:#ffffff22;
-margin-top:9px
+  font-size:11px;
+  background:rgba(255,255,255,.2);
+  padding:5px 8px;
+  border-radius:20px;
 }
-hr{border:0;border-top:1px solid #eee;margin:15px 0}
+
+.container{
+  width:100%;
+  max-width:900px;
+  margin:auto;
+  padding:18px 15px;
+}
+
+.page{
+  display:none;
+}
+
+.page.active{
+  display:block;
+}
+
+.hero{
+  background:white;
+  border-radius:20px;
+  padding:20px;
+  margin-bottom:16px;
+  box-shadow:0 3px 12px rgba(0,0,0,.06);
+}
+
+.hero h2{
+  font-size:24px;
+  margin-bottom:7px;
+}
+
+.hero p{
+  color:#777;
+  line-height:1.5;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:12px;
+  margin-bottom:16px;
+}
+
+.card{
+  background:white;
+  border-radius:17px;
+  padding:17px;
+  box-shadow:0 3px 12px rgba(0,0,0,.06);
+}
+
+.card h3{
+  margin-bottom:7px;
+}
+
+.card p{
+  color:#777;
+  font-size:14px;
+}
+
+.stat{
+  font-size:25px;
+  font-weight:bold;
+  margin-top:5px;
+}
+
+.section-title{
+  margin:20px 0 12px;
+  font-size:19px;
+}
+
+.form-card{
+  background:white;
+  border-radius:18px;
+  padding:18px;
+  margin-bottom:16px;
+}
+
+label{
+  display:block;
+  font-weight:bold;
+  font-size:14px;
+  margin-bottom:6px;
+}
+
+input,
+select,
+textarea{
+  width:100%;
+  border:1px solid #ddd;
+  border-radius:11px;
+  padding:13px;
+  margin-bottom:12px;
+  outline:none;
+  background:white;
+}
+
+textarea{
+  min-height:110px;
+  resize:vertical;
+}
+
+input:focus,
+select:focus,
+textarea:focus{
+  border-color:#ff5a00;
+}
+
+.btn{
+  border:0;
+  border-radius:11px;
+  padding:12px 16px;
+  font-weight:bold;
+  margin-right:5px;
+  margin-bottom:6px;
+}
+
+.btn-orange{
+  background:#ff5a00;
+  color:white;
+}
+
+.btn-dark{
+  background:#222;
+  color:white;
+}
+
+.btn-light{
+  background:#eee;
+  color:#222;
+}
+
+.product{
+  background:white;
+  border-radius:18px;
+  padding:17px;
+  margin-bottom:12px;
+  box-shadow:0 3px 12px rgba(0,0,0,.05);
+}
+
+.product-header{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+}
+
+.product h3{
+  font-size:17px;
+}
+
+.price{
+  font-size:21px;
+  font-weight:bold;
+  color:#ff5a00;
+  margin:8px 0;
+}
+
+.badge{
+  display:inline-block;
+  padding:5px 8px;
+  border-radius:20px;
+  background:#fff0e8;
+  color:#ff5a00;
+  font-size:12px;
+  font-weight:bold;
+}
+
+.empty{
+  text-align:center;
+  padding:35px 15px;
+  color:#888;
+  background:white;
+  border-radius:18px;
+}
+
+/* BOTTOM NAV */
+
+.bottom-nav{
+  position:fixed;
+  left:0;
+  right:0;
+  bottom:0;
+  height:68px;
+  background:white;
+  border-top:1px solid #ddd;
+  display:flex;
+  justify-content:center;
+  z-index:50;
+}
+
+.nav-inner{
+  width:100%;
+  max-width:900px;
+  display:flex;
+}
+
+.nav-btn{
+  flex:1;
+  border:0;
+  background:white;
+  color:#777;
+  font-size:11px;
+  padding:7px 2px;
+}
+
+.nav-btn span{
+  display:block;
+  font-size:22px;
+  margin-bottom:2px;
+}
+
+.nav-btn.active{
+  color:#ff5a00;
+  font-weight:bold;
+}
+
+/* TOAST */
+
+#toast{
+  position:fixed;
+  left:50%;
+  bottom:85px;
+  transform:translateX(-50%);
+  background:#222;
+  color:white;
+  padding:12px 17px;
+  border-radius:12px;
+  font-size:14px;
+  display:none;
+  z-index:100;
+  max-width:90%;
+  text-align:center;
+}
+
+/* AUTO */
+
+.auto-box{
+  border-left:4px solid #ff5a00;
+}
+
+.auto-time{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:12px 0;
+  border-bottom:1px solid #eee;
+}
+
+.switch{
+  width:48px;
+  height:27px;
+  position:relative;
+}
+
+.switch input{
+  display:none;
+}
+
+.slider{
+  position:absolute;
+  inset:0;
+  background:#ccc;
+  border-radius:30px;
+  cursor:pointer;
+}
+
+.slider:before{
+  content:"";
+  position:absolute;
+  width:21px;
+  height:21px;
+  left:3px;
+  top:3px;
+  background:white;
+  border-radius:50%;
+  transition:.2s;
+}
+
+.switch input:checked + .slider{
+  background:#ff5a00;
+}
+
+.switch input:checked + .slider:before{
+  transform:translateX(21px);
+}
+
+/* VITRINE */
+
+.vitrine{
+  background:#f5f5f5;
+}
+
+.vitrine-header{
+  background:#ff5a00;
+  color:white;
+  padding:25px 18px;
+  text-align:center;
+  border-radius:18px;
+  margin-bottom:15px;
+}
+
+.vitrine-header h2{
+  font-size:25px;
+  margin-bottom:5px;
+}
+
+.vitrine-product{
+  background:white;
+  border-radius:18px;
+  padding:18px;
+  margin-bottom:12px;
+  box-shadow:0 3px 10px rgba(0,0,0,.06);
+}
+
+.vitrine-product h3{
+  font-size:18px;
+}
+
+.vitrine-product .buy{
+  display:block;
+  width:100%;
+  text-align:center;
+  text-decoration:none;
+  background:#ff5a00;
+  color:white;
+  padding:13px;
+  border-radius:11px;
+  font-weight:bold;
+  margin-top:12px;
+}
+
+/* RESPONSIVO */
+
+@media(max-width:500px){
+  .grid{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .card{
+    padding:14px;
+  }
+
+  .stat{
+    font-size:21px;
+  }
+}
 </style>
 </head>
 
 <body>
 
-<!-- TELA DO PIN -->
-<div id="pinScreen" class="pin-screen">
-<div class="pin-box">
+<!-- LOGIN -->
 
-<div class="pin-logo">🛍️</div>
+<div id="loginScreen">
 
-<h1>Shopee Turbo</h1>
+  <div class="login-box">
 
-<p>Área privada do seu aplicativo de afiliados.</p>
+    <div class="logo">⚡</div>
 
-<label for="pinInput">Digite seu PIN</label>
+    <h1>Shopee Turbo</h1>
 
-<input
-id="pinInput"
-type="password"
-inputmode="numeric"
-maxlength="4"
-placeholder="••••"
->
+    <p>Seu painel de afiliado</p>
 
-<button class="btn" id="pinButton">
-🔐 Entrar
-</button>
+    <input
+      id="passwordInput"
+      type="password"
+      inputmode="numeric"
+      maxlength="4"
+      placeholder="••••"
+      autocomplete="off"
+    >
 
-<div id="pinError" class="pin-error"></div>
+    <button
+      id="loginBtn"
+      class="btn-primary"
+      type="button"
+    >
+      ENTRAR
+    </button>
 
-<p class="small">
-PIN inicial: <b>1234</b>
-</p>
+    <div id="loginError" class="login-error"></div>
 
-<button class="btn gray" id="openVitrineFromPin">
-🛍️ Abrir vitrine pública
-</button>
-
-</div>
-</div>
-
-<div id="publicScreen" style="display:none"></div>
-
-<!-- APLICATIVO PRIVADO -->
-<div id="privateApp" style="display:none">
-
-<header>
-
-<h1>🛍️ Shopee Turbo</h1>
-
-<p>Encontre. Crie. Divulgue. Venda.</p>
-
-<div class="top-actions">
-
-<button id="headerVitrine">
-🛍️ Vitrine
-</button>
-
-<button id="logoutBtn">
-🔒 Sair
-</button>
+  </div>
 
 </div>
 
-<span class="version">
-Versão 7.0
-</span>
 
-</header>
+<!-- APP -->
 
-<div class="wrap">
+<div id="app" class="hidden">
 
-<!-- INÍCIO -->
-<section id="page-home" class="page active">
+  <header class="topbar">
 
-<div class="title">
-Olá! 👋
-</div>
+    <div class="topbar-content">
 
-<div class="subtitle">
-Seu painel para organizar produtos, criar conteúdo e divulgar seus links.
-</div>
+      <h1>⚡ Shopee Turbo</h1>
 
-<div class="cards">
+      <div class="version">v10.0</div>
 
-<div class="card">
-<strong id="homeProducts">0</strong>
-<span>Produtos</span>
-</div>
+    </div>
 
-<div class="card">
-<strong id="homeContents">0</strong>
-<span>Conteúdos</span>
-</div>
+  </header>
 
-<div class="card">
-<strong id="homeLinks">0</strong>
-<span>Links</span>
-</div>
 
-<div class="card">
-<strong id="homeAuto">OFF</strong>
-<span>Auto Piloto</span>
-</div>
+  <main class="container">
 
-</div>
+    <!-- INÍCIO -->
 
-<div class="title">
-🚀 Atalhos
-</div>
+    <section id="page-home" class="page active">
 
-<div class="box">
+      <div class="hero">
 
-<div class="feature">
+        <h2>Olá! 👋</h2>
 
-<div class="feature-icon">
-🛍️
-</div>
+        <p>
+          Bem-vinda ao seu painel Shopee Turbo.
+          Organize seus produtos, crie conteúdos e acompanhe seus resultados.
+        </p>
 
-<div>
-<strong>Cadastre seus produtos</strong>
+      </div>
 
-<span class="small">
-Coloque nome, preço, comissão, categoria e seu link de afiliado.
-</span>
+      <div class="grid">
 
-</div>
+        <div class="card">
+          <p>Produtos</p>
+          <div id="statProducts" class="stat">0</div>
+        </div>
 
-</div>
+        <div class="card">
+          <p>Conteúdos</p>
+          <div id="statContents" class="stat">0</div>
+        </div>
 
-<button class="btn" data-go="products">
-➕ Adicionar produto
-</button>
+        <div class="card">
+          <p>Links</p>
+          <div id="statLinks" class="stat">0</div>
+        </div>
 
-</div>
+        <div class="card">
+          <p>Comissão estimada</p>
+          <div id="statCommission" class="stat">R$ 0</div>
+        </div>
 
-<div class="box">
+      </div>
 
-<div class="feature">
+      <div class="card">
 
-<div class="feature-icon">
-🤖
-</div>
+        <h3>🚀 Comece agora</h3>
 
-<div>
+        <p style="margin:10px 0 15px;">
+          Cadastre seus produtos e use o gerador de conteúdo.
+        </p>
 
-<strong>Gerador de conteúdo</strong>
+        <button class="btn btn-orange" type="button" data-page="products">
+          + Adicionar produto
+        </button>
 
-<span class="small">
-Crie gancho, roteiro, legenda, hashtags e CTA para seus vídeos.
-</span>
+        <button class="btn btn-dark" type="button" data-page="content">
+          🎬 Criar conteúdo
+        </button>
 
-</div>
+      </div>
 
-</div>
+    </section>
 
-<button class="btn dark" data-go="content">
-✨ Criar conteúdo
-</button>
 
-</div>
+    <!-- PRODUTOS -->
 
-<div class="box">
+    <section id="page-products" class="page">
 
-<div class="feature">
+      <div class="hero">
 
-<div class="feature-icon">
-📢
-</div>
+        <h2>📦 Produtos</h2>
 
-<div>
+        <p>
+          Cadastre os produtos que você divulga.
+        </p>
 
-<strong>Vitrine pública</strong>
+      </div>
 
-<span class="small">
-Gere um link para compartilhar seus produtos.
-</span>
+      <div class="form-card">
 
-</div>
+        <h3 style="margin-bottom:15px;">Adicionar produto</h3>
 
-</div>
+        <label for="productName">Nome do produto</label>
 
-<button class="btn" id="homeShareVitrine">
-🔗 Criar minha vitrine
-</button>
+        <input
+          id="productName"
+          type="text"
+          placeholder="Ex.: Mini Seladora Portátil"
+        >
 
-</div>
+        <label for="productPrice">Preço</label>
 
-</section>
+        <input
+          id="productPrice"
+          type="text"
+          inputmode="decimal"
+          placeholder="24,90"
+        >
 
-<!-- PRODUTOS -->
-<section id="page-products" class="page">
+        <label for="productCommission">Comissão (%)</label>
 
-<div class="title">
-📦 Produtos
-</div>
+        <input
+          id="productCommission"
+          type="number"
+          min="0"
+          max="100"
+          placeholder="15"
+        >
 
-<div class="subtitle">
-Cadastre os produtos que você divulga como afiliada.
-</div>
+        <label for="productCategory">Categoria</label>
 
-<div class="box">
+        <select id="productCategory">
 
-<h3 id="productFormTitle">
-➕ Novo produto
-</h3>
+          <option value="geral">Geral</option>
+          <option value="cozinha">Cozinha</option>
+          <option value="casa">Casa</option>
+          <option value="organizacao">Organização</option>
+          <option value="beleza">Beleza</option>
+          <option value="fitness">Fitness</option>
+          <option value="tecnologia">Tecnologia</option>
+          <option value="pet">Pet</option>
+          <option value="infantil">Infantil</option>
+          <option value="moda">Moda</option>
 
-<input id="productId" type="hidden">
+        </select>
 
-<label>Nome do produto</label>
+        <label for="productLink">Link de afiliado</label>
 
-<input
-id="productName"
-placeholder="Ex.: Trio de Vasos Cachepot"
->
+        <input
+          id="productLink"
+          type="url"
+          placeholder="https://s.shopee.com.br/..."
+        >
 
-<label>Preço</label>
+        <button
+          id="addProductBtn"
+          class="btn btn-orange"
+          type="button"
+        >
+          Adicionar produto
+        </button>
 
-<input
-id="productPrice"
-inputmode="decimal"
-placeholder="36,91"
->
+      </div>
 
-<label>Comissão (%)</label>
+      <div id="productsList"></div>
 
-<input
-id="productCommission"
-inputmode="decimal"
-placeholder="23"
->
+    </section>
 
-<label>Categoria</label>
 
-<select id="productCategory">
+    <!-- CONTEÚDO -->
 
-<option value="plants">
-🌵 Plantas e decoração
-</option>
+    <section id="page-content" class="page">
 
-<option value="mesa">
-🍷 Mesa e jantar
-</option>
+      <div class="hero">
 
-<option value="cozinha">
-🍳 Cozinha
-</option>
+        <h2>🎬 Criar conteúdo</h2>
 
-<option value="organizacao">
-📦 Organização
-</option>
+        <p>
+          Gere uma ideia de roteiro, legenda e hashtags para seus produtos.
+        </p>
 
-<option value="iluminacao">
-💡 Iluminação
-</option>
+      </div>
 
-<option value="beleza">
-💄 Beleza
-</option>
+      <div class="form-card">
 
-<option value="fitness">
-🏋️ Fitness
-</option>
+        <label for="contentProduct">Produto</label>
 
-<option value="tecnologia">
-📱 Tecnologia
-</option>
+        <select id="contentProduct"></select>
 
-<option value="pet">
-🐾 Pet
-</option>
+        <label for="contentDuration">Duração</label>
 
-<option value="infantil">
-🧸 Infantil
-</option>
+        <select id="contentDuration">
 
-<option value="moda">
-👗 Moda
-</option>
+          <option value="15">15 segundos</option>
+          <option value="30">30 segundos</option>
+          <option value="60">60 segundos</option>
 
-<option value="geral">
-🛍️ Geral
-</option>
+        </select>
 
-</select>
+        <button
+          id="generateContentBtn"
+          class="btn btn-orange"
+          type="button"
+        >
+          ✨ Gerar conteúdo
+        </button>
 
-<label>Link de afiliado</label>
+      </div>
 
-<input
-id="productLink"
-type="url"
-placeholder="https://s.shopee.com.br/..."
->
+      <div id="generatedContent" class="form-card hidden">
 
-<button class="btn" id="saveProduct">
-💾 Salvar produto
-</button>
+        <h3>🎯 Roteiro</h3>
 
-<button
-class="btn gray"
-id="cancelEdit"
-style="display:none"
->
-Cancelar edição
-</button>
+        <textarea id="scriptOutput" readonly></textarea>
 
-</div>
+        <h3>📝 Legenda</h3>
 
-<div class="title">
-Seus produtos
-</div>
+        <textarea id="captionOutput" readonly></textarea>
 
-<div id="productsList"></div>
+        <h3>#️⃣ Hashtags</h3>
 
-</section>
+        <textarea id="hashtagsOutput" readonly></textarea>
 
-<!-- CONTEÚDO -->
-<section id="page-content" class="page">
+        <button
+          id="saveContentBtn"
+          class="btn btn-dark"
+          type="button"
+        >
+          Salvar conteúdo
+        </button>
 
-<div class="title">
-✨ Criar conteúdo
-</div>
+      </div>
 
-<div class="subtitle">
-Gere conteúdo pronto para Reels, TikTok, Shorts e vídeos de afiliado.
-</div>
+      <div id="savedContentsList"></div>
 
-<div class="box">
+    </section>
 
-<label>Produto</label>
 
-<select id="contentProduct"></select>
+    <!-- LINKS -->
 
-<label>Duração</label>
+    <section id="page-links" class="page">
 
-<select id="contentDuration">
+      <div class="hero">
 
-<option value="15">
-15 segundos
-</option>
+        <h2>🔗 Links</h2>
 
-<option value="30">
-30 segundos
-</option>
+        <p>
+          Seus links de afiliado cadastrados.
+        </p>
 
-<option value="60">
-60 segundos
-</option>
+      </div>
 
-</select>
+      <div id="linksList"></div>
 
-<label>Estilo</label>
+    </section>
 
-<select id="contentStyle">
 
-<option value="normal">
-🔥 Achadinho
-</option>
+    <!-- RESULTADOS -->
 
-<option value="oferta">
-🏷️ Oferta / preço
-</option>
+    <section id="page-results" class="page">
 
-<option value="review">
-⭐ Review
-</option>
+      <div class="hero">
 
-<option value="problema">
-💡 Problema e solução
-</option>
+        <h2>📊 Resultados</h2>
 
-</select>
+        <p>
+          Acompanhe os dados cadastrados no aplicativo.
+        </p>
 
-<button class="btn" id="generateContent">
-✨ Gerar conteúdo
-</button>
+      </div>
 
-</div>
+      <div class="grid">
 
-<div id="generatedContent"></div>
+        <div class="card">
 
-<div class="title">
-Histórico
-</div>
+          <p>Total de produtos</p>
 
-<div id="contentHistory"></div>
+          <div id="resultProducts" class="stat">0</div>
 
-</section>
+        </div>
 
-<!-- LINKS -->
-<section id="page-links" class="page">
+        <div class="card">
 
-<div class="title">
-🔗 Meus links
-</div>
+          <p>Total de conteúdos</p>
 
-<div class="subtitle">
-Todos os seus links de afiliado em um só lugar.
-</div>
+          <div id="resultContents" class="stat">0</div>
 
-<div id="linksList"></div>
+        </div>
 
-</section>
+        <div class="card">
 
-<!-- RESULTADOS -->
-<section id="page-results" class="page">
+          <p>Links cadastrados</p>
 
-<div class="title">
-📊 Resultados
-</div>
+          <div id="resultLinks" class="stat">0</div>
 
-<div class="subtitle">
-Resumo do que já foi cadastrado e produzido no Shopee Turbo.
-</div>
+        </div>
 
-<div class="cards">
+        <div class="card">
 
-<div class="card">
-<strong id="resultProducts">0</strong>
-<span>Produtos</span>
-</div>
+          <p>Comissão média</p>
 
-<div class="card">
-<strong id="resultContents">0</strong>
-<span>Conteúdos</span>
-</div>
+          <div id="resultAverage" class="stat">0%</div>
 
-<div class="card">
-<strong id="resultCommission">0%</strong>
-<span>Comissão média</span>
-</div>
+        </div>
 
-<div class="card">
-<strong id="resultAuto">OFF</strong>
-<span>Auto Piloto</span>
-</div>
+      </div>
 
-</div>
+      <div class="card">
 
-<div class="box">
+        <h3>💡 Dica</h3>
 
-<h3>
-💡 Importante
-</h3>
+        <p style="margin-top:8px;">
+          Quanto mais conteúdos úteis você publicar,
+          maiores são as oportunidades de gerar cliques e vendas.
+        </p>
 
-<p class="small">
-Estes números são dados cadastrados dentro do aplicativo.
-Eles não representam vendas reais da Shopee.
-</p>
+      </div>
 
-</div>
+    </section>
 
-</section>
 
-<!-- AUTO PILOTO -->
-<section id="page-auto" class="page">
+    <!-- AUTO PILOTO -->
 
-<div class="title">
-🤖 Auto Piloto
-</div>
+    <section id="page-auto" class="page">
 
-<div class="subtitle">
-Automatiza a criação de conteúdos enquanto o aplicativo estiver aberto.
-</div>
+      <div class="hero">
 
-<div class="notice">
+        <h2>🤖 Auto Piloto</h2>
 
-<b>⚠️ Importante:</b>
+        <p>
+          Organize os horários em que pretende publicar seus conteúdos.
+        </p>
 
-Esta versão funciona enquanto o aplicativo estiver aberto.
-Para funcionar 24 horas em segundo plano será necessário um servidor/backend.
+      </div>
 
-</div>
+      <div class="form-card auto-box">
 
-<div class="auto-card">
+        <div class="auto-time">
 
-<div class="switch-row">
+          <div>
+            <strong>09:00</strong>
+            <p>Publicação da manhã</p>
+          </div>
 
-<div>
+          <label class="switch">
 
-<strong>
-Ativar Auto Piloto
-</strong>
+            <input
+              type="checkbox"
+              class="autoCheck"
+              data-time="09:00"
+            >
 
-<div class="small">
-Gerar conteúdo automaticamente nos horários definidos.
-</div>
+            <span class="slider"></span>
 
-</div>
+          </label>
 
-<label class="switch">
+        </div>
 
-<input
-id="autoEnabled"
-type="checkbox"
->
 
-<span class="slider"></span>
+        <div class="auto-time">
 
-</label>
+          <div>
+            <strong>12:00</strong>
+            <p>Publicação do almoço</p>
+          </div>
 
-</div>
+          <label class="switch">
 
-<label>
-Produto usado pelo Auto Piloto
-</label>
+            <input
+              type="checkbox"
+              class="autoCheck"
+              data-time="12:00"
+            >
 
-<select id="autoProduct"></select>
+            <span class="slider"></span>
 
-<h3>
-⏰ Horários
-</h3>
+          </label>
 
-<div class="time-list">
+        </div>
 
-<label class="time">
-<input type="checkbox" id="time09" checked>
-09:00
-</label>
 
-<label class="time">
-<input type="checkbox" id="time12" checked>
-12:00
-</label>
+        <div class="auto-time">
 
-<label class="time">
-<input type="checkbox" id="time18" checked>
-18:00
-</label>
+          <div>
+            <strong>18:00</strong>
+            <p>Publicação da tarde</p>
+          </div>
 
-<label class="time">
-<input type="checkbox" id="time21" checked>
-21:00
-</label>
+          <label class="switch">
 
-</div>
+            <input
+              type="checkbox"
+              class="autoCheck"
+              data-time="18:00"
+            >
 
-<button class="btn" id="saveAuto">
-💾 Salvar configuração
-</button>
+            <span class="slider"></span>
 
-</div>
+          </label>
 
-<div class="box">
+        </div>
 
-<h3>
-📌 Última execução
-</h3>
 
-<div id="autoLastRun" class="small">
-Ainda não executado.
-</div>
+        <div class="auto-time">
 
-</div>
+          <div>
+            <strong>21:00</strong>
+            <p>Publicação da noite</p>
+          </div>
 
-</section>
+          <label class="switch">
 
-<!-- VITRINE -->
-<section id="page-vitrine" class="page">
+            <input
+              type="checkbox"
+              class="autoCheck"
+              data-time="21:00"
+            >
 
-<div class="title">
-🛍️ Minha vitrine
-</div>
+            <span class="slider"></span>
 
-<div class="subtitle">
-Crie um link público para compartilhar seus produtos.
-</div>
+          </label>
 
-<div class="notice">
+        </div>
 
-A vitrine pública mostra seus produtos cadastrados.
-Ela não dá acesso ao seu painel privado.
+        <p style="margin-top:15px;color:#777;font-size:13px;">
+          ⚠️ Nesta versão, o Auto Piloto apenas organiza os horários.
+          A publicação automática real depende de uma integração autorizada.
+        </p>
+
+      </div>
+
+    </section>
+
+
+    <!-- VITRINE -->
+
+    <section id="page-vitrine" class="page">
+
+      <div class="vitrine">
+
+        <div class="vitrine-header">
+
+          <h2>🛍️ Minha Vitrine</h2>
+
+          <p>Produtos recomendados</p>
+
+        </div>
+
+        <div id="vitrineList"></div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <!-- NAVEGAÇÃO -->
+
+  <nav class="bottom-nav">
+
+    <div class="nav-inner">
+
+      <button class="nav-btn active" data-page="home" type="button">
+        <span>🏠</span>
+        Início
+      </button>
+
+      <button class="nav-btn" data-page="products" type="button">
+        <span>📦</span>
+        Produtos
+      </button>
+
+      <button class="nav-btn" data-page="content" type="button">
+        <span>🎬</span>
+        Conteúdo
+      </button>
+
+      <button class="nav-btn" data-page="links" type="button">
+        <span>🔗</span>
+        Links
+      </button>
+
+      <button class="nav-btn" data-page="results" type="button">
+        <span>📊</span>
+        Resultados
+      </button>
+
+      <button class="nav-btn" data-page="auto" type="button">
+        <span>🤖</span>
+        Auto
+      </button>
+
+      <button class="nav-btn" data-page="vitrine" type="button">
+        <span>🛍️</span>
+        Vitrine
+      </button>
+
+    </div>
+
+  </nav>
 
 </div>
 
-<div class="box">
 
-<h3>
-🔗 Link da vitrine
-</h3>
+<div id="toast"></div>
 
-<textarea
-id="vitrineLink"
-readonly
-placeholder="Seu link aparecerá aqui"
-></textarea>
-
-<button class="btn" id="generateVitrine">
-✨ Gerar link da vitrine
-</button>
-
-<button class="btn dark" id="copyVitrine">
-📋 Copiar link
-</button>
-
-<button class="btn gray" id="openVitrine">
-👀 Abrir vitrine
-</button>
-
-</div>
-
-<div class="box">
-
-<h3>
-📢 Como compartilhar
-</h3>
-
-<p class="small">
-Coloque o link na bio do Instagram, TikTok, WhatsApp, Facebook ou envie diretamente para seus clientes.
-</p>
-
-</div>
-
-</section>
-
-</div>
-
-<!-- MENU -->
-<nav class="nav">
-
-<button class="active" data-page="home">
-<span class="ico">🏠</span>
-Início
-</button>
-
-<button data-page="products">
-<span class="ico">📦</span>
-Produtos
-</button>
-
-<button data-page="content">
-<span class="ico">✨</span>
-Conteúdo
-</button>
-
-<button data-page="links">
-<span class="ico">🔗</span>
-Links
-</button>
-
-<button data-page="results">
-<span class="ico">📊</span>
-Resultados
-</button>
-
-<button data-page="auto">
-<span class="ico">🤖</span>
-Auto
-</button>
-
-<button data-page="vitrine">
-<span class="ico">🛍️</span>
-Vitrine
-</button>
-
-</nav>
-
-</div>
 
 <script>
-"use strict";
 
-const PIN="1234";
+/* =========================
+   CONFIGURAÇÃO
+========================= */
 
-const PRODUCT_KEY="shopee_turbo_produtos_v4";
-const CONTENT_KEY="shopee_turbo_conteudos_v4";
-const AUTO_KEY="shopee_turbo_auto_v4";
+const SENHA = "1234";
 
-const pinScreen=document.getElementById("pinScreen");
-const publicScreen=document.getElementById("publicScreen");
-const privateApp=document.getElementById("privateApp");
-const pinInput=document.getElementById("pinInput");
-const pinButton=document.getElementById("pinButton");
-const pinError=document.getElementById("pinError");
+const PRODUCTS_KEY = "shopee_turbo_products_v10";
+const CONTENT_KEY = "shopee_turbo_contents_v10";
+const AUTO_KEY = "shopee_turbo_auto_v10";
 
-const pages=document.querySelectorAll(".page");
-const navButtons=document.querySelectorAll(".nav button");
 
-let produtos=loadProducts();
-let conteudos=loadContents();
-let autoConfig=loadAuto();
+/* =========================
+   DADOS
+========================= */
 
-const categoryNames={
-plants:"Plantas e decoração",
-mesa:"Mesa e jantar",
-cozinha:"Cozinha",
-organizacao:"Organização",
-iluminacao:"Iluminação",
-beleza:"Beleza",
-fitness:"Fitness",
-tecnologia:"Tecnologia",
-pet:"Pet",
-infantil:"Infantil",
-moda:"Moda",
-geral:"Geral"
-};
+let products = [];
+let contents = [];
+let autoSettings = {};
 
-const hooks={
-plants:"🌵 Quem ama plantinhas vai amar esse achadinho!",
-mesa:"✨ Olha essa lindeza para deixar a mesa ainda mais especial!",
-cozinha:"🚨 Olha essa utilidade que pode facilitar muito a rotina!",
-organizacao:"🛍️ Olha esse achadinho para deixar tudo mais organizado!",
-iluminacao:"✨ Olha como um detalhe pode transformar o ambiente!",
-beleza:"💄 Olha esse achadinho para deixar a rotina de beleza ainda melhor!",
-fitness:"🔥 Olha esse achadinho para dar aquele up na rotina de treino!",
-tecnologia:"📱 Olha esse achadinho de tecnologia que vale a pena conhecer!",
-pet:"🐾 Olha esse achadinho que pode facilitar a rotina do seu pet!",
-infantil:"🧸 Olha esse achadinho que pode facilitar a rotina das crianças!",
-moda:"✨ Olha esse achadinho para deixar qualquer look ainda mais bonito!",
-geral:"🚨 Olha esse achadinho que eu encontrei!"
-};
 
-const spoken={
-plants:"esse trio de vasos com suporte para cactos e suculentas",
-mesa:"esse jogo de taças de vidro com um design lindo e diferenciado",
-cozinha:"essa utilidade que pode facilitar bastante a rotina na cozinha",
-organizacao:"esse organizador que ajuda a deixar tudo mais prático",
-iluminacao:"essa opção de iluminação que pode transformar o ambiente",
-beleza:"esse achadinho para deixar a rotina de beleza ainda mais prática",
-fitness:"esse achadinho para complementar a rotina de treino",
-tecnologia:"esse acessório que pode facilitar o uso dos seus dispositivos",
-pet:"esse achadinho que pode facilitar a rotina do seu pet",
-infantil:"esse achadinho para deixar a rotina das crianças mais prática",
-moda:"esse achadinho para completar os looks",
-geral:"esse achadinho que pode facilitar o dia a dia"
-};
+/* =========================
+   UTILIDADES
+========================= */
 
-function parseNumber(value){
-
-if(typeof value==="number")
-return isFinite(value)?value:0;
-
-let text=String(value||"")
-.trim()
-.replace(/R\$/gi,"")
-.replace(/\s/g,"");
-
-if(text.includes(",")){
-text=text.replace(/\./g,"").replace(",",".");
-}
-
-const n=parseFloat(text);
-
-return isFinite(n)?n:0;
-}
-
-function money(value){
-
-return Number(value||0).toLocaleString(
-"pt-BR",
-{
-style:"currency",
-currency:"BRL"
-}
-);
-
-}
-
-function escapeHtml(value){
-
-return String(value??"")
-.replace(/&/g,"&amp;")
-.replace(/</g,"&lt;")
-.replace(/>/g,"&gt;")
-.replace(/"/g,"&quot;")
-.replace(/'/g,"&#039;");
-
-}
-
-function loadProducts(){
-
-try{
-
-const current=localStorage.getItem(PRODUCT_KEY);
-
-if(current){
-
-const data=JSON.parse(current);
-
-if(Array.isArray(data))
-return data;
-
-}
-
-const oldKeys=[
-"shopee_turbo_produtos_v3",
-"shopee_turbo_produtos",
-"st_products"
-];
-
-for(const key of oldKeys){
-
-const old=localStorage.getItem(key);
-
-if(old){
-
-const parsed=JSON.parse(old);
-
-if(Array.isArray(parsed)){
-
-const migrated=parsed.map((p,i)=>({
-
-id:p.id||("p"+Date.now()+i),
-
-name:p.name||p.nome||"Produto",
-
-price:parseNumber(p.price||p.preco),
-
-commission:parseNumber(p.commission||p.comissao),
-
-category:p.category||"geral",
-
-link:p.link||p.affiliateLink||""
-
-}));
-
-localStorage.setItem(
-PRODUCT_KEY,
-JSON.stringify(migrated)
-);
-
-return migrated;
-
-}
-
-}
-
-}
-
-}
-
-}catch(e){
-
-console.log(e);
-
-}
-
-return [];
-
-}
-
-function loadContents(){
-
-try{
-
-const data=JSON.parse(
-localStorage.getItem(CONTENT_KEY)||"[]"
-);
-
-return Array.isArray(data)?data:[];
-
-}catch(e){
-
-return [];
-
-}
-
-}
-
-function loadAuto(){
-
-try{
-
-const data=JSON.parse(
-localStorage.getItem(AUTO_KEY)||"null"
-);
-
-if(data){
-
-return {
-
-enabled:!!data.enabled,
-
-productId:data.productId||"",
-
-times:Array.isArray(data.times)
-?data.times
-:["09:00","12:00","18:00","21:00"],
-
-lastRun:data.lastRun||""
-
-};
-
-}
-
-}catch(e){}
-
-return {
-
-enabled:false,
-
-productId:"",
-
-times:["09:00","12:00","18:00","21:00"],
-
-lastRun:""
-
-};
-
-}
-
-function saveProducts(){
-
-localStorage.setItem(
-PRODUCT_KEY,
-JSON.stringify(produtos)
-);
-
-}
-
-function saveContents(){
-
-localStorage.setItem(
-CONTENT_KEY,
-JSON.stringify(conteudos)
-);
-
-}
-
-function saveAuto(){
-
-localStorage.setItem(
-AUTO_KEY,
-JSON.stringify(autoConfig)
-);
-
-}
-
-function getProduct(id){
-
-return produtos.find(
-p=>String(p.id)===String(id)
-);
-
-}
-
-function showPrivate(){
-
-pinScreen.style.display="none";
-publicScreen.style.display="none";
-privateApp.style.display="block";
-
-renderAll();
-
-}
-
-function showPin(){
-
-pinScreen.style.display="flex";
-publicScreen.style.display="none";
-privateApp.style.display="none";
-
-}
-
-function login(){
-
-const value=pinInput.value.trim();
-
-if(value===PIN){
-
-sessionStorage.setItem(
-"shopee_turbo_auth",
-"1"
-);
-
-pinError.textContent="";
-
-showPrivate();
-
-}else{
-
-pinError.textContent="❌ PIN incorreto.";
-
-pinInput.value="";
-
-pinInput.focus();
-
-}
-
-}
-
-pinButton.addEventListener(
-"click",
-login
-);
-
-pinInput.addEventListener(
-"keydown",
-function(e){
-
-if(e.key==="Enter")
-login();
-
-}
-);
-
-document.getElementById("logoutBtn")
-.addEventListener(
-"click",
-function(){
-
-sessionStorage.removeItem(
-"shopee_turbo_auth"
-);
-
-showPin();
-
-}
-);
-
-function showPage(name){
-
-pages.forEach(
-page=>{
-
-page.classList.toggle(
-"active",
-page.id==="page-"+name
-);
-
-}
-);
-
-navButtons.forEach(
-button=>{
-
-button.classList.toggle(
-"active",
-button.dataset.page===name
-);
-
-}
-);
-
-window.scrollTo({
-top:0,
-behavior:"smooth"
-});
-
-renderAll();
-
-}
-
-navButtons.forEach(
-button=>{
-
-button.addEventListener(
-"click",
-()=>showPage(button.dataset.page)
-);
-
-}
-);
-
-document.querySelectorAll("[data-go]")
-.forEach(
-button=>{
-
-button.addEventListener(
-"click",
-()=>showPage(button.dataset.go)
-);
-
-}
-);
-
-function clearProductForm(){
-
-document.getElementById("productId").value="";
-document.getElementById("productName").value="";
-document.getElementById("productPrice").value="";
-document.getElementById("productCommission").value="";
-document.getElementById("productCategory").value="plants";
-document.getElementById("productLink").value="";
-
-document.getElementById("productFormTitle")
-.textContent="➕ Novo produto";
-
-document.getElementById("cancelEdit")
-.style.display="none";
-
-}
-
-function saveProduct(){
-
-const id=document.getElementById("productId").value;
-
-const name=document.getElementById("productName").value.trim();
-
-const price=parseNumber(
-document.getElementById("productPrice").value
-);
-
-const commission=parseNumber(
-document.getElementById("productCommission").value
-);
-
-const category=document.getElementById("productCategory").value;
-
-const link=document.getElementById("productLink").value.trim();
-
-if(!name){
-
-alert("Digite o nome do produto.");
-
-return;
-
-}
-
-if(price<=0){
-
-alert("Digite um preço válido.");
-
-return;
-
-}
-
-if(commission<0){
-
-alert("Digite uma comissão válida.");
-
-return;
-
-}
-
-if(!link){
-
-alert("Digite o link de afiliado.");
-
-return;
-
-}
-
-if(id){
-
-const index=produtos.findIndex(
-p=>String(p.id)===String(id)
-);
-
-if(index>=0){
-
-produtos[index]={
-...produtos[index],
-name,
-price,
-commission,
-category,
-link
-};
-
-}
-
-}else{
-
-produtos.unshift({
-
-id:"p_"+Date.now(),
-
-name,
-price,
-commission,
-category,
-link
-
-});
-
-}
-
-saveProducts();
-
-clearProductForm();
-
-renderAll();
-
-alert("✅ Produto salvo!");
-
-}
-
-document.getElementById("saveProduct")
-.addEventListener(
-"click",
-saveProduct
-);
-
-document.getElementById("cancelEdit")
-.addEventListener(
-"click",
-clearProductForm
-);
-
-function editProduct(id){
-
-const p=getProduct(id);
-
-if(!p)return;
-
-document.getElementById("productId").value=p.id;
-document.getElementById("productName").value=p.name;
-document.getElementById("productPrice").value=p.price;
-document.getElementById("productCommission").value=p.commission;
-document.getElementById("productCategory").value=p.category||"geral";
-document.getElementById("productLink").value=p.link||"";
-
-document.getElementById("productFormTitle")
-.textContent="✏️ Editar produto";
-
-document.getElementById("cancelEdit")
-.style.display="block";
-
-window.scrollTo({
-top:0,
-behavior:"smooth"
-});
-
-}
-
-window.editProduct=editProduct;
-
-function deleteProduct(id){
-
-const p=getProduct(id);
-
-if(!p)return;
-
-if(confirm("Excluir este produto?")){
-
-produtos=produtos.filter(
-item=>String(item.id)!==String(id)
-);
-
-saveProducts();
-
-renderAll();
-
-}
-
-}
-
-window.deleteProduct=deleteProduct;
-
-function renderProducts(){
-
-const list=document.getElementById(
-"productsList"
-);
-
-if(!produtos.length){
-
-list.innerHTML=`
-
-<div class="box empty">
-
-<div style="font-size:35px">
-📦
-</div>
-
-<p>
-Nenhum produto cadastrado.
-</p>
-
-<p class="small">
-Cadastre seu primeiro produto acima.
-</p>
-
-</div>
-
-`;
-
-return;
-
-}
-
-list.innerHTML=produtos.map(
-p=>`
-
-<div class="product">
-
-<span class="badge">
-${escapeHtml(categoryNames[p.category]||"Geral")}
-</span>
-
-<h3>
-${escapeHtml(p.name)}
-</h3>
-
-<div class="price">
-${money(p.price)}
-</div>
-
-<span class="commission">
-Comissão: ${p.commission}%
-</span>
-
-<div class="actions" style="margin-top:10px">
-
-<button
-class="btn gray"
-onclick="editProduct('${escapeHtml(p.id)}')"
->
-✏️ Editar
-</button>
-
-<button
-class="btn red"
-onclick="deleteProduct('${escapeHtml(p.id)}')"
->
-🗑️ Excluir
-</button>
-
-</div>
-
-<a
-href="${escapeHtml(p.link)}"
-target="_blank"
-rel="noopener"
->
-🛒 Abrir anúncio
-</a>
-
-</div>
-
-`
-).join("");
-
-}
-
-function fillProductSelects(){
-
-const contentSelect=
-document.getElementById("contentProduct");
-
-const autoSelect=
-document.getElementById("autoProduct");
-
-if(!produtos.length){
-
-contentSelect.innerHTML=
-'<option value="">Nenhum produto cadastrado</option>';
-
-autoSelect.innerHTML=
-'<option value="">Nenhum produto cadastrado</option>';
-
-return;
-
-}
-
-const options=produtos.map(
-p=>`
-
-<option value="${escapeHtml(p.id)}">
-${escapeHtml(p.name)}
-</option>
-
-`
-).join("");
-
-contentSelect.innerHTML=options;
-autoSelect.innerHTML=options;
-
-if(autoConfig.productId&&getProduct(autoConfig.productId)){
-
-autoSelect.value=autoConfig.productId;
-
-}
-
-}
-
-function getHook(p,style){
-
-if(style==="review")
-return "⭐ Vem conhecer esse achadinho comigo!";
-
-if(style==="problema")
-return "💡 Sabe quando você procura uma solução simples para o dia a dia?";
-
-if(style==="oferta")
-return "🏷️ Olha esse achadinho!";
-
-return hooks[p.category]||hooks.geral;
-
-}
-
-function getSpokenProduct(p){
-
-return spoken[p.category]||spoken.geral;
-
-}
-
-function generateScript(p,duration,style){
-
-const hook=getHook(p,style);
-
-const sp=getSpokenProduct(p);
-
-if(duration==="15"){
-
-return `${hook}
-
-Olha ${sp}! 😍
-
-É bonito, prático e pode deixar seu dia a dia ainda melhor.
-
-🛒 Gostou? Acesse o link e confira!`;
-
-}
-
-if(duration==="60"){
-
-return `[0–5s] GANCHO
-
-${hook}
-
-[5–15s] APRESENTAÇÃO
-
-Olha ${sp}! 😍
-
-Esse é daqueles achadinhos que chamam atenção logo de cara.
-
-[15–30s] DESTAQUE
-
-O destaque fica no design e na praticidade.
-É uma opção interessante para quem procura algo bonito e funcional.
-
-[30–42s] PREÇO
-
-E o valor cadastrado está em ${money(p.price)}. 💰
-
-[42–55s] CONFERÊNCIA
-
-Antes de comprar, confira no anúncio as fotos, avaliações, descrição e opções disponíveis.
-
-[55–60s] CTA
-
-🛒 Gostou? Acesse o link e confira todos os detalhes!`;
-
-}
-
-return `[0–3s] GANCHO
-
-${hook}
-
-[3–8s] PRODUTO
-
-Olha ${sp}! 😍
-
-[8–18s] DESTAQUE
-
-É aquele tipo de achadinho que chama atenção e pode facilitar o dia a dia.
-
-[18–25s] PREÇO
-
-E o valor cadastrado está em ${money(p.price)}. 💰
-
-[25–30s] CTA
-
-🛒 Gostou? Acesse o link e confira!`;
-
-}
-
-function generateContent(){
-
-if(!produtos.length){
-
-alert("Cadastre um produto primeiro.");
-
-showPage("products");
-
-return;
-
-}
-
-const productId=
-document.getElementById("contentProduct").value;
-
-const duration=
-document.getElementById("contentDuration").value;
-
-const style=
-document.getElementById("contentStyle").value;
-
-const p=getProduct(productId);
-
-if(!p)return;
-
-const hook=getHook(p,style);
-
-const script=generateScript(
-p,
-duration,
-style
-);
-
-const caption=`${hook}
-
-${p.name}
-
-💰 ${money(p.price)}
-
-✨ Confira todos os detalhes no anúncio.
-
-🛒 Link disponível na minha vitrine.
-
-#achadinhos #shopee #shopeeachadinhos #ofertas #comprinhas #dicas`;
-
-const hashtags=
-"#shopee #shopeeachadinhos #achadinhos #ofertas #comprinhas #dicas";
-
-const content={
-
-id:"c_"+Date.now(),
-
-productId:p.id,
-
-productName:p.name,
-
-duration,
-
-style,
-
-hook,
-
-script,
-
-caption,
-
-hashtags,
-
-cta:"🛒 Gostou? Acesse o link e confira todos os detalhes!",
-
-createdAt:new Date().toLocaleString("pt-BR")
-
-};
-
-conteudos.unshift(content);
-
-conteudos=conteudos.slice(0,50);
-
-saveContents();
-
-showGenerated(content);
-
-renderAll();
-
-}
-
-document.getElementById("generateContent")
-.addEventListener(
-"click",
-generateContent
-);
-
-function showGenerated(c){
-
-const box=
-document.getElementById(
-"generatedContent"
-);
-
-box.innerHTML=`
-
-<div class="result">
-
-<h3>
-🎬 Conteúdo pronto
-</h3>
-
-<b>Produto:</b>
-${escapeHtml(c.productName)}
-
-<br><br>
-
-<b>⏱️ Duração:</b>
-${escapeHtml(c.duration)} segundos
-
-<hr>
-
-<b>🎯 Gancho:</b>
-
-<br>
-
-${escapeHtml(c.hook)}
-
-<hr>
-
-<b>🎙️ Roteiro:</b>
-
-<br>
-
-${escapeHtml(c.script)}
-
-<hr>
-
-<b>📝 Legenda:</b>
-
-<br>
-
-${escapeHtml(c.caption)}
-
-<hr>
-
-<b>🏷️ Hashtags:</b>
-
-<br>
-
-${escapeHtml(c.hashtags)}
-
-<hr>
-
-<b>🛒 CTA:</b>
-
-<br>
-
-${escapeHtml(c.cta)}
-
-<br><br>
-
-<button
-class="btn"
-id="copyScriptButton"
->
-📋 Copiar roteiro
-</button>
-
-<button
-class="btn dark"
-id="copyCaptionButton"
->
-📋 Copiar legenda
-</button>
-
-</div>
-
-`;
-
-document.getElementById("copyScriptButton")
-.onclick=()=>copyText(c.script);
-
-document.getElementById("copyCaptionButton")
-.onclick=()=>copyText(
-c.caption+"\n\n"+c.hashtags
-);
-
-}
-
-function renderContentHistory(){
-
-const box=
-document.getElementById("contentHistory");
-
-if(!conteudos.length){
-
-box.innerHTML=
-'<div class="box empty">Nenhum conteúdo criado ainda.</div>';
-
-return;
-
-}
-
-box.innerHTML=conteudos
-.slice(0,10)
-.map(
-c=>`
-
-<div class="result">
-
-<h3>
-🎬 ${escapeHtml(c.productName)}
-</h3>
-
-<div class="small">
-${escapeHtml(c.duration)}
-segundos •
-${escapeHtml(c.createdAt)}
-</div>
-
-<hr>
-
-<b>Gancho:</b>
-
-<br>
-
-${escapeHtml(c.hook)}
-
-<br><br>
-
-<button
-class="btn gray"
-data-content-id="${escapeHtml(c.id)}"
->
-👀 Ver conteúdo
-</button>
-
-</div>
-
-`
-).join("");
-
-box.querySelectorAll("[data-content-id]")
-.forEach(button=>{
-
-button.addEventListener(
-"click",
-function(){
-
-const c=conteudos.find(
-item=>String(item.id)===String(
-button.dataset.contentId
-)
-);
-
-if(c)showGenerated(c);
-
-}
-);
-
-});
-
-}
-
-function renderLinks(){
-
-const list=
-document.getElementById("linksList");
-
-if(!produtos.length){
-
-list.innerHTML=
-'<div class="box empty">Nenhum link cadastrado.</div>';
-
-return;
-
-}
-
-list.innerHTML=produtos.map(
-p=>`
-
-<div class="product">
-
-<h3>
-${escapeHtml(p.name)}
-</h3>
-
-<div class="small">
-${escapeHtml(p.link)}
-</div>
-
-<div class="actions" style="margin-top:10px">
-
-<button
-class="btn"
-data-copy-link="${escapeHtml(p.link)}"
->
-📋 Copiar
-</button>
-
-<a
-class="btn dark"
-href="${escapeHtml(p.link)}"
-target="_blank"
-style="text-align:center;text-decoration:none"
->
-🔗 Abrir
-</a>
-
-</div>
-
-</div>
-
-`
-).join("");
-
-list.querySelectorAll("[data-copy-link]")
-.forEach(button=>{
-
-button.addEventListener(
-"click",
-()=>copyText(button.dataset.copyLink)
-);
-
-});
-
-}
-
-function renderResults(){
-
-document.getElementById(
-"resultProducts"
-).textContent=produtos.length;
-
-document.getElementById(
-"resultContents"
-).textContent=conteudos.length;
-
-if(produtos.length){
-
-const avg=
-produtos.reduce(
-(sum,p)=>sum+Number(p.commission||0),
-0
-)/produtos.length;
-
-document.getElementById(
-"resultCommission"
-).textContent=
-avg.toFixed(1)+"%";
-
-}else{
-
-document.getElementById(
-"resultCommission"
-).textContent="0%";
-
-}
-
-document.getElementById(
-"resultAuto"
-).textContent=
-autoConfig.enabled?"ON":"OFF";
-
-}
-
-function renderAuto(){
-
-document.getElementById(
-"autoEnabled"
-).checked=
-!!autoConfig.enabled;
-
-if(autoConfig.productId&&getProduct(autoConfig.productId)){
-
-document.getElementById(
-"autoProduct"
-).value=
-autoConfig.productId;
-
-}
-
-const times=autoConfig.times||[];
-
-document.getElementById("time09")
-.checked=times.includes("09:00");
-
-document.getElementById("time12")
-.checked=times.includes("12:00");
-
-document.getElementById("time18")
-.checked=times.includes("18:00");
-
-document.getElementById("time21")
-.checked=times.includes("21:00");
-
-document.getElementById(
-"autoLastRun"
-).textContent=
-autoConfig.lastRun
-?"Última execução: "+autoConfig.lastRun
-:"Ainda não executado.";
-
-}
-
-document.getElementById("saveAuto")
-.addEventListener(
-"click",
-function(){
-
-const times=[];
-
-if(document.getElementById("time09").checked)
-times.push("09:00");
-
-if(document.getElementById("time12").checked)
-times.push("12:00");
-
-if(document.getElementById("time18").checked)
-times.push("18:00");
-
-if(document.getElementById("time21").checked)
-times.push("21:00");
-
-autoConfig={
-
-enabled:document.getElementById(
-"autoEnabled"
-).checked,
-
-productId:document.getElementById(
-"autoProduct"
-).value,
-
-times,
-
-lastRun:autoConfig.lastRun||""
-
-};
-
-saveAuto();
-
-renderAll();
-
-alert("🤖 Auto Piloto salvo!");
-
-}
-);
-
-function runAutoPilot(){
-
-if(!autoConfig.enabled)return;
-
-if(!produtos.length)return;
-
-const now=new Date();
-
-const hh=String(
-now.getHours()
-).padStart(2,"0");
-
-const mm=String(
-now.getMinutes()
-).padStart(2,"0");
-
-const current=hh+":"+mm;
-
-if(!autoConfig.times.includes(current))
-return;
-
-const runKey=now.toISOString()
-.slice(0,16);
-
-if(autoConfig.lastRun===runKey)
-return;
-
-const product=
-getProduct(autoConfig.productId)
-||produtos[0];
-
-if(!product)return;
-
-const content={
-
-id:"auto_"+Date.now(),
-
-productId:product.id,
-
-productName:product.name,
-
-duration:"30",
-
-style:"normal",
-
-hook:getHook(product,"normal"),
-
-script:generateScript(
-product,
-"30",
-"normal"
-),
-
-caption:`${getHook(product,"normal")}
-
-${product.name}
-
-💰 ${money(product.price)}
-
-🛒 Confira no link da vitrine.`,
-
-hashtags:"#shopee #achadinhos #ofertas #comprinhas",
-
-cta:"🛒 Acesse o link e confira!",
-
-createdAt:new Date().toLocaleString("pt-BR"),
-
-auto:true
-
-};
-
-conteudos.unshift(content);
-
-conteudos=conteudos.slice(0,50);
-
-autoConfig.lastRun=runKey;
-
-saveContents();
-
-saveAuto();
-
-renderAll();
-
-}
-
-function base64UrlEncode(text){
-
-const bytes=
-new TextEncoder().encode(text);
-
-let binary="";
-
-bytes.forEach(
-byte=>{
-binary+=String.fromCharCode(byte)
-}
-);
-
-return btoa(binary)
-.replace(/\+/g,"-")
-.replace(/\//g,"_")
-.replace(/=+$/,"");
-
-}
-
-function base64UrlDecode(text){
-
-const normalized=
-text
-.replace(/-/g,"+")
-.replace(/_/g,"/");
-
-const padded=
-normalized+
-"=".repeat(
-(4-normalized.length%4)%4
-);
-
-const binary=atob(padded);
-
-const bytes=
-Uint8Array.from(
-binary,
-c=>c.charCodeAt(0)
-);
-
-return new TextDecoder()
-.decode(bytes);
-
-}
-
-function createVitrineLink(){
-
-if(!produtos.length){
-
-alert(
-"Cadastre pelo menos um produto antes de criar a vitrine."
-);
-
-return "";
-
-}
-
-const publicProducts=
-produtos.map(
-p=>({
-
-name:p.name,
-
-price:p.price,
-
-category:p.category,
-
-link:p.link
-
-})
-);
-
-const data=
-base64UrlEncode(
-JSON.stringify(publicProducts)
-);
-
-return location.origin+
-location.pathname+
-"?vitrine="+
-encodeURIComponent(data);
-
-}
-
-function generateVitrine(){
-
-const link=createVitrineLink();
-
-if(!link)return;
-
-document.getElementById(
-"vitrineLink"
-).value=link;
-
-alert("✅ Link da vitrine criado!");
-
-}
-
-document.getElementById(
-"generateVitrine"
-).addEventListener(
-"click",
-generateVitrine
-);
-
-document.getElementById(
-"copyVitrine"
-).addEventListener(
-"click",
-function(){
-
-const input=
-document.getElementById(
-"vitrineLink"
-);
-
-if(!input.value){
-
-const link=createVitrineLink();
-
-if(!link)return;
-
-input.value=link;
-
-}
-
-copyText(input.value);
-
-}
-);
-
-document.getElementById(
-"openVitrine"
-).addEventListener(
-"click",
-function(){
-
-const input=
-document.getElementById(
-"vitrineLink"
-);
-
-if(!input.value){
-
-const link=createVitrineLink();
-
-if(!link)return;
-
-input.value=link;
-
-}
-
-window.open(
-input.value,
-"_blank"
-);
-
-}
-);
-
-/* BOTÃO DA VITRINE NA TELA DO PIN */
-document.getElementById(
-"openVitrineFromPin"
-).addEventListener(
-"click",
-function(){
-
-const link=createVitrineLink();
-
-if(link){
-
-window.location.href=link;
-
-}
-
-}
-);
-
-document.getElementById(
-"homeShareVitrine"
-).addEventListener(
-"click",
-function(){
-
-showPage("vitrine");
-
-}
-);
-
-document.getElementById(
-"headerVitrine"
-).addEventListener(
-"click",
-function(){
-
-showPage("vitrine");
-
-}
-);
-
-function renderPublicVitrine(){
-
-let data=[];
-
-try{
-
-const params=
-new URLSearchParams(
-location.search
-);
-
-const encoded=
-params.get("vitrine");
-
-if(encoded){
-
-data=JSON.parse(
-base64UrlDecode(encoded)
-);
-
-}
-
-}catch(e){
-
-data=[];
-
-}
-
-if(!Array.isArray(data)||!data.length){
-
-publicScreen.innerHTML=`
-
-<div class="public">
-
-<div class="public-header">
-
-<h1>
-🛍️ Shopee Turbo
-</h1>
-
-<p>
-Minha vitrine de achadinhos
-</p>
-
-</div>
-
-<div class="public-wrap">
-
-<div class="box empty">
-
-<div style="font-size:40px">
-🛍️
-</div>
-
-<h3>
-Vitrine vazia
-</h3>
-
-<p>
-O link pode estar incompleto ou não possuir produtos.
-</p>
-
-</div>
-
-</div>
-
-</div>
-
-`;
-
-pinScreen.style.display="none";
-
-privateApp.style.display="none";
-
-publicScreen.style.display="block";
-
-return;
-
-}
-
-publicScreen.innerHTML=`
-
-<div class="public">
-
-<div class="public-header">
-
-<h1>
-🛍️ Shopee Turbo
-</h1>
-
-<p>
-Achadinhos selecionados para você ✨
-</p>
-
-</div>
-
-<div class="public-wrap">
-
-<div class="notice">
-
-🛒 Confira o produto e acesse o anúncio para ver fotos, avaliações, disponibilidade e detalhes antes de comprar.
-
-</div>
-
-${data.map(
-p=>`
-
-<div class="public-product">
-
-<div class="public-category">
-${escapeHtml(
-categoryNames[p.category]||"Achadinho"
-)}
-</div>
-
-<h2>
-${escapeHtml(p.name)}
-</h2>
-
-<div class="public-price">
-${money(p.price)}
-</div>
-
-<a
-class="public-buy"
-href="${escapeHtml(p.link)}"
-target="_blank"
-rel="noopener noreferrer"
->
-🛒 Comprar na Shopee
-</a>
-
-</div>
-
-`
-).join("")}
-
-<div
-class="small"
-style="text-align:center;margin:25px 0"
->
-Vitrine criada com Shopee Turbo.
-</div>
-
-</div>
-
-</div>
-
-`;
-
-pinScreen.style.display="none";
-
-privateApp.style.display="none";
-
-publicScreen.style.display="block";
-
-}
-
-async function copyText(text){
-
-try{
-
-await navigator.clipboard.writeText(
-String(text)
-);
-
-alert("✅ Copiado!");
-
-}catch(e){
-
-const area=
-document.createElement("textarea");
-
-area.value=String(text);
-
-document.body.appendChild(area);
-
-area.select();
-
-try{
-
-document.execCommand("copy");
-
-alert("✅ Copiado!");
-
-}catch(err){
-
-alert(
-"Selecione e copie o texto manualmente."
-);
-
-}
-
-area.remove();
-
-}
-
-}
-
-function renderHome(){
-
-document.getElementById(
-"homeProducts"
-).textContent=produtos.length;
-
-document.getElementById(
-"homeContents"
-).textContent=conteudos.length;
-
-document.getElementById(
-"homeLinks"
-).textContent=
-produtos.filter(p=>p.link).length;
-
-document.getElementById(
-"homeAuto"
-).textContent=
-autoConfig.enabled?"ON":"OFF";
-
-}
-
-function renderAll(){
-
-fillProductSelects();
-
-renderProducts();
-
-renderContentHistory();
-
-renderLinks();
-
-renderResults();
-
-renderAuto();
-
-renderHome();
-
-}
-
-function init(){
-
-const params=
-new URLSearchParams(
-location.search
-);
-
-if(params.has("vitrine")){
-
-renderPublicVitrine();
-
-return;
-
-}
-
-const authenticated=
-sessionStorage.getItem(
-"shopee_turbo_auth"
-)==="1";
-
-if(authenticated){
-
-showPrivate();
-
-}else{
-
-showPin();
-
-}
-
-renderAll();
-
-setTimeout(
-runAutoPilot,
-1500
-);
-
-setInterval(
-runAutoPilot,
-60000
-);
-
+function $(id){
+  return document.getElementById(id);
 }
 
-init();
 
-/* SERVICE WORKER */
-if("serviceWorker" in navigator){
+function showToast(message){
 
-window.addEventListener(
-"load",
-function(){
+  const toast = $("toast");
 
-navigator.serviceWorker
-.register(
-"./service-worker.js?v=7"
-)
-.then(
-function(){
+  toast.textContent = message;
+  toast.style.display = "block";
 
-console.log(
-"Shopee Turbo atualizado."
-);
-
-}
-)
-.catch(
-function(error){
-
-console.log(
-"Shopee Turbo SW:",
-error
-);
-
-}
-);
-
-}
-);
-
-}
+  clearTimeout(window.toastTimer);
 
-</script>
+  window.toastTimer = setTimeout(function(){
 
-</body>
-</html>
+    toast
