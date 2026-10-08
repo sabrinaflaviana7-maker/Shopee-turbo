@@ -2,360 +2,510 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<meta name="theme-color" content="#ff5a00">
-<title>Shopee Turbo</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#ff6b00">
+<meta name="description" content="VITRA — Tudo que você encontra. Em um só lugar.">
+<title>VITRA</title>
 
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
+*{box-sizing:border-box}
 
-body{
-font-family:Arial,Helvetica,sans-serif;
-background:#f5f5f5;
-color:#222;
-min-height:100vh
+:root{
+  --orange:#ff6b00;
+  --yellow:#ffc400;
+  --blue:#2878ff;
+  --green:#20b86b;
+  --pink:#f43f8f;
+  --purple:#7957ff;
+  --dark:#151515;
+  --gray:#6f6f6f;
+  --light:#f6f6f8;
+  --white:#fff;
+  --border:#e8e8ec;
 }
 
-button,input,select,textarea{font-family:inherit}
-.hidden{display:none!important}
+body{
+  margin:0;
+  font-family:Arial,Helvetica,sans-serif;
+  background:var(--light);
+  color:var(--dark);
+}
 
-#loginScreen{
-min-height:100vh;
-display:flex;
-align-items:center;
-justify-content:center;
-padding:20px;
-background:linear-gradient(135deg,#ff5a00,#ff7a22)
+button,input,select,textarea{
+  font:inherit;
+}
+
+button{
+  cursor:pointer;
+}
+
+.hidden{
+  display:none!important;
+}
+
+/* LOGIN */
+
+.login-screen{
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:24px;
+  background:
+    radial-gradient(circle at 10% 10%,rgba(255,196,0,.25),transparent 28%),
+    radial-gradient(circle at 90% 15%,rgba(40,120,255,.2),transparent 30%),
+    radial-gradient(circle at 50% 100%,rgba(244,63,143,.18),transparent 35%),
+    #111;
 }
 
 .login-box{
-width:100%;
-max-width:390px;
-background:#fff;
-border-radius:24px;
-padding:30px 24px;
-box-shadow:0 15px 45px rgba(0,0,0,.22);
-text-align:center
+  width:100%;
+  max-width:390px;
+  background:#fff;
+  border-radius:28px;
+  padding:32px 24px;
+  text-align:center;
+  box-shadow:0 25px 70px rgba(0,0,0,.35);
 }
 
 .logo{
-width:76px;
-height:76px;
-border-radius:22px;
-background:#ff5a00;
-color:#fff;
-display:flex;
-align-items:center;
-justify-content:center;
-font-size:38px;
-font-weight:900;
-margin:0 auto 18px
+  font-size:48px;
+  font-weight:900;
+  letter-spacing:-3px;
+  background:linear-gradient(
+    90deg,
+    var(--orange),
+    var(--yellow),
+    var(--green),
+    var(--blue),
+    var(--pink)
+  );
+  -webkit-background-clip:text;
+  color:transparent;
 }
 
-.login-box h1{font-size:28px;margin-bottom:8px}
-.login-box p{color:#777;margin-bottom:24px;line-height:1.4}
-
-.login-box input{
-width:100%;
-height:52px;
-border:2px solid #ddd;
-border-radius:14px;
-padding:0 16px;
-font-size:18px;
-outline:none;
-text-align:center;
-margin-bottom:12px
+.tagline{
+  color:#777;
+  margin:4px 0 28px;
+  font-size:14px;
 }
 
-.login-box input:focus{border-color:#ff5a00}
+.login-box h2{
+  margin:0 0 8px;
+}
+
+.login-box p{
+  color:#777;
+  font-size:14px;
+}
+
+.login-input{
+  width:100%;
+  padding:15px;
+  border:1px solid var(--border);
+  border-radius:14px;
+  margin:12px 0;
+  outline:none;
+}
+
+.login-input:focus{
+  border-color:var(--orange);
+}
 
 .login-button{
-width:100%;
-height:52px;
-border:0;
-border-radius:14px;
-background:#ff5a00;
-color:#fff;
-font-size:17px;
-font-weight:bold;
-cursor:pointer
+  width:100%;
+  border:0;
+  padding:15px;
+  border-radius:14px;
+  background:linear-gradient(90deg,var(--orange),var(--pink));
+  color:white;
+  font-weight:800;
 }
 
 .login-error{
-color:#e53935;
-font-size:14px;
-min-height:20px;
-margin-top:12px
+  color:#e53935;
+  min-height:20px;
+  margin-top:10px;
+  font-size:13px;
 }
 
-#app{
-min-height:100vh;
-padding-bottom:78px
+/* APP */
+
+.app{
+  min-height:100vh;
+  padding-bottom:85px;
 }
 
 .topbar{
-background:#ff5a00;
-color:#fff;
-padding:18px 18px 22px;
-border-radius:0 0 22px 22px
+  background:#fff;
+  padding:17px 18px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  position:sticky;
+  top:0;
+  z-index:20;
+  border-bottom:1px solid var(--border);
 }
 
-.topbar-row{
-display:flex;
-align-items:center;
-justify-content:space-between;
-gap:10px
+.top-logo{
+  font-size:28px;
+  font-weight:900;
+  letter-spacing:-2px;
+  background:linear-gradient(
+    90deg,
+    var(--orange),
+    var(--yellow),
+    var(--blue),
+    var(--pink)
+  );
+  -webkit-background-clip:text;
+  color:transparent;
 }
-
-.topbar h1{font-size:23px}
-.topbar small{opacity:.9}
 
 .logout{
-background:rgba(255,255,255,.18);
-color:#fff;
-border:1px solid rgba(255,255,255,.4);
-border-radius:10px;
-padding:9px 11px;
-cursor:pointer
+  border:0;
+  background:#f1f1f3;
+  padding:8px 12px;
+  border-radius:10px;
+  font-size:12px;
 }
 
 .container{
-width:100%;
-max-width:760px;
-margin:auto;
-padding:18px
+  max-width:760px;
+  margin:auto;
+  padding:18px;
 }
 
-.page{display:none}
-.page.active{display:block}
-
-.page-title{
-font-size:24px;
-font-weight:800;
-margin-bottom:5px
+.hero{
+  border-radius:24px;
+  padding:25px;
+  color:#fff;
+  background:
+    radial-gradient(circle at 100% 0%,rgba(255,196,0,.55),transparent 30%),
+    radial-gradient(circle at 0% 100%,rgba(40,120,255,.45),transparent 35%),
+    linear-gradient(135deg,#ff6200,#ed277b);
+  margin-bottom:18px;
 }
 
-.page-subtitle{
-color:#777;
-margin-bottom:18px
+.hero h1{
+  margin:0;
+  font-size:28px;
+}
+
+.hero p{
+  margin:8px 0 0;
+  opacity:.92;
+}
+
+.cards{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:12px;
 }
 
 .card{
-background:#fff;
-border-radius:18px;
-padding:18px;
-margin-bottom:14px;
-box-shadow:0 3px 14px rgba(0,0,0,.06)
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:18px;
+  padding:17px;
 }
 
-.card h3{margin-bottom:8px}
-
-.dashboard-grid{
-display:grid;
-grid-template-columns:repeat(2,1fr);
-gap:12px;
-margin-bottom:18px
+.card .icon{
+  font-size:25px;
 }
 
-.stat{
-background:#fff;
-border-radius:17px;
-padding:17px;
-box-shadow:0 3px 14px rgba(0,0,0,.06)
+.card strong{
+  display:block;
+  font-size:22px;
+  margin-top:8px;
 }
 
-.stat strong{
-display:block;
-font-size:25px;
-margin-bottom:5px
+.card span{
+  color:#777;
+  font-size:12px;
 }
 
-.stat span{
-color:#777;
-font-size:13px
+.section{
+  margin-top:22px;
 }
 
-.primary{background:#ff5a00;color:#fff}
-.green{background:#16a34a;color:#fff}
-
-.btn{
-border:0;
-border-radius:12px;
-padding:12px 15px;
-font-weight:bold;
-cursor:pointer;
-text-decoration:none;
-display:inline-block
+.section-title{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:12px;
 }
 
-.btn-primary{background:#ff5a00;color:#fff}
-.btn-secondary{background:#eee;color:#222}
-.btn-danger{background:#e53935;color:#fff}
-
-.button-row{
-display:flex;
-flex-wrap:wrap;
-gap:9px;
-margin-top:12px
+.section-title h2{
+  margin:0;
+  font-size:19px;
 }
 
-.form-group{margin-bottom:13px}
-
-.form-group label{
-display:block;
-font-weight:bold;
-font-size:14px;
-margin-bottom:6px
+.panel{
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:20px;
+  padding:18px;
 }
 
-.form-group input,
-.form-group select,
-.form-group textarea{
-width:100%;
-border:1px solid #ddd;
-border-radius:12px;
-padding:12px;
-font-size:15px;
-outline:none;
-background:#fff
+label{
+  display:block;
+  font-size:13px;
+  font-weight:700;
+  margin:12px 0 6px;
 }
 
-.form-group textarea{
-min-height:100px;
-resize:vertical
+input,select,textarea{
+  width:100%;
+  padding:13px;
+  border:1px solid var(--border);
+  border-radius:12px;
+  background:#fff;
+  outline:none;
 }
 
-.form-group input:focus,
-.form-group select:focus,
-.form-group textarea:focus{
-border-color:#ff5a00
+input:focus,select:focus,textarea:focus{
+  border-color:var(--orange);
+}
+
+textarea{
+  min-height:150px;
+  resize:vertical;
+}
+
+.primary{
+  border:0;
+  background:linear-gradient(90deg,var(--orange),var(--pink));
+  color:#fff;
+  padding:13px 17px;
+  border-radius:12px;
+  font-weight:800;
+}
+
+.secondary{
+  border:1px solid var(--border);
+  background:#fff;
+  padding:12px 15px;
+  border-radius:12px;
+  font-weight:700;
+}
+
+.danger{
+  background:#fff0f0;
+  color:#d22;
+  border:0;
+  padding:9px 11px;
+  border-radius:10px;
+}
+
+.row{
+  display:flex;
+  gap:9px;
+  flex-wrap:wrap;
 }
 
 .product{
-border:1px solid #eee;
-border-radius:16px;
-padding:15px;
-margin-bottom:12px
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:18px;
+  padding:15px;
+  margin-bottom:11px;
 }
 
 .product-top{
-display:flex;
-justify-content:space-between;
-gap:10px
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
 }
 
-.product-name{
-font-weight:800;
-font-size:17px
+.product h3{
+  margin:0;
+  font-size:16px;
 }
 
 .product-price{
-color:#ff5a00;
-font-weight:900;
-font-size:18px;
-white-space:nowrap
+  font-size:18px;
+  font-weight:900;
+  margin-top:7px;
 }
 
-.badge{
-display:inline-block;
-margin-top:7px;
-background:#fff0e8;
-color:#ff5a00;
-border-radius:20px;
-padding:5px 9px;
-font-size:12px;
-font-weight:bold
+.platform{
+  display:inline-block;
+  margin-top:8px;
+  padding:5px 9px;
+  border-radius:20px;
+  font-size:11px;
+  font-weight:800;
 }
 
-.product-info{
-color:#777;
-font-size:13px;
-margin-top:8px;
-line-height:1.5
+.platform-shopee{background:#fff0e7;color:#ed5a00}
+.platform-mercado{background:#fff8d7;color:#8b6b00}
+.platform-tiktok{background:#eee;color:#111}
+.platform-amazon{background:#e8f0ff;color:#1459d9}
+.platform-magalu{background:#e6fff3;color:#07854b}
+.platform-outra{background:#f1eaff;color:#6840c9}
+
+.product-link{
+  color:var(--blue);
+  font-size:12px;
+  word-break:break-all;
+  display:block;
+  margin:10px 0;
 }
 
 .empty{
-text-align:center;
-padding:25px 10px;
-color:#888
-}
-
-.content-box{
-white-space:pre-wrap;
-background:#fafafa;
-border:1px solid #eee;
-border-radius:13px;
-padding:14px;
-line-height:1.55;
-margin-top:10px;
-font-size:14px
-}
-
-.content-type{
-display:inline-block;
-background:#ff5a00;
-color:#fff;
-padding:5px 9px;
-border-radius:20px;
-font-size:11px;
-font-weight:bold;
-margin-bottom:8px
+  text-align:center;
+  color:#777;
+  padding:25px 10px;
 }
 
 .bottom-nav{
-position:fixed;
-left:0;
-right:0;
-bottom:0;
-background:#fff;
-border-top:1px solid #ddd;
-display:flex;
-justify-content:space-around;
-padding:8px 4px;
-z-index:100;
-overflow-x:auto
+  position:fixed;
+  left:0;
+  right:0;
+  bottom:0;
+  z-index:30;
+  background:#fff;
+  border-top:1px solid var(--border);
+  display:flex;
+  justify-content:center;
+}
+
+.nav-inner{
+  width:100%;
+  max-width:760px;
+  display:grid;
+  grid-template-columns:repeat(6,1fr);
 }
 
 .nav-btn{
-border:0;
-background:none;
-color:#777;
-font-size:11px;
-min-width:58px;
-padding:5px 3px;
-cursor:pointer
+  border:0;
+  background:#fff;
+  padding:9px 3px 10px;
+  color:#777;
+  font-size:10px;
 }
 
-.nav-btn .icon{
-display:block;
-font-size:21px;
-margin-bottom:2px
+.nav-btn span{
+  display:block;
+  font-size:20px;
+  margin-bottom:3px;
 }
 
 .nav-btn.active{
-color:#ff5a00;
-font-weight:bold
+  color:var(--orange);
+  font-weight:800;
 }
 
-#toast{
-position:fixed;
-left:50%;
-bottom:90px;
-transform:translateX(-50%);
-background:#222;
-color:#fff;
-padding:12px 18px;
-border-radius:12px;
-z-index:200;
-display:none;
-max-width:90%;
-text-align:center
+/* VITRINE */
+
+.public-store{
+  min-height:100vh;
+  background:
+    radial-gradient(circle at 0% 0%,rgba(255,196,0,.16),transparent 28%),
+    radial-gradient(circle at 100% 10%,rgba(40,120,255,.13),transparent 30%),
+    #f7f7f8;
 }
 
-@media(max-width:420px){
-.dashboard-grid{gap:9px}
-.stat{padding:14px}
-.stat strong{font-size:21px}
+.store-head{
+  padding:35px 20px 25px;
+  text-align:center;
+  background:#fff;
+  border-bottom:1px solid var(--border);
+}
+
+.store-logo{
+  font-size:42px;
+  font-weight:900;
+  letter-spacing:-3px;
+  background:linear-gradient(
+    90deg,
+    var(--orange),
+    var(--yellow),
+    var(--green),
+    var(--blue),
+    var(--pink)
+  );
+  -webkit-background-clip:text;
+  color:transparent;
+}
+
+.store-head p{
+  color:#777;
+  margin:5px 0 0;
+}
+
+.store-products{
+  max-width:700px;
+  margin:auto;
+  padding:18px;
+}
+
+.store-product{
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:20px;
+  padding:18px;
+  margin-bottom:13px;
+}
+
+.store-product h2{
+  margin:8px 0 5px;
+  font-size:18px;
+}
+
+.store-price{
+  font-size:23px;
+  font-weight:900;
+}
+
+.buy{
+  display:block;
+  width:100%;
+  text-align:center;
+  text-decoration:none;
+  background:linear-gradient(90deg,var(--orange),var(--pink));
+  color:white;
+  padding:13px;
+  border-radius:12px;
+  font-weight:900;
+  margin-top:13px;
+}
+
+.store-footer{
+  text-align:center;
+  padding:20px;
+  color:#888;
+  font-size:12px;
+}
+
+.toast{
+  position:fixed;
+  left:50%;
+  bottom:90px;
+  transform:translateX(-50%);
+  background:#171717;
+  color:#fff;
+  padding:12px 17px;
+  border-radius:12px;
+  z-index:100;
+  font-size:13px;
+  display:none;
+}
+
+@media(max-width:480px){
+  .cards{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .hero h1{
+    font-size:24px;
+  }
+
+  .nav-btn{
+    font-size:9px;
+  }
 }
 </style>
 </head>
@@ -363,1617 +513,1563 @@ text-align:center
 <body>
 
 <!-- LOGIN -->
+<div id="loginScreen" class="login-screen">
+  <div class="login-box">
+    <div class="logo">VITRA</div>
+    <div class="tagline">Tudo que você encontra. Em um só lugar.</div>
 
-<div id="loginScreen">
+    <h2>Bem-vinda 👋</h2>
+    <p>Entre para acessar seu painel.</p>
 
-<div class="login-box">
+    <input
+      id="passwordInput"
+      class="login-input"
+      type="password"
+      placeholder="Digite seu PIN"
+      autocomplete="off"
+    >
 
-<div class="logo">🚀</div>
+    <button id="loginButton" class="login-button">
+      ENTRAR
+    </button>
 
-<h1>Shopee Turbo</h1>
-
-<p>
-Encontre produtos, crie conteúdos
-e organize seus links de afiliado.
-</p>
-
-<input
-id="passwordInput"
-type="password"
-inputmode="numeric"
-maxlength="20"
-placeholder="Digite sua senha"
-autocomplete="off"
->
-
-<button
-class="login-button"
-type="button"
-id="loginButton">
-ENTRAR
-</button>
-
-<div id="loginError" class="login-error"></div>
-
+    <div id="loginError" class="login-error"></div>
+  </div>
 </div>
-
-</div>
-
 
 <!-- APP -->
+<div id="app" class="app hidden">
+
+  <header class="topbar">
+    <div class="top-logo">VITRA</div>
+    <button id="logoutButton" class="logout">Sair</button>
+  </header>
+
+  <main class="container">
+
+    <!-- HOME -->
+    <section id="page-home" class="page">
+
+      <div class="hero">
+        <h1>Olá! 👋</h1>
+        <p>
+          Encontre produtos, crie conteúdos e organize seus links em um só lugar.
+        </p>
+      </div>
+
+      <div class="cards">
+        <div class="card">
+          <div class="icon">🛍️</div>
+          <strong id="totalProducts">0</strong>
+          <span>Produtos</span>
+        </div>
+
+        <div class="card">
+          <div class="icon">🔗</div>
+          <strong id="totalLinks">0</strong>
+          <span>Links</span>
+        </div>
+
+        <div class="card">
+          <div class="icon">🎬</div>
+          <strong id="totalContents">0</strong>
+          <span>Conteúdos</span>
+        </div>
+
+        <div class="card">
+          <div class="icon">🚀</div>
+          <strong id="totalAuto">0</strong>
+          <span>Automação</span>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-title">
+          <h2>Comece agora</h2>
+        </div>
+
+        <div class="panel">
+          <div class="row">
+            <button class="primary" data-page="products">
+              ➕ Adicionar produto
+            </button>
+
+            <button class="secondary" data-page="content">
+              🎬 Criar conteúdo
+            </button>
+
+            <button class="secondary" data-page="vitrine">
+              🛒 Minha vitrine
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- PRODUTOS -->
+    <section id="page-products" class="page hidden">
+
+      <div class="section-title">
+        <h2>🛍️ Produtos</h2>
+      </div>
+
+      <div class="panel">
+
+        <label>Nome do produto</label>
+        <input id="productName" placeholder="Ex.: Trio de Vasos Cachepot">
+
+        <label>Plataforma</label>
+        <select id="productPlatform">
+          <option value="Shopee">🟠 Shopee</option>
+          <option value="Mercado Livre">🟡 Mercado Livre</option>
+          <option value="TikTok Shop">⚫ TikTok Shop</option>
+          <option value="Amazon">🔵 Amazon</option>
+          <option value="Magalu">🟢 Magalu</option>
+          <option value="Outra">🟣 Outra</option>
+        </select>
+
+        <label>Categoria</label>
+        <select id="productCategory">
+          <option>Geral</option>
+          <option>Casa</option>
+          <option>Cozinha</option>
+          <option>Organização</option>
+          <option>Decoração</option>
+          <option>Beleza</option>
+          <option>Fitness</option>
+          <option>Tecnologia</option>
+          <option>Pet</option>
+          <option>Infantil</option>
+          <option>Moda</option>
+        </select>
+
+        <label>Preço</label>
+        <input id="productPrice" type="number" step="0.01" placeholder="39.90">
+
+        <label>Link de afiliado</label>
+        <input id="productLink" placeholder="Cole o link aqui">
+
+        <label>Descrição curta</label>
+        <textarea
+          id="productDescription"
+          placeholder="Ex.: Ideal para deixar sua casa mais bonita e organizada."
+        ></textarea>
+
+        <div class="row" style="margin-top:14px">
+          <button id="addProductButton" class="primary">
+            ➕ Adicionar produto
+          </button>
+
+          <button id="clearProductButton" class="secondary">
+            Limpar
+          </button>
+        </div>
+
+      </div>
+
+      <div class="section">
+        <div class="section-title">
+          <h2>Seus produtos</h2>
+        </div>
+
+        <div id="productsList"></div>
+      </div>
+
+    </section>
+
+    <!-- LINKS -->
+    <section id="page-links" class="page hidden">
+
+      <div class="section-title">
+        <h2>🔗 Links</h2>
+      </div>
+
+      <div class="panel">
+        <p style="color:#777;font-size:13px">
+          Todos os seus links de produtos ficam organizados aqui.
+        </p>
+
+        <div id="linksList"></div>
+      </div>
+
+    </section>
+
+    <!-- CONTEÚDO -->
+    <section id="page-content" class="page hidden">
+
+      <div class="section-title">
+        <h2>🎬 Criar conteúdo</h2>
+      </div>
+
+      <div class="panel">
+
+        <label>Escolha o produto</label>
+        <select id="contentProduct"></select>
+
+        <label>Duração</label>
+        <select id="contentDuration">
+          <option value="15">15 segundos</option>
+          <option value="30">30 segundos</option>
+          <option value="60">60 segundos</option>
+        </select>
+
+        <div class="row" style="margin-top:14px">
+          <button id="generateScriptButton" class="primary">
+            ✨ Gerar roteiro
+          </button>
+
+          <button id="generateCaptionButton" class="secondary">
+            📝 Gerar legenda
+          </button>
+        </div>
+
+      </div>
+
+      <div class="section">
+        <div class="panel">
+          <label>Resultado</label>
+
+          <textarea
+            id="contentResult"
+            placeholder="Seu conteúdo aparecerá aqui..."
+          ></textarea>
+
+          <button
+            id="copyContentButton"
+            class="secondary"
+            style="margin-top:10px"
+          >
+            📋 Copiar
+          </button>
+        </div>
+      </div>
 
-<div id="app" class="hidden">
+    </section>
 
-<header class="topbar">
+    <!-- RESULTADOS -->
+    <section id="page-results" class="page hidden">
 
-<div class="topbar-row">
+      <div class="section-title">
+        <h2>📊 Resultados</h2>
+      </div>
 
-<div>
-<h1>🚀 Shopee Turbo</h1>
-<small>Seu painel de afiliado</small>
-</div>
+      <div class="cards">
+        <div class="card">
+          <div class="icon">👆</div>
+          <strong id="resultClicks">0</strong>
+          <span>Cliques registrados</span>
+        </div>
 
-<button
-class="logout"
-type="button"
-id="logoutButton">
-Sair
-</button>
+        <div class="card">
+          <div class="icon">💰</div>
+          <strong id="resultSales">0</strong>
+          <span>Vendas registradas</span>
+        </div>
+      </div>
 
-</div>
+      <div class="section">
+        <div class="panel">
+          <p>
+            Esta área será preparada para receber métricas reais das
+            plataformas quando as integrações oficiais forem adicionadas.
+          </p>
+        </div>
+      </div>
 
-</header>
+    </section>
 
+    <!-- AUTO -->
+    <section id="page-auto" class="page hidden">
 
-<main class="container">
+      <div class="section-title">
+        <h2>🚀 Auto</h2>
+      </div>
 
-<!-- HOME -->
+      <div class="panel">
 
-<section id="page-home" class="page active">
+        <h3>Modo automático</h3>
 
-<div class="page-title">Olá! 👋</div>
+        <p style="color:#777;font-size:13px">
+          Organize sua rotina de conteúdos e produtos.
+        </p>
 
-<div class="page-subtitle">
-Vamos turbinar suas vendas hoje.
-</div>
+        <label>Horário preferido</label>
+        <select id="autoTime">
+          <option>09:00</option>
+          <option>12:00</option>
+          <option>18:00</option>
+          <option>21:00</option>
+        </select>
 
-<div class="dashboard-grid">
+        <label>
+          <input
+            id="autoEnabled"
+            type="checkbox"
+            style="width:auto;margin-right:8px"
+          >
+          Ativar rotina
+        </label>
 
-<div class="stat">
-<strong id="statProducts">0</strong>
-<span>Produtos</span>
-</div>
+        <button id="saveAutoButton" class="primary">
+          Salvar rotina
+        </button>
 
-<div class="stat">
-<strong id="statContents">0</strong>
-<span>Conteúdos</span>
-</div>
+        <p id="autoStatus" style="margin-top:12px;color:#777"></p>
 
-<div class="stat">
-<strong id="statLinks">0</strong>
-<span>Links</span>
-</div>
+      </div>
 
-<div class="stat">
-<strong id="statVideos">0</strong>
-<span>Vídeos</span>
-</div>
+    </section>
 
-</div>
+    <!-- VITRINE -->
+    <section id="page-vitrine" class="page hidden">
 
-<div class="card primary">
+      <div class="section-title">
+        <h2>🛒 Minha Vitrine</h2>
+      </div>
 
-<h3>🔥 Comece agora</h3>
+      <div class="panel">
 
-<p>
-Cadastre seus produtos e gere rapidamente
-roteiros para divulgar nas redes sociais.
-</p>
+        <h3>Vitrine pública</h3>
 
-<div class="button-row">
+        <p style="font-size:13px;color:#777">
+          Crie um link para compartilhar seus produtos com outras pessoas.
+        </p>
 
-<button
-class="btn"
-style="background:#fff;color:#ff5a00"
-type="button"
-onclick="showPage('products')">
-+ Produto
-</button>
+        <button id="generateStoreButton" class="primary">
+          🔗 Gerar link público
+        </button>
 
-<button
-class="btn"
-style="background:rgba(255,255,255,.18);color:#fff"
-type="button"
-onclick="showPage('content')">
-Criar conteúdo
-</button>
+        <div id="storeLinkArea" class="hidden" style="margin-top:14px">
 
-</div>
+          <label>Seu link público</label>
 
-</div>
+          <input id="storeLink" readonly>
 
-<div class="card">
+          <div class="row" style="margin-top:10px">
 
-<h3>⚡ Como usar</h3>
+            <button id="copyStoreButton" class="secondary">
+              📋 Copiar link
+            </button>
 
-<p style="color:#666;line-height:1.6">
-1. Cadastre um produto.<br>
-2. Gere um roteiro.<br>
-3. Copie legenda e hashtags.<br>
-4. Divulgue seu link.<br>
-5. Acompanhe seus resultados.
-</p>
+            <button id="openStoreButton" class="secondary">
+              👀 Abrir vitrine
+            </button>
 
-</div>
+          </div>
 
-</section>
+        </div>
 
+      </div>
 
-<!-- PRODUTOS -->
+      <div class="section">
+        <div class="panel">
+          <h3>Prévia</h3>
+          <div id="vitrineList"></div>
+        </div>
+      </div>
 
-<section id="page-products" class="page">
+    </section>
 
-<div class="page-title">Produtos</div>
+  </main>
 
-<div class="page-subtitle">
-Cadastre e organize seus produtos afiliados.
-</div>
+  <nav class="bottom-nav">
 
-<div class="card">
+    <div class="nav-inner">
 
-<h3>➕ Novo produto</h3>
+      <button class="nav-btn active" data-page="home">
+        <span>🏠</span>
+        Início
+      </button>
 
-<div class="form-group">
-<label>Nome do produto</label>
-<input id="productName" type="text"
-placeholder="Ex.: Trio de Vasos Cachepot">
-</div>
+      <button class="nav-btn" data-page="products">
+        <span>🛍️</span>
+        Produtos
+      </button>
 
-<div class="form-group">
-<label>Preço</label>
-<input id="productPrice" type="text"
-inputmode="decimal"
-placeholder="Ex.: 36,91">
-</div>
+      <button class="nav-btn" data-page="links">
+        <span>🔗</span>
+        Links
+      </button>
 
-<div class="form-group">
-<label>Comissão (%)</label>
-<input id="productCommission"
-type="number"
-min="0"
-max="100"
-placeholder="Ex.: 23">
-</div>
+      <button class="nav-btn" data-page="content">
+        <span>🎬</span>
+        Conteúdo
+      </button>
 
-<div class="form-group">
-<label>Categoria</label>
+      <button class="nav-btn" data-page="results">
+        <span>📊</span>
+        Resultados
+      </button>
 
-<select id="productCategory">
+      <button class="nav-btn" data-page="vitrine">
+        <span>🛒</span>
+        Vitrine
+      </button>
 
-<option value="Geral">Geral</option>
-<option value="Casa">Casa</option>
-<option value="Cozinha">Cozinha</option>
-<option value="Organização">Organização</option>
-<option value="Decoração">Decoração</option>
-<option value="Beleza">Beleza</option>
-<option value="Fitness">Fitness</option>
-<option value="Tecnologia">Tecnologia</option>
-<option value="Pet">Pet</option>
-<option value="Infantil">Infantil</option>
-<option value="Moda">Moda</option>
+    </div>
 
-</select>
-</div>
-
-<div class="form-group">
-<label>Link de afiliado</label>
-<input id="productLink"
-type="url"
-placeholder="Cole aqui seu link">
-</div>
-
-<button
-class="btn btn-primary"
-type="button"
-id="saveProductButton">
-SALVAR PRODUTO
-</button>
-
-</div>
-
-<div class="card">
-
-<h3>📦 Meus produtos</h3>
-
-<div id="productsList"></div>
-
-</div>
-
-</section>
-
-
-<!-- CONTEÚDO -->
-
-<section id="page-content" class="page">
-
-<div class="page-title">Conteúdo</div>
-
-<div class="page-subtitle">
-Crie conteúdos pensados para chamar atenção e vender.
-</div>
-
-<div class="card">
-
-<div class="form-group">
-
-<label>Escolha o produto</label>
-
-<select id="contentProduct"></select>
-
-</div>
-
-<div class="form-group">
-
-<label>Tipo de conteúdo</label>
-
-<select id="contentType">
-
-<option value="15">
-🔥 Roteiro vendedor — 15 segundos
-</option>
-
-<option value="30">
-🔥 Roteiro vendedor — 30 segundos
-</option>
-
-<option value="60">
-🔥 Roteiro vendedor — 60 segundos
-</option>
-
-<option value="caption">
-📝 Legenda + hashtags + CTA
-</option>
-
-</select>
-
-</div>
-
-<button
-class="btn btn-primary"
-type="button"
-id="generateButton">
-⚡ GERAR CONTEÚDO
-</button>
-
-</div>
-
-
-<div id="generatedContent" class="card hidden">
-
-<h3>✨ Conteúdo gerado</h3>
-
-<div id="generatedText" class="content-box"></div>
-
-<div class="button-row">
-
-<button
-class="btn btn-secondary"
-type="button"
-id="saveContentButton">
-💾 Salvar
-</button>
-
-<button
-class="btn btn-primary"
-type="button"
-id="copyContentButton">
-📋 Copiar
-</button>
-
-</div>
-
-</div>
-
-
-<div class="card">
-
-<h3>📝 Conteúdos salvos</h3>
-
-<div id="contentsList"></div>
-
-</div>
-
-</section>
-
-
-<!-- LINKS -->
-
-<section id="page-links" class="page">
-
-<div class="page-title">Links</div>
-
-<div class="page-subtitle">
-Seus links de afiliado em um só lugar.
-</div>
-
-<div id="linksList" class="card"></div>
-
-</section>
-
-
-<!-- RESULTADOS -->
-
-<section id="page-results" class="page">
-
-<div class="page-title">Resultados</div>
-
-<div class="page-subtitle">
-Acompanhe sua evolução.
-</div>
-
-<div class="dashboard-grid">
-
-<div class="stat">
-<strong id="resultProducts">0</strong>
-<span>Produtos cadastrados</span>
-</div>
-
-<div class="stat">
-<strong id="resultContents">0</strong>
-<span>Conteúdos criados</span>
-</div>
-
-<div class="stat">
-<strong id="resultLinks">0</strong>
-<span>Links</span>
-</div>
-
-<div class="stat">
-<strong id="resultViews">0</strong>
-<span>Visualizações</span>
-</div>
-
-</div>
-
-<div class="card green">
-
-<h3>💰 Comissão estimada</h3>
-
-<strong
-id="estimatedCommission"
-style="font-size:30px;display:block;margin-top:8px">
-R$ 0,00
-</strong>
-
-<p style="margin-top:8px">
-Estimativa baseada nos produtos cadastrados.
-</p>
-
-</div>
-
-</section>
-
-
-<!-- AUTO -->
-
-<section id="page-auto" class="page">
-
-<div class="page-title">Auto Piloto</div>
-
-<div class="page-subtitle">
-Organize sua rotina de publicação.
-</div>
-
-<div class="card">
-
-<h3>🤖 Status</h3>
-
-<div
-id="autoStatus"
-style="font-size:18px;font-weight:bold;margin:12px 0">
-Desativado
-</div>
-
-<p style="color:#777;line-height:1.5">
-Esta versão organiza seus horários localmente.
-Ela não publica automaticamente na Shopee ou
-nas redes sociais.
-</p>
-
-<div class="button-row">
-
-<button
-class="btn btn-primary"
-type="button"
-id="autoToggle">
-ATIVAR AUTO PILOTO
-</button>
+  </nav>
 
 </div>
 
-</div>
+<div id="toast" class="toast"></div>
 
-<div class="card">
-
-<h3>⏰ Horários</h3>
-
-<p style="line-height:2;color:#555">
-🕘 09:00 — Publicação da manhã<br>
-🕛 12:00 — Publicação do almoço<br>
-🕕 18:00 — Publicação da tarde<br>
-🕘 21:00 — Publicação da noite
-</p>
-
-</div>
-
-</section>
-
-
-<!-- VITRINE -->
-
-<section id="page-vitrine" class="page">
-
-<div class="page-title">Vitrine</div>
-
-<div class="page-subtitle">
-Visualização dos seus produtos.
-</div>
-
-<div class="card">
-
-<h3>🛍️ Minha vitrine</h3>
-
-<div id="vitrineList"></div>
-
-</div>
-
-</section>
-
-</main>
-
-
-<!-- MENU -->
-
-<nav class="bottom-nav">
-
-<button class="nav-btn active"
-type="button"
-data-page="home">
-<span class="icon">🏠</span>
-Início
-</button>
-
-<button class="nav-btn"
-type="button"
-data-page="products">
-<span class="icon">📦</span>
-Produtos
-</button>
-
-<button class="nav-btn"
-type="button"
-data-page="content">
-<span class="icon">🎬</span>
-Conteúdo
-</button>
-
-<button class="nav-btn"
-type="button"
-data-page="links">
-<span class="icon">🔗</span>
-Links
-</button>
-
-<button class="nav-btn"
-type="button"
-data-page="results">
-<span class="icon">📊</span>
-Resultados
-</button>
-
-<button class="nav-btn"
-type="button"
-data-page="auto">
-<span class="icon">🤖</span>
-Auto
-</button>
-
-</nav>
-
-</div>
-
-<div id="toast"></div>
-
+<!-- JAVASCRIPT -->
 
 <script>
 
-/* ================================
-   SHOPEE TURBO
-   VERSÃO 12
-================================ */
+"use strict";
+
+/* =========================
+   CONFIGURAÇÃO
+========================= */
+
+const STORAGE_PRODUCTS = "vitra_produtos_v1";
+const STORAGE_CONTENTS = "vitra_conteudos_v1";
+const STORAGE_AUTO = "vitra_auto_v1";
+
+let produtos = [];
+let conteudos = [];
+let autoConfig = {
+  enabled:false,
+  time:"09:00"
+};
 
 function $(id){
-return document.getElementById(id);
+  return document.getElementById(id);
 }
 
-function toast(msg){
-
-var t=$("toast");
-
-t.textContent=msg;
-t.style.display="block";
-
-clearTimeout(window.toastTimer);
-
-window.toastTimer=setTimeout(function(){
-t.style.display="none";
-},2500);
-
+function escapeHtml(value){
+  return String(value ?? "")
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
 }
 
+function dinheiro(value){
+  const n = Number(value) || 0;
 
-/* LOGIN */
-
-function login(){
-
-var senha=$("passwordInput").value;
-
-if(senha==="1234"){
-
-sessionStorage.setItem(
-"shopee_turbo_logged",
-"true"
-);
-
-$("loginScreen").classList.add("hidden");
-$("app").classList.remove("hidden");
-
-carregarTudo();
-
-toast("Login realizado! 🚀");
-
-}else{
-
-$("loginError").textContent=
-"Senha incorreta. A senha é 1234.";
-
-$("passwordInput").value="";
-$("passwordInput").focus();
-
+  return n.toLocaleString("pt-BR",{
+    style:"currency",
+    currency:"BRL"
+  });
 }
 
+function toast(message){
+  const el = $("toast");
+
+  el.textContent = message;
+  el.style.display = "block";
+
+  clearTimeout(window.__toastTimer);
+
+  window.__toastTimer = setTimeout(()=>{
+    el.style.display = "none";
+  },2500);
 }
 
-$("loginButton").addEventListener(
-"click",
-login
-);
+/* =========================
+   SALVAR / CARREGAR
+========================= */
 
-$("passwordInput").addEventListener(
-"keydown",
-function(e){
+function carregarTudo(){
 
-if(e.key==="Enter"){
-login();
+  try{
+    produtos = JSON.parse(
+      localStorage.getItem(STORAGE_PRODUCTS) || "[]"
+    );
+  }catch(e){
+    produtos = [];
+  }
+
+  try{
+    conteudos = JSON.parse(
+      localStorage.getItem(STORAGE_CONTENTS) || "[]"
+    );
+  }catch(e){
+    conteudos = [];
+  }
+
+  try{
+    autoConfig = JSON.parse(
+      localStorage.getItem(STORAGE_AUTO) ||
+      '{"enabled":false,"time":"09:00"}'
+    );
+  }catch(e){
+    autoConfig = {
+      enabled:false,
+      time:"09:00"
+    };
+  }
+
+  renderTudo();
 }
 
-});
-
-
-/* SAIR */
-
-$("logoutButton").addEventListener(
-"click",
-function(){
-
-sessionStorage.removeItem(
-"shopee_turbo_logged"
-);
-
-$("app").classList.add("hidden");
-$("loginScreen").classList.remove("hidden");
-
-$("passwordInput").value="";
-
-}
-);
-
-
-/* DADOS */
-
-var produtos=[];
-var conteudos=[];
-var autoAtivo=false;
-var conteudoAtual="";
-
-
-function carregarDados(){
-
-try{
-
-produtos=JSON.parse(
-localStorage.getItem(
-"shopee_turbo_produtos_v12"
-)||"[]"
-);
-
-}catch(e){
-
-produtos=[];
-
+function salvarProdutos(){
+  localStorage.setItem(
+    STORAGE_PRODUCTS,
+    JSON.stringify(produtos)
+  );
 }
 
-
-try{
-
-conteudos=JSON.parse(
-localStorage.getItem(
-"shopee_turbo_conteudos_v12"
-)||"[]"
-);
-
-}catch(e){
-
-conteudos=[];
-
+function salvarConteudos(){
+  localStorage.setItem(
+    STORAGE_CONTENTS,
+    JSON.stringify(conteudos)
+  );
 }
 
-
-autoAtivo=
-localStorage.getItem(
-"shopee_turbo_auto_v12"
-)==="true";
-
+function salvarAuto(){
+  localStorage.setItem(
+    STORAGE_AUTO,
+    JSON.stringify(autoConfig)
+  );
 }
 
+/* =========================
+   PLATAFORMA
+========================= */
 
-function salvarDados(){
+function platformClass(platform){
 
-localStorage.setItem(
-"shopee_turbo_produtos_v12",
-JSON.stringify(produtos)
-);
+  if(platform === "Shopee"){
+    return "platform-shopee";
+  }
 
-localStorage.setItem(
-"shopee_turbo_conteudos_v12",
-JSON.stringify(conteudos)
-);
+  if(platform === "Mercado Livre"){
+    return "platform-mercado";
+  }
 
-localStorage.setItem(
-"shopee_turbo_auto_v12",
-autoAtivo?"true":"false"
-);
+  if(platform === "TikTok Shop"){
+    return "platform-tiktok";
+  }
 
+  if(platform === "Amazon"){
+    return "platform-amazon";
+  }
+
+  if(platform === "Magalu"){
+    return "platform-magalu";
+  }
+
+  return "platform-outra";
 }
 
+function platformEmoji(platform){
 
-/* NAVEGAÇÃO */
+  if(platform === "Shopee") return "🟠";
+  if(platform === "Mercado Livre") return "🟡";
+  if(platform === "TikTok Shop") return "⚫";
+  if(platform === "Amazon") return "🔵";
+  if(platform === "Magalu") return "🟢";
 
-function showPage(nome){
-
-document
-.querySelectorAll(".page")
-.forEach(function(p){
-p.classList.remove("active");
-});
-
-var pagina=$("page-"+nome);
-
-if(pagina){
-pagina.classList.add("active");
+  return "🟣";
 }
 
-document
-.querySelectorAll(".nav-btn")
-.forEach(function(btn){
+/* =========================
+   PRODUTOS
+========================= */
 
-btn.classList.remove("active");
+function addProduct(){
 
-if(btn.dataset.page===nome){
-btn.classList.add("active");
+  const name = $("productName").value.trim();
+  const platform = $("productPlatform").value;
+  const category = $("productCategory").value;
+  const price = Number($("productPrice").value);
+  const link = $("productLink").value.trim();
+  const description = $("productDescription").value.trim();
+
+  if(!name){
+    toast("Digite o nome do produto.");
+    $("productName").focus();
+    return;
+  }
+
+  if(!price || price < 0){
+    toast("Digite um preço válido.");
+    $("productPrice").focus();
+    return;
+  }
+
+  if(!link){
+    toast("Cole o link do produto.");
+    $("productLink").focus();
+    return;
+  }
+
+  const produto = {
+    id:Date.now(),
+    name,
+    platform,
+    category,
+    price,
+    link,
+    description,
+    createdAt:new Date().toISOString()
+  };
+
+  produtos.unshift(produto);
+
+  salvarProdutos();
+  renderTudo();
+  limparProduto();
+
+  toast("Produto adicionado! 🛍️");
 }
-
-});
-
-if(nome==="products")renderProducts();
-if(nome==="content"){
-renderContentProducts();
-renderContents();
-}
-if(nome==="links")renderLinks();
-if(nome==="results")renderResults();
-if(nome==="auto")renderAuto();
-if(nome==="vitrine")renderVitrine();
-
-}
-
-
-document
-.querySelectorAll(".nav-btn")
-.forEach(function(btn){
-
-btn.addEventListener(
-"click",
-function(){
-showPage(btn.dataset.page);
-}
-);
-
-});
-
-
-/* PRODUTOS */
 
 function limparProduto(){
 
-$("productName").value="";
-$("productPrice").value="";
-$("productCommission").value="";
-$("productCategory").value="Geral";
-$("productLink").value="";
+  $("productName").value = "";
+  $("productPrice").value = "";
+  $("productLink").value = "";
+  $("productDescription").value = "";
 
 }
 
+function removeProduct(id){
 
-function salvarProduto(){
+  if(!confirm("Excluir este produto?")){
+    return;
+  }
 
-var nome=$("productName").value.trim();
-var preco=$("productPrice").value.trim();
-var comissao=$("productCommission").value.trim();
-var categoria=$("productCategory").value;
-var link=$("productLink").value.trim();
+  produtos = produtos.filter(
+    p => p.id !== id
+  );
 
-if(!nome){
-toast("Digite o nome do produto.");
-return;
+  salvarProdutos();
+  renderTudo();
+
+  toast("Produto excluído.");
 }
-
-if(!preco){
-toast("Digite o preço.");
-return;
-}
-
-produtos.push({
-
-id:Date.now(),
-name:nome,
-price:preco,
-commission:comissao||"0",
-category:categoria,
-link:link
-
-});
-
-salvarDados();
-limparProduto();
-carregarTudo();
-
-toast("Produto salvo! 📦");
-
-}
-
-
-$("saveProductButton").addEventListener(
-"click",
-salvarProduto
-);
-
-
-function excluirProduto(id){
-
-if(!confirm("Deseja excluir este produto?")){
-return;
-}
-
-produtos=produtos.filter(
-function(p){
-return p.id!==id;
-}
-);
-
-salvarDados();
-carregarTudo();
-
-toast("Produto excluído.");
-
-}
-
 
 function renderProducts(){
 
-var area=$("productsList");
+  const area = $("productsList");
 
-if(produtos.length===0){
+  if(!produtos.length){
 
-area.innerHTML=
-'<div class="empty">Nenhum produto cadastrado ainda.</div>';
+    area.innerHTML = `
+      <div class="empty">
+        Você ainda não cadastrou produtos.
+      </div>
+    `;
 
-return;
+    return;
+  }
 
+  area.innerHTML = produtos.map(p => `
+
+    <div class="product">
+
+      <div class="product-top">
+
+        <div>
+          <h3>${escapeHtml(p.name)}</h3>
+
+          <span class="platform ${platformClass(p.platform)}">
+            ${platformEmoji(p.platform)}
+            ${escapeHtml(p.platform)}
+          </span>
+
+          <div style="font-size:11px;color:#888;margin-top:6px">
+            ${escapeHtml(p.category)}
+          </div>
+        </div>
+
+        <button
+          class="danger"
+          onclick="removeProduct(${p.id})"
+        >
+          🗑️
+        </button>
+
+      </div>
+
+      <div class="product-price">
+        ${dinheiro(p.price)}
+      </div>
+
+      ${
+        p.description
+        ?
+        `<div style="font-size:13px;color:#666;margin-top:7px">
+          ${escapeHtml(p.description)}
+        </div>`
+        :
+        ""
+      }
+
+      <a
+        class="product-link"
+        href="${escapeHtml(p.link)}"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        ${escapeHtml(p.link)}
+      </a>
+
+      <button
+        class="secondary"
+        onclick="copyText('${encodeURIComponent(p.link)}')"
+      >
+        📋 Copiar link
+      </button>
+
+    </div>
+
+  `).join("");
 }
 
-area.innerHTML="";
+/* =========================
+   LINKS
+========================= */
 
-produtos.forEach(function(p){
+function renderLinks(){
 
-var div=document.createElement("div");
+  const area = $("linksList");
 
-div.className="product";
+  const comLink = produtos.filter(
+    p => p.link
+  );
 
-div.innerHTML=
+  if(!comLink.length){
 
-'<div class="product-top">'+
+    area.innerHTML = `
+      <div class="empty">
+        Nenhum link cadastrado.
+      </div>
+    `;
 
-'<div>'+
-'<div class="product-name">'+
-escapeHTML(p.name)+
-'</div>'+
+    return;
+  }
 
-'<span class="badge">'+
-escapeHTML(p.category)+
-'</span>'+
-'</div>'+
+  area.innerHTML = comLink.map(p => `
 
-'<div class="product-price">'+
-'R$ '+escapeHTML(p.price)+
-'</div>'+
+    <div style="
+      padding:12px 0;
+      border-bottom:1px solid #eee;
+    ">
 
-'</div>'+
+      <strong>${escapeHtml(p.name)}</strong>
 
-'<div class="product-info">'+
-'Comissão: '+escapeHTML(p.commission)+'%<br>'+
+      <div style="
+        font-size:12px;
+        color:#777;
+        margin:5px 0;
+      ">
+        ${platformEmoji(p.platform)}
+        ${escapeHtml(p.platform)}
+      </div>
 
-(p.link
-?
-'<a href="'+escapeHTML(p.link)+'" target="_blank" rel="noopener">🔗 Abrir link</a>'
-:
-'Sem link cadastrado'
-)+
+      <div class="row">
 
-'</div>'+
+        <button
+          class="secondary"
+          onclick="copyText('${encodeURIComponent(p.link)}')"
+        >
+          📋 Copiar
+        </button>
 
-'<div class="button-row">'+
+        <a
+          class="secondary"
+          href="${escapeHtml(p.link)}"
+          target="_blank"
+          rel="noopener noreferrer"
+          style="text-decoration:none;color:#222"
+        >
+          Abrir
+        </a>
 
-'<button class="btn btn-primary" type="button" onclick="gerarParaProduto('+p.id+')">'+
-'🎬 Criar conteúdo'+
-'</button>'+
+      </div>
 
-'<button class="btn btn-danger" type="button" onclick="excluirProduto('+p.id+')">'+
-'Excluir'+
-'</button>'+
+    </div>
 
-'</div>';
-
-area.appendChild(div);
-
-});
-
+  `).join("");
 }
 
+/* =========================
+   CONTEÚDO
+========================= */
 
-/* CONTEÚDO */
+function updateContentProducts(){
 
-function renderContentProducts(){
+  const select = $("contentProduct");
 
-var select=$("contentProduct");
+  if(!produtos.length){
 
-select.innerHTML="";
+    select.innerHTML =
+      `<option value="">Nenhum produto cadastrado</option>`;
 
-if(produtos.length===0){
+    return;
+  }
 
-var o=document.createElement("option");
+  select.innerHTML = produtos.map(p => `
 
-o.value="";
-o.textContent="Cadastre um produto primeiro";
+    <option value="${p.id}">
+      ${platformEmoji(p.platform)}
+      ${p.name} — ${dinheiro(p.price)}
+    </option>
 
-select.appendChild(o);
-
-return;
-
+  `).join("");
 }
 
-produtos.forEach(function(p){
+function getSelectedProduct(){
 
-var o=document.createElement("option");
+  const id = Number(
+    $("contentProduct").value
+  );
 
-o.value=p.id;
-o.textContent=p.name;
-
-select.appendChild(o);
-
-});
-
+  return produtos.find(
+    p => p.id === id
+  );
 }
 
+function generateScript(){
 
-function gerarParaProduto(id){
+  const p = getSelectedProduct();
 
-showPage("content");
+  if(!p){
+    toast("Cadastre um produto primeiro.");
+    return;
+  }
 
-$("contentProduct").value=String(id);
+  const duration =
+    Number($("contentDuration").value);
 
-}
+  let text = "";
 
+  if(duration === 15){
 
-function produtoSelecionado(){
-
-var id=Number(
-$("contentProduct").value
-);
-
-return produtos.find(
-function(p){
-return p.id===id;
-}
-);
-
-}
-
-
-/* GERADOR MELHORADO */
-
-function gerarConteudo(){
-
-var p=produtoSelecionado();
-
-if(!p){
-
-toast("Cadastre um produto primeiro.");
-
-return;
-
-}
-
-var tipo=$("contentType").value;
-
-var texto="";
-
-
-if(tipo==="15"){
-
-texto=
-`🎬 ROTEIRO — 15 SEGUNDOS
+    text = `
+🎬 ROTEIRO — 15 SEGUNDOS
 
 🔥 GANCHO:
-"Quer deixar sua casa muito mais bonita sem gastar uma fortuna? 😍"
-
-📦 PRODUTO:
-"Olha esse ${p.name}!"
-
-✨ DESENVOLVIMENTO:
-"Perfeito para dar aquele toque especial na decoração e deixar tudo muito mais bonito. E o melhor: você encontra por apenas R$ ${p.price}."
-
-🚀 CTA:
-"Gostou? Corre conferir o preço pelo link antes que mude!"
-
-🔗 LINK:
-${p.link||"Cole seu link de afiliado aqui."}`;
-
-}
-
-
-if(tipo==="30"){
-
-texto=
-`🎬 ROTEIRO — 30 SEGUNDOS
-
-🔥 GANCHO:
-"Se você gosta de deixar sua casa bonita, olha esse achadinho! 😍"
+"Olha esse achadinho que eu encontrei! 😍"
 
 📦 PRODUTO:
 "${p.name}"
 
 ✨ DESENVOLVIMENTO:
-"Eu encontrei esse produto e achei uma opção linda e prática para transformar o ambiente."
+"É uma opção linda, prática e que pode fazer toda diferença no dia a dia."
 
 💰 PREÇO:
-"Ele está por R$ ${p.price}."
-
-🎯 BENEFÍCIO:
-"É aquele tipo de produto que deixa o espaço muito mais bonito sem precisar gastar uma fortuna."
+"Por apenas ${dinheiro(p.price)}."
 
 🚀 CTA:
-"Quer conferir? O link está aqui. Aproveita para ver se o preço ainda está disponível!"
+"Gostou? Corre conferir pelo link antes que o preço mude!"
+
+🛍️ PLATAFORMA:
+${platformEmoji(p.platform)} ${p.platform}
 
 🔗 LINK:
-${p.link||"Cole seu link de afiliado aqui."}`;
+${p.link}
+`.trim();
 
-}
+  }else if(duration === 30){
 
-
-if(tipo==="60"){
-
-texto=
-`🎬 ROTEIRO — 60 SEGUNDOS
+    text = `
+🎬 ROTEIRO — 30 SEGUNDOS
 
 🔥 GANCHO:
-"Você também ama aqueles achadinhos que deixam a casa com cara de Pinterest? Então olha isso! 😍"
+"Você precisa ver esse achadinho! 😍"
 
 📦 PRODUTO:
 "${p.name}"
 
 ✨ APRESENTAÇÃO:
-"Eu encontrei esse produto e achei uma opção muito interessante para quem quer deixar o ambiente mais bonito e aconchegante."
+"Eu encontrei esse produto e achei uma opção muito interessante para quem procura praticidade e bom custo-benefício."
 
-💡 BENEFÍCIOS:
-"Além de ser bonito, ele pode ajudar a transformar aquele cantinho que está sem graça e dar um toque especial na decoração."
+💡 BENEFÍCIO:
+"${p.description || "Uma opção prática para facilitar o dia a dia e deixar tudo ainda melhor."}"
 
 💰 PREÇO:
-"E o melhor: atualmente está por R$ ${p.price}."
-
-🎯 CONVENCIMENTO:
-"É uma opção para quem quer mudar o ambiente sem precisar fazer uma grande reforma ou gastar muito."
+"Ele está por ${dinheiro(p.price)}."
 
 🚀 CTA:
-"Se você gostou, confira o produto pelo link e veja o preço atual antes que ele mude."
+"Se você gostou, confira agora pelo link e veja se ainda está nesse preço!"
+
+🛍️ ${platformEmoji(p.platform)} ${p.platform}
 
 🔗 LINK:
-${p.link||"Cole seu link de afiliado aqui."}`;
+${p.link}
+`.trim();
 
+  }else{
+
+    text = `
+🎬 ROTEIRO — 60 SEGUNDOS
+
+🔥 GANCHO:
+"Pare tudo e olha esse achadinho que eu encontrei! 😍"
+
+📦 PRODUTO:
+"${p.name}"
+
+✨ APRESENTAÇÃO:
+"Se você está procurando algo bonito, útil e que realmente possa facilitar sua rotina, vale a pena conhecer esse produto."
+
+💡 BENEFÍCIOS:
+"${p.description || "Ele pode ser uma ótima opção para quem busca praticidade, organização e um bom custo-benefício."}"
+
+💰 PREÇO:
+"Atualmente ele está por ${dinheiro(p.price)}."
+
+🎯 POR QUE VALE A PENA:
+"É aquele tipo de produto que pode resolver uma necessidade do dia a dia sem precisar gastar muito."
+
+🚀 CTA:
+"Gostou? Então aproveita para conferir o produto pelo link e veja o preço atual antes que ele mude."
+
+🛍️ PLATAFORMA:
+${platformEmoji(p.platform)} ${p.platform}
+
+🔗 LINK:
+${p.link}
+`.trim();
+
+  }
+
+  $("contentResult").value = text;
+
+  conteudos.unshift({
+    id:Date.now(),
+    productId:p.id,
+    type:"roteiro",
+    duration,
+    text,
+    createdAt:new Date().toISOString()
+  });
+
+  salvarConteudos();
+
+  renderTudo();
+
+  toast("Roteiro criado! 🎬");
 }
 
+function generateCaption(){
 
-if(tipo==="caption"){
+  const p = getSelectedProduct();
 
-texto=
-`📝 LEGENDA
+  if(!p){
+    toast("Cadastre um produto primeiro.");
+    return;
+  }
 
-✨ ACHADINHO DO DIA!
+  const caption = `
+🔥 ACHADINHO DO DIA!
 
-Olha só esse ${p.name}! 😍
+${p.name}
 
-Uma opção linda e prática para deixar seu ambiente ainda mais especial.
+✨ ${p.description || "Uma opção incrível para facilitar seu dia a dia."}
 
-💰 Preço: R$ ${p.price}
-📦 Categoria: ${p.category}
+💰 Por ${dinheiro(p.price)}
 
-🔥 Se você gostou, vale a pena conferir o preço atual pelo link!
+🛍️ ${platformEmoji(p.platform)} ${p.platform}
 
-👉 ACESSE O LINK E CONFIRA!
+👇 Confira pelo link:
+${p.link}
 
-🔗 ${p.link||"Cole seu link aqui."}
+#achadinhos #ofertas #promocao #comprinhas #dicas #achadinho #vitrine #VITRA
+`.trim();
 
-#shopee
-#shopeeachados
-#achadinhos
-#achadinhosshopee
-#ofertas
-#promoção
-#comprinhas
-#dicasdecompras
-#casa
-#decoracao
-#afiliados
-#rendaextra
-#viral
-#fyp`;
+  $("contentResult").value = caption;
 
+  conteudos.unshift({
+    id:Date.now(),
+    productId:p.id,
+    type:"legenda",
+    text:caption,
+    createdAt:new Date().toISOString()
+  });
+
+  salvarConteudos();
+
+  renderTudo();
+
+  toast("Legenda criada! 📝");
 }
 
+function copyText(encoded){
 
-conteudoAtual=texto;
+  const text =
+    decodeURIComponent(encoded);
 
-$("generatedText").textContent=texto;
-
-$("generatedContent")
-.classList.remove("hidden");
-
+  navigator.clipboard.writeText(text)
+    .then(()=>{
+      toast("Copiado! 📋");
+    })
+    .catch(()=>{
+      prompt("Copie o texto:",text);
+    });
 }
 
-
-/* BOTÃO GERAR */
-
-$("generateButton").addEventListener(
-"click",
-gerarConteudo
-);
-
-
-/* COPIAR */
-
-$("copyContentButton").addEventListener(
-"click",
-function(){
-
-if(!conteudoAtual){
-return;
-}
-
-if(navigator.clipboard){
-
-navigator.clipboard
-.writeText(conteudoAtual)
-.then(function(){
-
-toast("Conteúdo copiado! 📋");
-
-})
-.catch(function(){
-
-toast("Não foi possível copiar.");
-
-});
-
-}else{
-
-toast("Selecione o texto e copie.");
-
-}
-
-}
-);
-
-
-/* SALVAR CONTEÚDO */
-
-$("saveContentButton").addEventListener(
-"click",
-function(){
-
-if(!conteudoAtual){
-return;
-}
-
-var select=$("contentProduct");
-
-var nomeProduto=
-select.options[
-select.selectedIndex
-]?.text||"Produto";
-
-conteudos.unshift({
-
-id:Date.now(),
-product:nomeProduto,
-text:conteudoAtual,
-date:new Date().toLocaleDateString("pt-BR")
-
-});
-
-salvarDados();
-
-renderContents();
-
-atualizarDashboard();
-
-toast("Conteúdo salvo! 💾");
-
-}
-);
-
-
-function renderContents(){
-
-var area=$("contentsList");
-
-if(conteudos.length===0){
-
-area.innerHTML=
-'<div class="empty">Nenhum conteúdo salvo ainda.</div>';
-
-return;
-
-}
-
-area.innerHTML="";
-
-conteudos.forEach(function(c){
-
-var div=document.createElement("div");
-
-div.className="product";
-
-div.innerHTML=
-
-'<span class="content-type">CONTEÚDO SALVO</span>'+
-
-'<strong>'+
-escapeHTML(c.product)+
-'</strong>'+
-
-'<div style="font-size:12px;color:#888;margin-top:5px">'+
-escapeHTML(c.date)+
-'</div>'+
-
-'<div class="content-box">'+
-escapeHTML(c.text)+
-'</div>'+
-
-'<div class="button-row">'+
-
-'<button class="btn btn-secondary" type="button" onclick="copiarSalvo('+c.id+')">'+
-'📋 Copiar'+
-'</button>'+
-
-'</div>';
-
-area.appendChild(div);
-
-});
-
-}
-
-
-function copiarSalvo(id){
-
-var item=conteudos.find(
-function(c){
-return c.id===id;
-}
-);
-
-if(!item)return;
-
-if(navigator.clipboard){
-
-navigator.clipboard
-.writeText(item.text)
-.then(function(){
-toast("Copiado! 📋");
-});
-
-}
-
-}
-
-
-/* LINKS */
-
-function renderLinks(){
-
-var area=$("linksList");
-
-if(produtos.length===0){
-
-area.innerHTML=
-'<div class="empty">Nenhum produto com link ainda.</div>';
-
-return;
-
-}
-
-area.innerHTML="";
-
-produtos.forEach(function(p){
-
-var div=document.createElement("div");
-
-div.style.marginBottom="18px";
-
-div.innerHTML=
-
-'<strong>'+
-escapeHTML(p.name)+
-'</strong>'+
-
-'<div style="font-size:13px;color:#777;margin:7px 0">'+
-
-(p.link
-?escapeHTML(p.link)
-:"Sem link cadastrado")+
-
-'</div>'+
-
-'<div class="button-row">'+
-
-(p.link
-?
-'<a class="btn btn-primary" href="'+escapeHTML(p.link)+'" target="_blank" rel="noopener">🔗 Abrir</a>'
-:"")+
-
-(p.link
-?
-'<button class="btn btn-secondary" type="button" onclick="copiarLink('+p.id+')">📋 Copiar</button>'
-:"")+
-
-'</div>';
-
-area.appendChild(div);
-
-});
-
-}
-
-
-function copiarLink(id){
-
-var p=produtos.find(
-function(x){
-return x.id===id;
-}
-);
-
-if(!p||!p.link){
-
-toast("Produto sem link.");
-
-return;
-
-}
-
-if(navigator.clipboard){
-
-navigator.clipboard
-.writeText(p.link)
-.then(function(){
-toast("Link copiado! 🔗");
-});
-
-}
-
-}
-
-
-/* RESULTADOS */
-
-function calcularComissao(){
-
-var total=0;
-
-produtos.forEach(function(p){
-
-var preco=parseFloat(
-String(p.price)
-.replace(/\./g,"")
-.replace(",",".")
-.replace(/[^\d.]/g,"")
-);
-
-var comissao=parseFloat(
-String(p.commission)
-.replace(",",".")
-.replace(/[^\d.]/g,"")
-);
-
-if(!isNaN(preco)&&!isNaN(comissao){
-
-total+=preco*(comissao/100);
-
-}
-
-});
-
-return total;
-
-}
-
-
-function moeda(v){
-
-return v.toLocaleString(
-"pt-BR",
-{
-style:"currency",
-currency:"BRL"
-}
-);
-
-}
-
-
-function renderResults(){
-
-$("resultProducts").textContent=
-produtos.length;
-
-$("resultContents").textContent=
-conteudos.length;
-
-$("resultLinks").textContent=
-produtos.filter(
-function(p){
-return !!p.link;
-}
-).length;
-
-$("resultViews").textContent="0";
-
-$("estimatedCommission").textContent=
-moeda(calcularComissao());
-
-}
-
-
-/* AUTO */
-
-function renderAuto(){
-
-if(autoAtivo){
-
-$("autoStatus").textContent=
-"🟢 Auto Piloto ativado";
-
-$("autoStatus").style.color=
-"#16a34a";
-
-$("autoToggle").textContent=
-"DESATIVAR AUTO PILOTO";
-
-$("autoToggle").className=
-"btn btn-danger";
-
-}else{
-
-$("autoStatus").textContent=
-"🔴 Auto Piloto desativado";
-
-$("autoStatus").style.color=
-"#e53935";
-
-$("autoToggle").textContent=
-"ATIVAR AUTO PILOTO";
-
-$("autoToggle").className=
-"btn btn-primary";
-
-}
-
-}
-
-
-$("autoToggle").addEventListener(
-"click",
-function(){
-
-autoAtivo=!autoAtivo;
-
-salvarDados();
-
-renderAuto();
-
-toast(
-autoAtivo
-?"Auto Piloto ativado! 🤖"
-:"Auto Piloto desativado."
-);
-
-}
-);
-
-
-/* VITRINE */
+/* =========================
+   VITRINE
+========================= */
 
 function renderVitrine(){
 
-var area=$("vitrineList");
+  const area = $("vitrineList");
 
-if(produtos.length===0){
+  if(!produtos.length){
 
-area.innerHTML=
-'<div class="empty">Cadastre produtos para montar sua vitrine.</div>';
+    area.innerHTML = `
+      <div class="empty">
+        Cadastre produtos para montar sua vitrine.
+      </div>
+    `;
 
-return;
+    return;
+  }
+
+  area.innerHTML = produtos.map(p => `
+
+    <div class="product">
+
+      <span class="platform ${platformClass(p.platform)}">
+        ${platformEmoji(p.platform)}
+        ${escapeHtml(p.platform)}
+      </span>
+
+      <h3 style="margin:10px 0 4px">
+        ${escapeHtml(p.name)}
+      </h3>
+
+      <div class="product-price">
+        ${dinheiro(p.price)}
+      </div>
+
+      <p style="font-size:13px;color:#777">
+        ${escapeHtml(
+          p.description ||
+          "Confira este produto na plataforma."
+        )}
+      </p>
+
+    </div>
+
+  `).join("");
+}
+
+/*
+  Transformamos os dados públicos em texto codificado.
+  Isso NÃO é segurança.
+  É apenas uma forma prática de colocar os produtos
+  no link público sem precisar de banco de dados.
+*/
+
+function encodeBase64Url(text){
+
+  const bytes =
+    new TextEncoder().encode(text);
+
+  let binary = "";
+
+  bytes.forEach(
+    b => binary += String.fromCharCode(b)
+  );
+
+  return btoa(binary)
+    .replace(/\+/g,"-")
+    .replace(/\//g,"_")
+    .replace(/=/g,"");
+}
+
+function decodeBase64Url(value){
+
+  try{
+
+    value = value
+      .replace(/-/g,"+")
+      .replace(/_/g,"/");
+
+    while(value.length % 4){
+      value += "=";
+    }
+
+    const binary = atob(value);
+
+    const bytes =
+      Uint8Array.from(
+        binary,
+        c => c.charCodeAt(0)
+      );
+
+    return new TextDecoder().decode(bytes);
+
+  }catch(e){
+
+    return null;
+  }
+}
+
+function generatePublicStore(){
+
+  if(!produtos.length){
+
+    toast("Cadastre pelo menos um produto.");
+    return;
+  }
+
+  const publicProducts =
+    produtos.map(p => ({
+      name:p.name,
+      platform:p.platform,
+      category:p.category,
+      price:p.price,
+      link:p.link,
+      description:p.description
+    }));
+
+  const json =
+    JSON.stringify(publicProducts);
+
+  const encoded =
+    encodeBase64Url(json);
+
+  const url =
+    location.origin +
+    location.pathname.replace(
+      "shopee_turbo_final.html",
+      ""
+    ) +
+    "?vitrine=" +
+    encoded;
+
+  $("storeLink").value = url;
+  $("storeLinkArea").classList.remove("hidden");
+
+  $("openStoreButton").onclick = ()=>{
+    window.open(
+      url,
+      "_blank",
+      "noopener,noreferrer"
+    );
+  };
+
+  $("copyStoreButton").onclick = ()=>{
+    navigator.clipboard.writeText(url)
+      .then(()=>{
+        toast("Link da vitrine copiado! 🛒");
+      })
+      .catch(()=>{
+        $("storeLink").select();
+        document.execCommand("copy");
+        toast("Link copiado! 🛒");
+      });
+  };
+
+  toast("Vitrine pública criada! 🚀");
+}
+
+/* =========================
+   VITRINE PÚBLICA
+========================= */
+
+function showPublicStore(encoded){
+
+  const json =
+    decodeBase64Url(encoded);
+
+  if(!json){
+
+    document.body.innerHTML = `
+      <div style="
+        padding:40px 20px;
+        font-family:Arial;
+        text-align:center;
+      ">
+        <h1>VITRA</h1>
+        <p>Não foi possível carregar esta vitrine.</p>
+      </div>
+    `;
+
+    return;
+  }
+
+  let publicProducts;
+
+  try{
+    publicProducts = JSON.parse(json);
+  }catch(e){
+    publicProducts = [];
+  }
+
+  if(!Array.isArray(publicProducts)){
+    publicProducts = [];
+  }
+
+  document.body.innerHTML = `
+
+    <div class="public-store">
+
+      <header class="store-head">
+
+        <div class="store-logo">
+          VITRA
+        </div>
+
+        <p>
+          Tudo que você encontra. Em um só lugar.
+        </p>
+
+      </header>
+
+      <main class="store-products">
+
+        <h2 style="
+          margin:5px 0 15px;
+          font-size:20px;
+        ">
+          🛍️ Achadinhos
+        </h2>
+
+        ${
+          publicProducts.length
+          ?
+          publicProducts.map(p => `
+
+            <article class="store-product">
+
+              <span class="platform ${platformClass(p.platform)}">
+                ${platformEmoji(p.platform)}
+                ${escapeHtml(p.platform)}
+              </span>
+
+              <h2>
+                ${escapeHtml(p.name)}
+              </h2>
+
+              <div class="store-price">
+                ${dinheiro(p.price)}
+              </div>
+
+              <p style="
+                color:#666;
+                font-size:13px;
+                line-height:1.5;
+              ">
+                ${escapeHtml(
+                  p.description ||
+                  "Confira este produto."
+                )}
+              </p>
+
+              <div style="
+                font-size:12px;
+                color:#888;
+              ">
+                ${escapeHtml(p.category || "Geral")}
+              </div>
+
+              <a
+                class="buy"
+                href="${escapeHtml(p.link)}"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                🛒 COMPRAR
+              </a>
+
+            </article>
+
+          `).join("")
+          :
+          `
+            <div class="store-product">
+              <p>Nenhum produto disponível.</p>
+            </div>
+          `
+        }
+
+      </main>
+
+      <footer class="store-footer">
+        Vitrine criada com VITRA 🚀
+      </footer>
+
+    </div>
+
+  `;
+}
+
+/* =========================
+   AUTO
+========================= */
+
+function renderAuto(){
+
+  $("autoTime").value =
+    autoConfig.time || "09:00";
+
+  $("autoEnabled").checked =
+    !!autoConfig.enabled;
+
+  $("autoStatus").textContent =
+    autoConfig.enabled
+    ? "🚀 Rotina ativada para " + autoConfig.time
+    : "⏸️ Rotina desativada.";
 
 }
 
-area.innerHTML="";
+/* =========================
+   DASHBOARD
+========================= */
 
-produtos.forEach(function(p){
+function renderDashboard(){
 
-var div=document.createElement("div");
+  $("totalProducts").textContent =
+    produtos.length;
 
-div.className="product";
+  $("totalLinks").textContent =
+    produtos.filter(p => p.link).length;
 
-div.innerHTML=
+  $("totalContents").textContent =
+    conteudos.length;
 
-'<div class="product-name">'+
-escapeHTML(p.name)+
-'</div>'+
+  $("totalAuto").textContent =
+    autoConfig.enabled ? "ON" : "OFF";
 
-'<div class="product-price" style="margin-top:8px">'+
-'R$ '+escapeHTML(p.price)+
-'</div>'+
+  $("resultClicks").textContent =
+    "0";
 
-'<span class="badge">'+
-escapeHTML(p.category)+
-'</span>'+
+  $("resultSales").textContent =
+    "0";
+}
 
-(p.link
-?
-'<div class="button-row">'+
-'<a class="btn btn-primary" href="'+escapeHTML(p.link)+'" target="_blank" rel="noopener">🛍️ Ver produto</a>'+
-'</div>'
-:"");
+/* =========================
+   RENDER
+========================= */
 
-area.appendChild(div);
+function renderTudo(){
 
-});
+  renderDashboard();
+  renderProducts();
+  renderLinks();
+  updateContentProducts();
+  renderVitrine();
+  renderAuto();
 
 }
 
+/* =========================
+   NAVEGAÇÃO
+========================= */
 
-/* DASHBOARD */
+function openPage(page){
 
-function atualizarDashboard(){
+  document.querySelectorAll(".page")
+    .forEach(el=>{
+      el.classList.add("hidden");
+    });
 
-$("statProducts").textContent=
-produtos.length;
+  const target =
+    $("page-" + page);
 
-$("statContents").textContent=
-conteudos.length;
+  if(target){
+    target.classList.remove("hidden");
+  }
 
-$("statLinks").textContent=
-produtos.filter(
-function(p){
-return !!p.link;
-}
-).length;
+  document.querySelectorAll(".nav-btn")
+    .forEach(btn=>{
+      btn.classList.toggle(
+        "active",
+        btn.dataset.page === page
+      );
+    });
 
-$("statVideos").textContent=
-conteudos.length;
-
-renderResults();
-
-}
-
-
-/* SEGURANÇA */
-
-function escapeHTML(valor){
-
-return String(valor||"")
-.replace(/&/g,"&amp;")
-.replace(/</g,"&lt;")
-.replace(/>/g,"&gt;")
-.replace(/"/g,"&quot;")
-.replace(/'/g,"&#039;");
-
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
 }
 
+document.querySelectorAll("[data-page]")
+  .forEach(btn=>{
 
-/* CARREGAR */
+    btn.addEventListener("click",()=>{
 
-function carregarTudo(){
+      const page =
+        btn.dataset.page;
 
-carregarDados();
+      if(page){
+        openPage(page);
+      }
 
-atualizarDashboard();
+    });
 
-renderProducts();
+  });
 
-renderContentProducts();
+/* =========================
+   LOGIN
+========================= */
 
-renderContents();
+function login(){
 
-renderLinks();
+  const senha =
+    $("passwordInput").value;
 
-renderResults();
+  if(senha === "1234"){
 
-renderAuto();
+    sessionStorage.setItem(
+      "vitra_logged",
+      "true"
+    );
 
-renderVitrine();
+    $("loginScreen")
+      .classList.add("hidden");
 
+    $("app")
+      .classList.remove("hidden");
+
+    carregarTudo();
+
+    toast("Login realizado! 🚀");
+
+  }else{
+
+    $("loginError").textContent =
+      "PIN incorreto. O PIN atual é 1234.";
+
+    $("passwordInput").value = "";
+
+    $("passwordInput").focus();
+
+  }
 }
 
+$("loginButton")
+  .addEventListener("click",login);
 
-/* INÍCIO */
+$("passwordInput")
+  .addEventListener("keydown",event=>{
+    if(event.key === "Enter"){
+      login();
+    }
+  });
 
-(function(){
+$("logoutButton")
+  .addEventListener("click",()=>{
 
-var logado=
-sessionStorage.getItem(
-"shopee_turbo_logged"
-)==="true";
+    sessionStorage.removeItem(
+      "vitra_logged"
+    );
 
-if(logado){
+    location.reload();
 
-$("loginScreen")
-.classList.add("hidden");
+  });
 
-$("app")
-.classList.remove("hidden");
+/* =========================
+   BOTÕES
+========================= */
 
-carregarTudo();
+$("addProductButton")
+  .addEventListener("click",addProduct);
 
-}else{
+$("clearProductButton")
+  .addEventListener("click",limparProduto);
 
-$("loginScreen")
-.classList.remove("hidden");
+$("generateScriptButton")
+  .addEventListener("click",generateScript);
 
-$("app")
-.classList.add("hidden");
+$("generateCaptionButton")
+  .addEventListener("click",generateCaption);
 
-}
+$("copyContentButton")
+  .addEventListener("click",()=>{
+
+    const text =
+      $("contentResult").value;
+
+    if(!text){
+      toast("Nada para copiar.");
+      return;
+    }
+
+    navigator.clipboard.writeText(text)
+      .then(()=>{
+        toast("Conteúdo copiado! 📋");
+      })
+      .catch(()=>{
+        $("contentResult").select();
+        document.execCommand("copy");
+        toast("Conteúdo copiado! 📋");
+      });
+
+  });
+
+$("generateStoreButton")
+  .addEventListener(
+    "click",
+    generatePublicStore
+  );
+
+$("saveAutoButton")
+  .addEventListener("click",()=>{
+
+    autoConfig = {
+      enabled:$("autoEnabled").checked,
+      time:$("autoTime").value
+    };
+
+    salvarAuto();
+    renderAuto();
+    renderDashboard();
+
+    toast("Rotina salva! 🚀");
+
+  });
+
+/* =========================
+   INICIALIZAÇÃO
+========================= */
+
+(function init(){
+
+  /*
+    Primeiro verificamos se este link é uma
+    VITRINE PÚBLICA.
+  */
+
+  const params =
+    new URLSearchParams(
+      window.location.search
+    );
+
+  const vitrine =
+    params.get("vitrine");
+
+  if(vitrine){
+
+    showPublicStore(vitrine);
+    return;
+
+  }
+
+  /*
+    Caso contrário, abrimos o painel normal.
+  */
+
+  const logged =
+    sessionStorage.getItem(
+      "vitra_logged"
+    ) === "true";
+
+  if(logged){
+
+    $("loginScreen")
+      .classList.add("hidden");
+
+    $("app")
+      .classList.remove("hidden");
+
+    carregarTudo();
+
+  }
 
 })();
 
