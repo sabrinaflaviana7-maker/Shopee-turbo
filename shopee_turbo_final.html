@@ -5,17 +5,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#111111">
 <title>VITRA</title>
-
 <style>
 *{box-sizing:border-box}
 body{margin:0;background:#080810;color:white;font-family:Arial,sans-serif}
 .container{max-width:480px;margin:auto;padding:20px 16px}
-.logo{font-size:56px;font-weight:900;text-align:center;margin:24px 0 6px;
-background:linear-gradient(90deg,#ff7900,#ff168c,#8b32ff,#00cfff,#35e66a);
--webkit-background-clip:text;background-clip:text;color:transparent}
+.logo{font-size:56px;font-weight:900;text-align:center;margin:24px 0 6px;background:linear-gradient(90deg,#ff7900,#ff168c,#8b32ff,#00cfff,#35e66a);-webkit-background-clip:text;background-clip:text;color:transparent}
 .tagline{text-align:center;color:#ddd;margin-bottom:28px}
 .panel{background:#141421;border:1px solid #39394b;border-radius:18px;padding:18px;margin-bottom:16px}
-input,select,textarea{width:100%;padding:13px;margin:7px 0 13px;border-radius:10px;border:1px solid #55556b;background:#080810;color:white;font-size:16px}
+input,select{width:100%;padding:13px;margin:7px 0 13px;border-radius:10px;border:1px solid #55556b;background:#080810;color:white;font-size:16px}
 button{width:100%;padding:14px;border:0;border-radius:11px;background:linear-gradient(90deg,#ff7900,#f000a8,#702cff);color:white;font-size:16px;font-weight:bold;margin:5px 0;cursor:pointer}
 .secondary{background:#28283b;border:1px solid #45455b}
 .hidden{display:none!important}
@@ -27,7 +24,6 @@ button{width:100%;padding:14px;border:0;border-radius:11px;background:linear-gra
 a{color:#55d9ff}
 </style>
 </head>
-
 <body>
 <main class="container">
 
@@ -60,10 +56,10 @@ a{color:#55d9ff}
   <div class="panel">
     <h3>➕ Adicionar plataforma</h3>
     <form id="platformForm">
-      <input id="newPlatform" placeholder="Nome da plataforma" required>
+      <input id="newPlatform" placeholder="Nome da nova plataforma" required>
       <button type="submit">ADICIONAR PLATAFORMA</button>
     </form>
-    <p class="small">Você pode cadastrar novas plataformas quando quiser.</p>
+    <p class="small">Cadastre novas plataformas quando quiser.</p>
   </div>
 
   <div class="panel">
@@ -85,85 +81,90 @@ a{color:#55d9ff}
   <button class="secondary" id="logout">SAIR DO PAINEL</button>
   <p class="small">VITRA © 2026</p>
 </section>
-
 </main>
 
 <script>
-var defaultPlatforms = ["Shopee","Mercado Livre","TikTok Shop","Outra"];
-
-function readStorage(key, fallback) {
-  try {
-    var value = JSON.parse(localStorage.getItem(key));
-    return value === null ? fallback : value;
-  } catch(e) {
-    return fallback;
-  }
+function readStorage(key,fallback){
+  try{
+    var value=JSON.parse(localStorage.getItem(key));
+    return value===null?fallback:value;
+  }catch(e){return fallback;}
 }
 
-var platforms = readStorage("vitra_platforms_v1", defaultPlatforms);
-var products = readStorage("vitra_produtos_v1", []);
+var defaultPlatforms=["Shopee","Mercado Livre","TikTok Shop","Outra"];
+var savedPlatforms=readStorage("vitra_platforms_v1",defaultPlatforms);
+var products=readStorage("vitra_produtos_v1",[]);
 
-if (!Array.isArray(platforms)) platforms = defaultPlatforms.slice();
-if (!Array.isArray(products)) products = [];
+if(!Array.isArray(savedPlatforms)) savedPlatforms=defaultPlatforms.slice();
+if(!Array.isArray(products)) products=[];
 
-defaultPlatforms.forEach(function(name) {
-  if (!platforms.includes(name)) platforms.push(name);
+/* Remove Amazon e Magalu das plataformas salvas */
+var platforms=savedPlatforms.filter(function(name){
+  return typeof name==="string" &&
+    name.toLowerCase()!=="amazon" &&
+    name.toLowerCase()!=="magalu";
 });
 
-function savePlatforms() {
-  localStorage.setItem("vitra_platforms_v1", JSON.stringify(platforms));
+/* Garante as opções principais */
+defaultPlatforms.forEach(function(name){
+  if(!platforms.some(function(p){return p.toLowerCase()===name.toLowerCase();})){
+    platforms.push(name);
+  }
+});
+
+function savePlatforms(){
+  localStorage.setItem("vitra_platforms_v1",JSON.stringify(platforms));
 }
 
-function renderPlatforms() {
-  var area = document.getElementById("platforms");
-  var select = document.getElementById("platformSelect");
+function renderPlatforms(){
+  var area=document.getElementById("platforms");
+  var select=document.getElementById("platformSelect");
+  area.textContent="";
+  select.textContent="";
 
-  area.textContent = "";
-  select.textContent = "";
-
-  platforms.forEach(function(name) {
-    var card = document.createElement("div");
-    card.className = "platform";
-    card.textContent = name;
+  platforms.forEach(function(name){
+    var card=document.createElement("div");
+    card.className="platform";
+    card.textContent=name;
     area.appendChild(card);
 
-    var option = document.createElement("option");
-    option.value = name;
-    option.textContent = name;
+    var option=document.createElement("option");
+    option.value=name;
+    option.textContent=name;
     select.appendChild(option);
   });
 }
 
-function showDashboard() {
+function showDashboard(){
   document.getElementById("loginScreen").classList.add("hidden");
   document.getElementById("dashboard").classList.remove("hidden");
   renderPlatforms();
   renderProducts();
 }
 
-document.getElementById("loginForm").addEventListener("submit",function(e) {
+document.getElementById("loginForm").addEventListener("submit",function(e){
   e.preventDefault();
-
-  if (document.getElementById("pin").value === "1234") {
+  if(document.getElementById("pin").value==="1234"){
     sessionStorage.setItem("vitra_logged","true");
-    document.getElementById("error").textContent = "";
+    document.getElementById("error").textContent="";
     showDashboard();
-  } else {
-    document.getElementById("error").textContent = "PIN incorreto. Tente novamente.";
+  }else{
+    document.getElementById("error").textContent="PIN incorreto. Tente novamente.";
   }
 });
 
-document.getElementById("platformForm").addEventListener("submit",function(e) {
+document.getElementById("platformForm").addEventListener("submit",function(e){
   e.preventDefault();
+  var field=document.getElementById("newPlatform");
+  var name=field.value.trim();
+  if(!name)return;
 
-  var field = document.getElementById("newPlatform");
-  var name = field.value.trim();
+  if(["amazon","magalu"].includes(name.toLowerCase())){
+    alert("Essa plataforma foi removida. Escolha outra.");
+    return;
+  }
 
-  if (!name) return;
-
-  if (platforms.some(function(p) {
-    return p.toLowerCase() === name.toLowerCase();
-  })) {
+  if(platforms.some(function(p){return p.toLowerCase()===name.toLowerCase();})){
     alert("Essa plataforma já está cadastrada.");
     return;
   }
@@ -171,17 +172,17 @@ document.getElementById("platformForm").addEventListener("submit",function(e) {
   platforms.push(name);
   savePlatforms();
   renderPlatforms();
-  field.value = "";
+  field.value="";
 });
 
-document.getElementById("productForm").addEventListener("submit",function(e) {
+document.getElementById("productForm").addEventListener("submit",function(e){
   e.preventDefault();
 
   products.push({
-    name: document.getElementById("productName").value.trim(),
-    platform: document.getElementById("platformSelect").value,
-    price: document.getElementById("price").value.trim(),
-    link: document.getElementById("link").value.trim()
+    name:document.getElementById("productName").value.trim(),
+    platform:document.getElementById("platformSelect").value,
+    price:document.getElementById("price").value.trim(),
+    link:document.getElementById("link").value.trim()
   });
 
   localStorage.setItem("vitra_produtos_v1",JSON.stringify(products));
@@ -189,60 +190,59 @@ document.getElementById("productForm").addEventListener("submit",function(e) {
   renderProducts();
 });
 
-function renderProducts() {
-  var area = document.getElementById("products");
-  area.textContent = "";
+function renderProducts(){
+  var area=document.getElementById("products");
+  area.textContent="";
 
-  if (!products.length) {
-    area.textContent = "Nenhum produto cadastrado.";
+  if(!products.length){
+    area.textContent="Nenhum produto cadastrado.";
     return;
   }
 
-  products.forEach(function(p,index) {
-    var card = document.createElement("div");
-    card.className = "product";
+  products.forEach(function(p,index){
+    var card=document.createElement("div");
+    card.className="product";
 
-    var title = document.createElement("strong");
-    title.textContent = p.name;
+    var title=document.createElement("strong");
+    title.textContent=p.name;
     card.appendChild(title);
 
-    var info = document.createElement("p");
-    info.textContent = p.platform + (p.price ? " • R$ " + p.price : "");
+    var info=document.createElement("p");
+    info.textContent=p.platform+(p.price?" • R$ "+p.price:"");
     card.appendChild(info);
 
-    if (p.link) {
-      var link = document.createElement("a");
-      link.href = p.link;
-      link.target = "_blank";
-      link.rel = "noopener noreferrer";
-      link.textContent = "Abrir link do produto";
+    if(p.link){
+      var link=document.createElement("a");
+      link.href=p.link;
+      link.target="_blank";
+      link.rel="noopener noreferrer";
+      link.textContent="Abrir link do produto";
       card.appendChild(link);
     }
 
-    var remove = document.createElement("button");
-    remove.className = "secondary";
-    remove.textContent = "Excluir produto";
-    remove.addEventListener("click",function() {
+    var remove=document.createElement("button");
+    remove.className="secondary";
+    remove.textContent="Excluir produto";
+    remove.addEventListener("click",function(){
       products.splice(index,1);
       localStorage.setItem("vitra_produtos_v1",JSON.stringify(products));
       renderProducts();
     });
-
     card.appendChild(remove);
     area.appendChild(card);
   });
 }
 
-document.getElementById("logout").addEventListener("click",function() {
+document.getElementById("logout").addEventListener("click",function(){
   sessionStorage.removeItem("vitra_logged");
   document.getElementById("dashboard").classList.add("hidden");
   document.getElementById("loginScreen").classList.remove("hidden");
-  document.getElementById("pin").value = "";
+  document.getElementById("pin").value="";
 });
 
 savePlatforms();
 
-if (sessionStorage.getItem("vitra_logged") === "true") {
+if(sessionStorage.getItem("vitra_logged")==="true"){
   showDashboard();
 }
 </script>
