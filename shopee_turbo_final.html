@@ -1,2079 +1,257 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#ff6b00">
-<meta name="description" content="VITRA — Tudo que você encontra. Em um só lugar.">
-<title>VITRA</title>
-
-<style>
-*{box-sizing:border-box}
-
-:root{
-  --orange:#ff6b00;
-  --yellow:#ffc400;
-  --blue:#2878ff;
-  --green:#20b86b;
-  --pink:#f43f8f;
-  --purple:#7957ff;
-  --dark:#151515;
-  --gray:#6f6f6f;
-  --light:#f6f6f8;
-  --white:#fff;
-  --border:#e8e8ec;
-}
-
-body{
-  margin:0;
-  font-family:Arial,Helvetica,sans-serif;
-  background:var(--light);
-  color:var(--dark);
-}
-
-button,input,select,textarea{
-  font:inherit;
-}
-
-button{
-  cursor:pointer;
-}
-
-.hidden{
-  display:none!important;
-}
-
-/* LOGIN */
-
-.login-screen{
-  min-height:100vh;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  padding:24px;
-  background:
-    radial-gradient(circle at 10% 10%,rgba(255,196,0,.25),transparent 28%),
-    radial-gradient(circle at 90% 15%,rgba(40,120,255,.2),transparent 30%),
-    radial-gradient(circle at 50% 100%,rgba(244,63,143,.18),transparent 35%),
-    #111;
-}
-
-.login-box{
-  width:100%;
-  max-width:390px;
-  background:#fff;
-  border-radius:28px;
-  padding:32px 24px;
-  text-align:center;
-  box-shadow:0 25px 70px rgba(0,0,0,.35);
-}
-
-.logo{
-  font-size:48px;
-  font-weight:900;
-  letter-spacing:-3px;
-  background:linear-gradient(
-    90deg,
-    var(--orange),
-    var(--yellow),
-    var(--green),
-    var(--blue),
-    var(--pink)
-  );
-  -webkit-background-clip:text;
-  color:transparent;
-}
-
-.tagline{
-  color:#777;
-  margin:4px 0 28px;
-  font-size:14px;
-}
-
-.login-box h2{
-  margin:0 0 8px;
-}
-
-.login-box p{
-  color:#777;
-  font-size:14px;
-}
-
-.login-input{
-  width:100%;
-  padding:15px;
-  border:1px solid var(--border);
-  border-radius:14px;
-  margin:12px 0;
-  outline:none;
-}
-
-.login-input:focus{
-  border-color:var(--orange);
-}
-
-.login-button{
-  width:100%;
-  border:0;
-  padding:15px;
-  border-radius:14px;
-  background:linear-gradient(90deg,var(--orange),var(--pink));
-  color:white;
-  font-weight:800;
-}
-
-.login-error{
-  color:#e53935;
-  min-height:20px;
-  margin-top:10px;
-  font-size:13px;
-}
-
-/* APP */
-
-.app{
-  min-height:100vh;
-  padding-bottom:85px;
-}
-
-.topbar{
-  background:#fff;
-  padding:17px 18px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  position:sticky;
-  top:0;
-  z-index:20;
-  border-bottom:1px solid var(--border);
-}
-
-.top-logo{
-  font-size:28px;
-  font-weight:900;
-  letter-spacing:-2px;
-  background:linear-gradient(
-    90deg,
-    var(--orange),
-    var(--yellow),
-    var(--blue),
-    var(--pink)
-  );
-  -webkit-background-clip:text;
-  color:transparent;
-}
-
-.logout{
-  border:0;
-  background:#f1f1f3;
-  padding:8px 12px;
-  border-radius:10px;
-  font-size:12px;
-}
-
-.container{
-  max-width:760px;
-  margin:auto;
-  padding:18px;
-}
-
-.hero{
-  border-radius:24px;
-  padding:25px;
-  color:#fff;
-  background:
-    radial-gradient(circle at 100% 0%,rgba(255,196,0,.55),transparent 30%),
-    radial-gradient(circle at 0% 100%,rgba(40,120,255,.45),transparent 35%),
-    linear-gradient(135deg,#ff6200,#ed277b);
-  margin-bottom:18px;
-}
-
-.hero h1{
-  margin:0;
-  font-size:28px;
-}
-
-.hero p{
-  margin:8px 0 0;
-  opacity:.92;
-}
-
-.cards{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:12px;
-}
-
-.card{
-  background:#fff;
-  border:1px solid var(--border);
-  border-radius:18px;
-  padding:17px;
-}
-
-.card .icon{
-  font-size:25px;
-}
-
-.card strong{
-  display:block;
-  font-size:22px;
-  margin-top:8px;
-}
-
-.card span{
-  color:#777;
-  font-size:12px;
-}
-
-.section{
-  margin-top:22px;
-}
-
-.section-title{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  margin-bottom:12px;
-}
-
-.section-title h2{
-  margin:0;
-  font-size:19px;
-}
-
-.panel{
-  background:#fff;
-  border:1px solid var(--border);
-  border-radius:20px;
-  padding:18px;
-}
-
-label{
-  display:block;
-  font-size:13px;
-  font-weight:700;
-  margin:12px 0 6px;
-}
-
-input,select,textarea{
-  width:100%;
-  padding:13px;
-  border:1px solid var(--border);
-  border-radius:12px;
-  background:#fff;
-  outline:none;
-}
-
-input:focus,select:focus,textarea:focus{
-  border-color:var(--orange);
-}
-
-textarea{
-  min-height:150px;
-  resize:vertical;
-}
-
-.primary{
-  border:0;
-  background:linear-gradient(90deg,var(--orange),var(--pink));
-  color:#fff;
-  padding:13px 17px;
-  border-radius:12px;
-  font-weight:800;
-}
-
-.secondary{
-  border:1px solid var(--border);
-  background:#fff;
-  padding:12px 15px;
-  border-radius:12px;
-  font-weight:700;
-}
-
-.danger{
-  background:#fff0f0;
-  color:#d22;
-  border:0;
-  padding:9px 11px;
-  border-radius:10px;
-}
-
-.row{
-  display:flex;
-  gap:9px;
-  flex-wrap:wrap;
-}
-
-.product{
-  background:#fff;
-  border:1px solid var(--border);
-  border-radius:18px;
-  padding:15px;
-  margin-bottom:11px;
-}
-
-.product-top{
-  display:flex;
-  justify-content:space-between;
-  gap:10px;
-}
-
-.product h3{
-  margin:0;
-  font-size:16px;
-}
-
-.product-price{
-  font-size:18px;
-  font-weight:900;
-  margin-top:7px;
-}
-
-.platform{
-  display:inline-block;
-  margin-top:8px;
-  padding:5px 9px;
-  border-radius:20px;
-  font-size:11px;
-  font-weight:800;
-}
-
-.platform-shopee{background:#fff0e7;color:#ed5a00}
-.platform-mercado{background:#fff8d7;color:#8b6b00}
-.platform-tiktok{background:#eee;color:#111}
-.platform-amazon{background:#e8f0ff;color:#1459d9}
-.platform-magalu{background:#e6fff3;color:#07854b}
-.platform-outra{background:#f1eaff;color:#6840c9}
-
-.product-link{
-  color:var(--blue);
-  font-size:12px;
-  word-break:break-all;
-  display:block;
-  margin:10px 0;
-}
-
-.empty{
-  text-align:center;
-  color:#777;
-  padding:25px 10px;
-}
-
-.bottom-nav{
-  position:fixed;
-  left:0;
-  right:0;
-  bottom:0;
-  z-index:30;
-  background:#fff;
-  border-top:1px solid var(--border);
-  display:flex;
-  justify-content:center;
-}
-
-.nav-inner{
-  width:100%;
-  max-width:760px;
-  display:grid;
-  grid-template-columns:repeat(6,1fr);
-}
-
-.nav-btn{
-  border:0;
-  background:#fff;
-  padding:9px 3px 10px;
-  color:#777;
-  font-size:10px;
-}
-
-.nav-btn span{
-  display:block;
-  font-size:20px;
-  margin-bottom:3px;
-}
-
-.nav-btn.active{
-  color:var(--orange);
-  font-weight:800;
-}
-
-/* VITRINE */
-
-.public-store{
-  min-height:100vh;
-  background:
-    radial-gradient(circle at 0% 0%,rgba(255,196,0,.16),transparent 28%),
-    radial-gradient(circle at 100% 10%,rgba(40,120,255,.13),transparent 30%),
-    #f7f7f8;
-}
-
-.store-head{
-  padding:35px 20px 25px;
-  text-align:center;
-  background:#fff;
-  border-bottom:1px solid var(--border);
-}
-
-.store-logo{
-  font-size:42px;
-  font-weight:900;
-  letter-spacing:-3px;
-  background:linear-gradient(
-    90deg,
-    var(--orange),
-    var(--yellow),
-    var(--green),
-    var(--blue),
-    var(--pink)
-  );
-  -webkit-background-clip:text;
-  color:transparent;
-}
-
-.store-head p{
-  color:#777;
-  margin:5px 0 0;
-}
-
-.store-products{
-  max-width:700px;
-  margin:auto;
-  padding:18px;
-}
-
-.store-product{
-  background:#fff;
-  border:1px solid var(--border);
-  border-radius:20px;
-  padding:18px;
-  margin-bottom:13px;
-}
-
-.store-product h2{
-  margin:8px 0 5px;
-  font-size:18px;
-}
-
-.store-price{
-  font-size:23px;
-  font-weight:900;
-}
-
-.buy{
-  display:block;
-  width:100%;
-  text-align:center;
-  text-decoration:none;
-  background:linear-gradient(90deg,var(--orange),var(--pink));
-  color:white;
-  padding:13px;
-  border-radius:12px;
-  font-weight:900;
-  margin-top:13px;
-}
-
-.store-footer{
-  text-align:center;
-  padding:20px;
-  color:#888;
-  font-size:12px;
-}
-
-.toast{
-  position:fixed;
-  left:50%;
-  bottom:90px;
-  transform:translateX(-50%);
-  background:#171717;
-  color:#fff;
-  padding:12px 17px;
-  border-radius:12px;
-  z-index:100;
-  font-size:13px;
-  display:none;
-}
-
-@media(max-width:480px){
-  .cards{
-    grid-template-columns:repeat(2,1fr);
-  }
-
-  .hero h1{
-    font-size:24px;
-  }
-
-  .nav-btn{
-    font-size:9px;
-  }
-}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#111111">
+  <title>VITRA</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #080810;
+      color: white;
+      min-height: 100vh;
+    }
+    .container {
+      max-width: 480px;
+      margin: auto;
+      padding: 24px 18px;
+    }
+    .logo {
+      font-size: 58px;
+      font-weight: 900;
+      letter-spacing: 2px;
+      text-align: center;
+      margin: 25px 0 8px;
+      background: linear-gradient(90deg,#ff7900,#ff168c,#8b32ff,#00cfff,#35e66a);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .tagline {
+      text-align: center;
+      color: #ddd;
+      margin-bottom: 30px;
+    }
+    .panel {
+      background: #12121e;
+      border: 1px solid #39394b;
+      border-radius: 20px;
+      padding: 22px;
+      margin-bottom: 18px;
+    }
+    h2 { margin-top: 0; }
+    input, select, textarea {
+      width: 100%;
+      padding: 14px;
+      margin: 8px 0 14px;
+      border-radius: 10px;
+      border: 1px solid #55556b;
+      background: #080810;
+      color: white;
+      font-size: 16px;
+    }
+    button {
+      width: 100%;
+      padding: 14px;
+      border: 0;
+      border-radius: 12px;
+      font-size: 16px;
+      font-weight: bold;
+      color: white;
+      background: linear-gradient(90deg,#ff7900,#f000a8,#702cff);
+      cursor: pointer;
+      margin: 5px 0;
+    }
+    .secondary {
+      background: #242437;
+      border: 1px solid #44445b;
+    }
+    .hidden { display: none !important; }
+    .platforms {
+      display: grid;
+      grid-template-columns: repeat(2,minmax(0,1fr));
+      gap: 10px;
+    }
+    .platform {
+      padding: 15px 5px;
+      text-align: center;
+      border-radius: 12px;
+      background: #202033;
+      border: 1px solid #41415a;
+    }
+    .message {
+      color: #ff8585;
+      min-height: 20px;
+      text-align: center;
+    }
+    .small { color: #aaa; font-size: 13px; text-align: center; }
+  </style>
 </head>
-
 <body>
-
-<!-- LOGIN -->
-<div id="loginScreen" class="login-screen">
-  <div class="login-box">
-    <div class="logo">VITRA</div>
-    <div class="tagline">Tudo que você encontra. Em um só lugar.</div>
-
-    <h2>Bem-vinda 👋</h2>
-    <p>Entre para acessar seu painel.</p>
-
-    <input
-      id="passwordInput"
-      class="login-input"
-      type="password"
-      placeholder="Digite seu PIN"
-      autocomplete="off"
-    >
-
-    <button id="loginButton" class="login-button">
-      ENTRAR
-    </button>
-
-    <div id="loginError" class="login-error"></div>
-  </div>
-</div>
-
-<!-- APP -->
-<div id="app" class="app hidden">
-
-  <header class="topbar">
-    <div class="top-logo">VITRA</div>
-    <button id="logoutButton" class="logout">Sair</button>
-  </header>
-
   <main class="container">
+    <section id="loginScreen">
+      <div class="logo">VITRA</div>
+      <div class="tagline">Tudo que você encontra. Em um só lugar.</div>
 
-    <!-- HOME -->
-    <section id="page-home" class="page">
-
-      <div class="hero">
-        <h1>Olá! 👋</h1>
-        <p>
-          Encontre produtos, crie conteúdos e organize seus links em um só lugar.
-        </p>
+      <div class="panel">
+        <h2>🔐 Acesso ao painel</h2>
+        <p>Entre para organizar seus produtos e links.</p>
+        <form id="loginForm">
+          <input id="pin" type="password" placeholder="Digite seu PIN"
+                 inputmode="numeric" autocomplete="current-password" required>
+          <button type="submit">ENTRAR 🚀</button>
+        </form>
+        <div id="error" class="message"></div>
+        <div class="small">VITRA • Seu espaço de produtos</div>
       </div>
-
-      <div class="cards">
-        <div class="card">
-          <div class="icon">🛍️</div>
-          <strong id="totalProducts">0</strong>
-          <span>Produtos</span>
-        </div>
-
-        <div class="card">
-          <div class="icon">🔗</div>
-          <strong id="totalLinks">0</strong>
-          <span>Links</span>
-        </div>
-
-        <div class="card">
-          <div class="icon">🎬</div>
-          <strong id="totalContents">0</strong>
-          <span>Conteúdos</span>
-        </div>
-
-        <div class="card">
-          <div class="icon">🚀</div>
-          <strong id="totalAuto">0</strong>
-          <span>Automação</span>
-        </div>
-      </div>
-
-      <div class="section">
-        <div class="section-title">
-          <h2>Comece agora</h2>
-        </div>
-
-        <div class="panel">
-          <div class="row">
-            <button class="primary" data-page="products">
-              ➕ Adicionar produto
-            </button>
-
-            <button class="secondary" data-page="content">
-              🎬 Criar conteúdo
-            </button>
-
-            <button class="secondary" data-page="vitrine">
-              🛒 Minha vitrine
-            </button>
-          </div>
-        </div>
-      </div>
-
     </section>
 
-    <!-- PRODUTOS -->
-    <section id="page-products" class="page hidden">
+    <section id="dashboard" class="hidden">
+      <div class="logo">VITRA</div>
+      <div class="tagline">Tudo que você encontra. Em um só lugar.</div>
 
-      <div class="section-title">
-        <h2>🛍️ Produtos</h2>
+      <div class="panel">
+        <h2>Olá! 👋</h2>
+        <p>Bem-vinda ao seu painel VITRA.</p>
+        <h3>🛍️ Suas plataformas</h3>
+        <div class="platforms">
+          <div class="platform">🟠 Shopee</div>
+          <div class="platform">🟡 Mercado Livre</div>
+          <div class="platform">⚫ TikTok Shop</div>
+          <div class="platform">🔵 Amazon</div>
+          <div class="platform">🔷 Magalu</div>
+          <div class="platform">🟣 Outra</div>
+        </div>
       </div>
 
       <div class="panel">
-
-        <label>Nome do produto</label>
-        <input id="productName" placeholder="Ex.: Trio de Vasos Cachepot">
-
-        <label>Plataforma</label>
-        <select id="productPlatform">
-          <option value="Shopee">🟠 Shopee</option>
-          <option value="Mercado Livre">🟡 Mercado Livre</option>
-          <option value="TikTok Shop">⚫ TikTok Shop</option>
-          <option value="Amazon">🔵 Amazon</option>
-          <option value="Magalu">🟢 Magalu</option>
-          <option value="Outra">🟣 Outra</option>
-        </select>
-
-        <label>Categoria</label>
-        <select id="productCategory">
-          <option>Geral</option>
-          <option>Casa</option>
-          <option>Cozinha</option>
-          <option>Organização</option>
-          <option>Decoração</option>
-          <option>Beleza</option>
-          <option>Fitness</option>
-          <option>Tecnologia</option>
-          <option>Pet</option>
-          <option>Infantil</option>
-          <option>Moda</option>
-        </select>
-
-        <label>Preço</label>
-        <input id="productPrice" type="number" step="0.01" placeholder="39.90">
-
-        <label>Link de afiliado</label>
-        <input id="productLink" placeholder="Cole o link aqui">
-
-        <label>Descrição curta</label>
-        <textarea
-          id="productDescription"
-          placeholder="Ex.: Ideal para deixar sua casa mais bonita e organizada."
-        ></textarea>
-
-        <div class="row" style="margin-top:14px">
-          <button id="addProductButton" class="primary">
-            ➕ Adicionar produto
-          </button>
-
-          <button id="clearProductButton" class="secondary">
-            Limpar
-          </button>
-        </div>
-
-      </div>
-
-      <div class="section">
-        <div class="section-title">
-          <h2>Seus produtos</h2>
-        </div>
-
-        <div id="productsList"></div>
-      </div>
-
-    </section>
-
-    <!-- LINKS -->
-    <section id="page-links" class="page hidden">
-
-      <div class="section-title">
-        <h2>🔗 Links</h2>
+        <h3>📦 Cadastrar produto</h3>
+        <form id="productForm">
+          <input id="productName" placeholder="Nome do produto" required>
+          <select id="platform">
+            <option value="Shopee">Shopee</option>
+            <option value="Mercado Livre">Mercado Livre</option>
+            <option value="TikTok Shop">TikTok Shop</option>
+            <option value="Amazon">Amazon</option>
+            <option value="Magalu">Magalu</option>
+            <option value="Outra">Outra</option>
+          </select>
+          <input id="price" placeholder="Preço (ex.: 29,90)">
+          <input id="link" type="url" placeholder="Link de afiliado">
+          <button type="submit">SALVAR PRODUTO</button>
+        </form>
       </div>
 
       <div class="panel">
-        <p style="color:#777;font-size:13px">
-          Todos os seus links de produtos ficam organizados aqui.
-        </p>
-
-        <div id="linksList"></div>
+        <h3>🧺 Meus produtos</h3>
+        <div id="products">Nenhum produto cadastrado.</div>
       </div>
 
+      <button class="secondary" id="logout">SAIR DO PAINEL</button>
+      <p class="small">VITRA © 2026</p>
     </section>
-
-    <!-- CONTEÚDO -->
-    <section id="page-content" class="page hidden">
-
-      <div class="section-title">
-        <h2>🎬 Criar conteúdo</h2>
-      </div>
-
-      <div class="panel">
-
-        <label>Escolha o produto</label>
-        <select id="contentProduct"></select>
-
-        <label>Duração</label>
-        <select id="contentDuration">
-          <option value="15">15 segundos</option>
-          <option value="30">30 segundos</option>
-          <option value="60">60 segundos</option>
-        </select>
-
-        <div class="row" style="margin-top:14px">
-          <button id="generateScriptButton" class="primary">
-            ✨ Gerar roteiro
-          </button>
-
-          <button id="generateCaptionButton" class="secondary">
-            📝 Gerar legenda
-          </button>
-        </div>
-
-      </div>
-
-      <div class="section">
-        <div class="panel">
-          <label>Resultado</label>
-
-          <textarea
-            id="contentResult"
-            placeholder="Seu conteúdo aparecerá aqui..."
-          ></textarea>
-
-          <button
-            id="copyContentButton"
-            class="secondary"
-            style="margin-top:10px"
-          >
-            📋 Copiar
-          </button>
-        </div>
-      </div>
-
-    </section>
-
-    <!-- RESULTADOS -->
-    <section id="page-results" class="page hidden">
-
-      <div class="section-title">
-        <h2>📊 Resultados</h2>
-      </div>
-
-      <div class="cards">
-        <div class="card">
-          <div class="icon">👆</div>
-          <strong id="resultClicks">0</strong>
-          <span>Cliques registrados</span>
-        </div>
-
-        <div class="card">
-          <div class="icon">💰</div>
-          <strong id="resultSales">0</strong>
-          <span>Vendas registradas</span>
-        </div>
-      </div>
-
-      <div class="section">
-        <div class="panel">
-          <p>
-            Esta área será preparada para receber métricas reais das
-            plataformas quando as integrações oficiais forem adicionadas.
-          </p>
-        </div>
-      </div>
-
-    </section>
-
-    <!-- AUTO -->
-    <section id="page-auto" class="page hidden">
-
-      <div class="section-title">
-        <h2>🚀 Auto</h2>
-      </div>
-
-      <div class="panel">
-
-        <h3>Modo automático</h3>
-
-        <p style="color:#777;font-size:13px">
-          Organize sua rotina de conteúdos e produtos.
-        </p>
-
-        <label>Horário preferido</label>
-        <select id="autoTime">
-          <option>09:00</option>
-          <option>12:00</option>
-          <option>18:00</option>
-          <option>21:00</option>
-        </select>
-
-        <label>
-          <input
-            id="autoEnabled"
-            type="checkbox"
-            style="width:auto;margin-right:8px"
-          >
-          Ativar rotina
-        </label>
-
-        <button id="saveAutoButton" class="primary">
-          Salvar rotina
-        </button>
-
-        <p id="autoStatus" style="margin-top:12px;color:#777"></p>
-
-      </div>
-
-    </section>
-
-    <!-- VITRINE -->
-    <section id="page-vitrine" class="page hidden">
-
-      <div class="section-title">
-        <h2>🛒 Minha Vitrine</h2>
-      </div>
-
-      <div class="panel">
-
-        <h3>Vitrine pública</h3>
-
-        <p style="font-size:13px;color:#777">
-          Crie um link para compartilhar seus produtos com outras pessoas.
-        </p>
-
-        <button id="generateStoreButton" class="primary">
-          🔗 Gerar link público
-        </button>
-
-        <div id="storeLinkArea" class="hidden" style="margin-top:14px">
-
-          <label>Seu link público</label>
-
-          <input id="storeLink" readonly>
-
-          <div class="row" style="margin-top:10px">
-
-            <button id="copyStoreButton" class="secondary">
-              📋 Copiar link
-            </button>
-
-            <button id="openStoreButton" class="secondary">
-              👀 Abrir vitrine
-            </button>
-
-          </div>
-
-        </div>
-
-      </div>
-
-      <div class="section">
-        <div class="panel">
-          <h3>Prévia</h3>
-          <div id="vitrineList"></div>
-        </div>
-      </div>
-
-    </section>
-
   </main>
 
-  <nav class="bottom-nav">
-
-    <div class="nav-inner">
-
-      <button class="nav-btn active" data-page="home">
-        <span>🏠</span>
-        Início
-      </button>
-
-      <button class="nav-btn" data-page="products">
-        <span>🛍️</span>
-        Produtos
-      </button>
-
-      <button class="nav-btn" data-page="links">
-        <span>🔗</span>
-        Links
-      </button>
-
-      <button class="nav-btn" data-page="content">
-        <span>🎬</span>
-        Conteúdo
-      </button>
-
-      <button class="nav-btn" data-page="results">
-        <span>📊</span>
-        Resultados
-      </button>
-
-      <button class="nav-btn" data-page="vitrine">
-        <span>🛒</span>
-        Vitrine
-      </button>
-
-    </div>
-
-  </nav>
-
-</div>
-
-<div id="toast" class="toast"></div>
-
-<!-- JAVASCRIPT -->
-
-<script>
-
-"use strict";
-
-/* =========================
-   CONFIGURAÇÃO
-========================= */
-
-const STORAGE_PRODUCTS = "vitra_produtos_v1";
-const STORAGE_CONTENTS = "vitra_conteudos_v1";
-const STORAGE_AUTO = "vitra_auto_v1";
-
-let produtos = [];
-let conteudos = [];
-let autoConfig = {
-  enabled:false,
-  time:"09:00"
-};
-
-function $(id){
-  return document.getElementById(id);
-}
-
-function escapeHtml(value){
-  return String(value ?? "")
-    .replace(/&/g,"&amp;")
-    .replace(/</g,"&lt;")
-    .replace(/>/g,"&gt;")
-    .replace(/"/g,"&quot;")
-    .replace(/'/g,"&#039;");
-}
-
-function dinheiro(value){
-  const n = Number(value) || 0;
-
-  return n.toLocaleString("pt-BR",{
-    style:"currency",
-    currency:"BRL"
-  });
-}
-
-function toast(message){
-  const el = $("toast");
-
-  el.textContent = message;
-  el.style.display = "block";
-
-  clearTimeout(window.__toastTimer);
-
-  window.__toastTimer = setTimeout(()=>{
-    el.style.display = "none";
-  },2500);
-}
-
-/* =========================
-   SALVAR / CARREGAR
-========================= */
-
-function carregarTudo(){
-
-  try{
-    produtos = JSON.parse(
-      localStorage.getItem(STORAGE_PRODUCTS) || "[]"
-    );
-  }catch(e){
-    produtos = [];
-  }
-
-  try{
-    conteudos = JSON.parse(
-      localStorage.getItem(STORAGE_CONTENTS) || "[]"
-    );
-  }catch(e){
-    conteudos = [];
-  }
-
-  try{
-    autoConfig = JSON.parse(
-      localStorage.getItem(STORAGE_AUTO) ||
-      '{"enabled":false,"time":"09:00"}'
-    );
-  }catch(e){
-    autoConfig = {
-      enabled:false,
-      time:"09:00"
-    };
-  }
-
-  renderTudo();
-}
-
-function salvarProdutos(){
-  localStorage.setItem(
-    STORAGE_PRODUCTS,
-    JSON.stringify(produtos)
-  );
-}
-
-function salvarConteudos(){
-  localStorage.setItem(
-    STORAGE_CONTENTS,
-    JSON.stringify(conteudos)
-  );
-}
-
-function salvarAuto(){
-  localStorage.setItem(
-    STORAGE_AUTO,
-    JSON.stringify(autoConfig)
-  );
-}
-
-/* =========================
-   PLATAFORMA
-========================= */
-
-function platformClass(platform){
-
-  if(platform === "Shopee"){
-    return "platform-shopee";
-  }
-
-  if(platform === "Mercado Livre"){
-    return "platform-mercado";
-  }
-
-  if(platform === "TikTok Shop"){
-    return "platform-tiktok";
-  }
-
-  if(platform === "Amazon"){
-    return "platform-amazon";
-  }
-
-  if(platform === "Magalu"){
-    return "platform-magalu";
-  }
-
-  return "platform-outra";
-}
-
-function platformEmoji(platform){
-
-  if(platform === "Shopee") return "🟠";
-  if(platform === "Mercado Livre") return "🟡";
-  if(platform === "TikTok Shop") return "⚫";
-  if(platform === "Amazon") return "🔵";
-  if(platform === "Magalu") return "🟢";
-
-  return "🟣";
-}
-
-/* =========================
-   PRODUTOS
-========================= */
-
-function addProduct(){
-
-  const name = $("productName").value.trim();
-  const platform = $("productPlatform").value;
-  const category = $("productCategory").value;
-  const price = Number($("productPrice").value);
-  const link = $("productLink").value.trim();
-  const description = $("productDescription").value.trim();
-
-  if(!name){
-    toast("Digite o nome do produto.");
-    $("productName").focus();
-    return;
-  }
-
-  if(!price || price < 0){
-    toast("Digite um preço válido.");
-    $("productPrice").focus();
-    return;
-  }
-
-  if(!link){
-    toast("Cole o link do produto.");
-    $("productLink").focus();
-    return;
-  }
-
-  const produto = {
-    id:Date.now(),
-    name,
-    platform,
-    category,
-    price,
-    link,
-    description,
-    createdAt:new Date().toISOString()
-  };
-
-  produtos.unshift(produto);
-
-  salvarProdutos();
-  renderTudo();
-  limparProduto();
-
-  toast("Produto adicionado! 🛍️");
-}
-
-function limparProduto(){
-
-  $("productName").value = "";
-  $("productPrice").value = "";
-  $("productLink").value = "";
-  $("productDescription").value = "";
-
-}
-
-function removeProduct(id){
-
-  if(!confirm("Excluir este produto?")){
-    return;
-  }
-
-  produtos = produtos.filter(
-    p => p.id !== id
-  );
-
-  salvarProdutos();
-  renderTudo();
-
-  toast("Produto excluído.");
-}
-
-function renderProducts(){
-
-  const area = $("productsList");
-
-  if(!produtos.length){
-
-    area.innerHTML = `
-      <div class="empty">
-        Você ainda não cadastrou produtos.
-      </div>
-    `;
-
-    return;
-  }
-
-  area.innerHTML = produtos.map(p => `
-
-    <div class="product">
-
-      <div class="product-top">
-
-        <div>
-          <h3>${escapeHtml(p.name)}</h3>
-
-          <span class="platform ${platformClass(p.platform)}">
-            ${platformEmoji(p.platform)}
-            ${escapeHtml(p.platform)}
-          </span>
-
-          <div style="font-size:11px;color:#888;margin-top:6px">
-            ${escapeHtml(p.category)}
-          </div>
-        </div>
-
-        <button
-          class="danger"
-          onclick="removeProduct(${p.id})"
-        >
-          🗑️
-        </button>
-
-      </div>
-
-      <div class="product-price">
-        ${dinheiro(p.price)}
-      </div>
-
-      ${
-        p.description
-        ?
-        `<div style="font-size:13px;color:#666;margin-top:7px">
-          ${escapeHtml(p.description)}
-        </div>`
-        :
-        ""
-      }
-
-      <a
-        class="product-link"
-        href="${escapeHtml(p.link)}"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        ${escapeHtml(p.link)}
-      </a>
-
-      <button
-        class="secondary"
-        onclick="copyText('${encodeURIComponent(p.link)}')"
-      >
-        📋 Copiar link
-      </button>
-
-    </div>
-
-  `).join("");
-}
-
-/* =========================
-   LINKS
-========================= */
-
-function renderLinks(){
-
-  const area = $("linksList");
-
-  const comLink = produtos.filter(
-    p => p.link
-  );
-
-  if(!comLink.length){
-
-    area.innerHTML = `
-      <div class="empty">
-        Nenhum link cadastrado.
-      </div>
-    `;
-
-    return;
-  }
-
-  area.innerHTML = comLink.map(p => `
-
-    <div style="
-      padding:12px 0;
-      border-bottom:1px solid #eee;
-    ">
-
-      <strong>${escapeHtml(p.name)}</strong>
-
-      <div style="
-        font-size:12px;
-        color:#777;
-        margin:5px 0;
-      ">
-        ${platformEmoji(p.platform)}
-        ${escapeHtml(p.platform)}
-      </div>
-
-      <div class="row">
-
-        <button
-          class="secondary"
-          onclick="copyText('${encodeURIComponent(p.link)}')"
-        >
-          📋 Copiar
-        </button>
-
-        <a
-          class="secondary"
-          href="${escapeHtml(p.link)}"
-          target="_blank"
-          rel="noopener noreferrer"
-          style="text-decoration:none;color:#222"
-        >
-          Abrir
-        </a>
-
-      </div>
-
-    </div>
-
-  `).join("");
-}
-
-/* =========================
-   CONTEÚDO
-========================= */
-
-function updateContentProducts(){
-
-  const select = $("contentProduct");
-
-  if(!produtos.length){
-
-    select.innerHTML =
-      `<option value="">Nenhum produto cadastrado</option>`;
-
-    return;
-  }
-
-  select.innerHTML = produtos.map(p => `
-
-    <option value="${p.id}">
-      ${platformEmoji(p.platform)}
-      ${p.name} — ${dinheiro(p.price)}
-    </option>
-
-  `).join("");
-}
-
-function getSelectedProduct(){
-
-  const id = Number(
-    $("contentProduct").value
-  );
-
-  return produtos.find(
-    p => p.id === id
-  );
-}
-
-function generateScript(){
-
-  const p = getSelectedProduct();
-
-  if(!p){
-    toast("Cadastre um produto primeiro.");
-    return;
-  }
-
-  const duration =
-    Number($("contentDuration").value);
-
-  let text = "";
-
-  if(duration === 15){
-
-    text = `
-🎬 ROTEIRO — 15 SEGUNDOS
-
-🔥 GANCHO:
-"Olha esse achadinho que eu encontrei! 😍"
-
-📦 PRODUTO:
-"${p.name}"
-
-✨ DESENVOLVIMENTO:
-"É uma opção linda, prática e que pode fazer toda diferença no dia a dia."
-
-💰 PREÇO:
-"Por apenas ${dinheiro(p.price)}."
-
-🚀 CTA:
-"Gostou? Corre conferir pelo link antes que o preço mude!"
-
-🛍️ PLATAFORMA:
-${platformEmoji(p.platform)} ${p.platform}
-
-🔗 LINK:
-${p.link}
-`.trim();
-
-  }else if(duration === 30){
-
-    text = `
-🎬 ROTEIRO — 30 SEGUNDOS
-
-🔥 GANCHO:
-"Você precisa ver esse achadinho! 😍"
-
-📦 PRODUTO:
-"${p.name}"
-
-✨ APRESENTAÇÃO:
-"Eu encontrei esse produto e achei uma opção muito interessante para quem procura praticidade e bom custo-benefício."
-
-💡 BENEFÍCIO:
-"${p.description || "Uma opção prática para facilitar o dia a dia e deixar tudo ainda melhor."}"
-
-💰 PREÇO:
-"Ele está por ${dinheiro(p.price)}."
-
-🚀 CTA:
-"Se você gostou, confira agora pelo link e veja se ainda está nesse preço!"
-
-🛍️ ${platformEmoji(p.platform)} ${p.platform}
-
-🔗 LINK:
-${p.link}
-`.trim();
-
-  }else{
-
-    text = `
-🎬 ROTEIRO — 60 SEGUNDOS
-
-🔥 GANCHO:
-"Pare tudo e olha esse achadinho que eu encontrei! 😍"
-
-📦 PRODUTO:
-"${p.name}"
-
-✨ APRESENTAÇÃO:
-"Se você está procurando algo bonito, útil e que realmente possa facilitar sua rotina, vale a pena conhecer esse produto."
-
-💡 BENEFÍCIOS:
-"${p.description || "Ele pode ser uma ótima opção para quem busca praticidade, organização e um bom custo-benefício."}"
-
-💰 PREÇO:
-"Atualmente ele está por ${dinheiro(p.price)}."
-
-🎯 POR QUE VALE A PENA:
-"É aquele tipo de produto que pode resolver uma necessidade do dia a dia sem precisar gastar muito."
-
-🚀 CTA:
-"Gostou? Então aproveita para conferir o produto pelo link e veja o preço atual antes que ele mude."
-
-🛍️ PLATAFORMA:
-${platformEmoji(p.platform)} ${p.platform}
-
-🔗 LINK:
-${p.link}
-`.trim();
-
-  }
-
-  $("contentResult").value = text;
-
-  conteudos.unshift({
-    id:Date.now(),
-    productId:p.id,
-    type:"roteiro",
-    duration,
-    text,
-    createdAt:new Date().toISOString()
-  });
-
-  salvarConteudos();
-
-  renderTudo();
-
-  toast("Roteiro criado! 🎬");
-}
-
-function generateCaption(){
-
-  const p = getSelectedProduct();
-
-  if(!p){
-    toast("Cadastre um produto primeiro.");
-    return;
-  }
-
-  const caption = `
-🔥 ACHADINHO DO DIA!
-
-${p.name}
-
-✨ ${p.description || "Uma opção incrível para facilitar seu dia a dia."}
-
-💰 Por ${dinheiro(p.price)}
-
-🛍️ ${platformEmoji(p.platform)} ${p.platform}
-
-👇 Confira pelo link:
-${p.link}
-
-#achadinhos #ofertas #promocao #comprinhas #dicas #achadinho #vitrine #VITRA
-`.trim();
-
-  $("contentResult").value = caption;
-
-  conteudos.unshift({
-    id:Date.now(),
-    productId:p.id,
-    type:"legenda",
-    text:caption,
-    createdAt:new Date().toISOString()
-  });
-
-  salvarConteudos();
-
-  renderTudo();
-
-  toast("Legenda criada! 📝");
-}
-
-function copyText(encoded){
-
-  const text =
-    decodeURIComponent(encoded);
-
-  navigator.clipboard.writeText(text)
-    .then(()=>{
-      toast("Copiado! 📋");
-    })
-    .catch(()=>{
-      prompt("Copie o texto:",text);
-    });
-}
-
-/* =========================
-   VITRINE
-========================= */
-
-function renderVitrine(){
-
-  const area = $("vitrineList");
-
-  if(!produtos.length){
-
-    area.innerHTML = `
-      <div class="empty">
-        Cadastre produtos para montar sua vitrine.
-      </div>
-    `;
-
-    return;
-  }
-
-  area.innerHTML = produtos.map(p => `
-
-    <div class="product">
-
-      <span class="platform ${platformClass(p.platform)}">
-        ${platformEmoji(p.platform)}
-        ${escapeHtml(p.platform)}
-      </span>
-
-      <h3 style="margin:10px 0 4px">
-        ${escapeHtml(p.name)}
-      </h3>
-
-      <div class="product-price">
-        ${dinheiro(p.price)}
-      </div>
-
-      <p style="font-size:13px;color:#777">
-        ${escapeHtml(
-          p.description ||
-          "Confira este produto na plataforma."
-        )}
-      </p>
-
-    </div>
-
-  `).join("");
-}
-
-/*
-  Transformamos os dados públicos em texto codificado.
-  Isso NÃO é segurança.
-  É apenas uma forma prática de colocar os produtos
-  no link público sem precisar de banco de dados.
-*/
-
-function encodeBase64Url(text){
-
-  const bytes =
-    new TextEncoder().encode(text);
-
-  let binary = "";
-
-  bytes.forEach(
-    b => binary += String.fromCharCode(b)
-  );
-
-  return btoa(binary)
-    .replace(/\+/g,"-")
-    .replace(/\//g,"_")
-    .replace(/=/g,"");
-}
-
-function decodeBase64Url(value){
-
-  try{
-
-    value = value
-      .replace(/-/g,"+")
-      .replace(/_/g,"/");
-
-    while(value.length % 4){
-      value += "=";
+  <script>
+    var products = [];
+
+    try {
+      products = JSON.parse(localStorage.getItem("vitra_produtos_v1") || "[]");
+      if (!Array.isArray(products)) products = [];
+    } catch (e) {
+      products = [];
     }
 
-    const binary = atob(value);
+    function showDashboard() {
+      document.getElementById("loginScreen").classList.add("hidden");
+      document.getElementById("dashboard").classList.remove("hidden");
+      renderProducts();
+    }
 
-    const bytes =
-      Uint8Array.from(
-        binary,
-        c => c.charCodeAt(0)
-      );
+    document.getElementById("loginForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      var pin = document.getElementById("pin").value;
+      if (pin === "1234") {
+        sessionStorage.setItem("vitra_logged", "true");
+        document.getElementById("error").textContent = "";
+        showDashboard();
+      } else {
+        document.getElementById("error").textContent = "PIN incorreto. Tente novamente.";
+      }
+    });
 
-    return new TextDecoder().decode(bytes);
+    document.getElementById("productForm").addEventListener("submit", function(e) {
+      e.preventDefault();
 
-  }catch(e){
-
-    return null;
-  }
-}
-
-function generatePublicStore(){
-
-  if(!produtos.length){
-
-    toast("Cadastre pelo menos um produto.");
-    return;
-  }
-
-  const publicProducts =
-    produtos.map(p => ({
-      name:p.name,
-      platform:p.platform,
-      category:p.category,
-      price:p.price,
-      link:p.link,
-      description:p.description
-    }));
-
-  const json =
-    JSON.stringify(publicProducts);
-
-  const encoded =
-    encodeBase64Url(json);
-
-  const url =
-    location.origin +
-    location.pathname.replace(
-      "shopee_turbo_final.html",
-      ""
-    ) +
-    "?vitrine=" +
-    encoded;
-
-  $("storeLink").value = url;
-  $("storeLinkArea").classList.remove("hidden");
-
-  $("openStoreButton").onclick = ()=>{
-    window.open(
-      url,
-      "_blank",
-      "noopener,noreferrer"
-    );
-  };
-
-  $("copyStoreButton").onclick = ()=>{
-    navigator.clipboard.writeText(url)
-      .then(()=>{
-        toast("Link da vitrine copiado! 🛒");
-      })
-      .catch(()=>{
-        $("storeLink").select();
-        document.execCommand("copy");
-        toast("Link copiado! 🛒");
+      products.push({
+        name: document.getElementById("productName").value.trim(),
+        platform: document.getElementById("platform").value,
+        price: document.getElementById("price").value.trim(),
+        link: document.getElementById("link").value.trim()
       });
-  };
 
-  toast("Vitrine pública criada! 🚀");
-}
+      localStorage.setItem("vitra_produtos_v1", JSON.stringify(products));
+      this.reset();
+      renderProducts();
+    });
 
-/* =========================
-   VITRINE PÚBLICA
-========================= */
+    function renderProducts() {
+      var area = document.getElementById("products");
+      area.textContent = "";
 
-function showPublicStore(encoded){
+      if (products.length === 0) {
+        area.textContent = "Nenhum produto cadastrado.";
+        return;
+      }
 
-  const json =
-    decodeBase64Url(encoded);
+      products.forEach(function(p, index) {
+        var card = document.createElement("div");
+        card.className = "panel";
 
-  if(!json){
+        var title = document.createElement("strong");
+        title.textContent = p.name;
+        card.appendChild(title);
 
-    document.body.innerHTML = `
-      <div style="
-        padding:40px 20px;
-        font-family:Arial;
-        text-align:center;
-      ">
-        <h1>VITRA</h1>
-        <p>Não foi possível carregar esta vitrine.</p>
-      </div>
-    `;
+        var details = document.createElement("p");
+        details.textContent = p.platform + (p.price ? " • R$ " + p.price : "");
+        card.appendChild(details);
 
-    return;
-  }
-
-  let publicProducts;
-
-  try{
-    publicProducts = JSON.parse(json);
-  }catch(e){
-    publicProducts = [];
-  }
-
-  if(!Array.isArray(publicProducts)){
-    publicProducts = [];
-  }
-
-  document.body.innerHTML = `
-
-    <div class="public-store">
-
-      <header class="store-head">
-
-        <div class="store-logo">
-          VITRA
-        </div>
-
-        <p>
-          Tudo que você encontra. Em um só lugar.
-        </p>
-
-      </header>
-
-      <main class="store-products">
-
-        <h2 style="
-          margin:5px 0 15px;
-          font-size:20px;
-        ">
-          🛍️ Achadinhos
-        </h2>
-
-        ${
-          publicProducts.length
-          ?
-          publicProducts.map(p => `
-
-            <article class="store-product">
-
-              <span class="platform ${platformClass(p.platform)}">
-                ${platformEmoji(p.platform)}
-                ${escapeHtml(p.platform)}
-              </span>
-
-              <h2>
-                ${escapeHtml(p.name)}
-              </h2>
-
-              <div class="store-price">
-                ${dinheiro(p.price)}
-              </div>
-
-              <p style="
-                color:#666;
-                font-size:13px;
-                line-height:1.5;
-              ">
-                ${escapeHtml(
-                  p.description ||
-                  "Confira este produto."
-                )}
-              </p>
-
-              <div style="
-                font-size:12px;
-                color:#888;
-              ">
-                ${escapeHtml(p.category || "Geral")}
-              </div>
-
-              <a
-                class="buy"
-                href="${escapeHtml(p.link)}"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                🛒 COMPRAR
-              </a>
-
-            </article>
-
-          `).join("")
-          :
-          `
-            <div class="store-product">
-              <p>Nenhum produto disponível.</p>
-            </div>
-          `
+        if (p.link) {
+          var link = document.createElement("a");
+          link.href = p.link;
+          link.target = "_blank";
+          link.rel = "noopener noreferrer";
+          link.textContent = "Abrir link do produto";
+          link.style.color = "#55d9ff";
+          card.appendChild(link);
         }
 
-      </main>
-
-      <footer class="store-footer">
-        Vitrine criada com VITRA 🚀
-      </footer>
-
-    </div>
-
-  `;
-}
-
-/* =========================
-   AUTO
-========================= */
-
-function renderAuto(){
-
-  $("autoTime").value =
-    autoConfig.time || "09:00";
-
-  $("autoEnabled").checked =
-    !!autoConfig.enabled;
-
-  $("autoStatus").textContent =
-    autoConfig.enabled
-    ? "🚀 Rotina ativada para " + autoConfig.time
-    : "⏸️ Rotina desativada.";
-
-}
-
-/* =========================
-   DASHBOARD
-========================= */
-
-function renderDashboard(){
-
-  $("totalProducts").textContent =
-    produtos.length;
-
-  $("totalLinks").textContent =
-    produtos.filter(p => p.link).length;
-
-  $("totalContents").textContent =
-    conteudos.length;
-
-  $("totalAuto").textContent =
-    autoConfig.enabled ? "ON" : "OFF";
-
-  $("resultClicks").textContent =
-    "0";
-
-  $("resultSales").textContent =
-    "0";
-}
-
-/* =========================
-   RENDER
-========================= */
-
-function renderTudo(){
-
-  renderDashboard();
-  renderProducts();
-  renderLinks();
-  updateContentProducts();
-  renderVitrine();
-  renderAuto();
-
-}
-
-/* =========================
-   NAVEGAÇÃO
-========================= */
-
-function openPage(page){
-
-  document.querySelectorAll(".page")
-    .forEach(el=>{
-      el.classList.add("hidden");
-    });
-
-  const target =
-    $("page-" + page);
-
-  if(target){
-    target.classList.remove("hidden");
-  }
-
-  document.querySelectorAll(".nav-btn")
-    .forEach(btn=>{
-      btn.classList.toggle(
-        "active",
-        btn.dataset.page === page
-      );
-    });
-
-  window.scrollTo({
-    top:0,
-    behavior:"smooth"
-  });
-}
-
-document.querySelectorAll("[data-page]")
-  .forEach(btn=>{
-
-    btn.addEventListener("click",()=>{
-
-      const page =
-        btn.dataset.page;
-
-      if(page){
-        openPage(page);
-      }
-
-    });
-
-  });
-
-/* =========================
-   LOGIN
-========================= */
-
-function login(){
-
-  const senha =
-    $("passwordInput").value;
-
-  if(senha === "1234"){
-
-    sessionStorage.setItem(
-      "vitra_logged",
-      "true"
-    );
-
-    $("loginScreen")
-      .classList.add("hidden");
-
-    $("app")
-      .classList.remove("hidden");
-
-    carregarTudo();
-
-    toast("Login realizado! 🚀");
-
-  }else{
-
-    $("loginError").textContent =
-      "PIN incorreto. O PIN atual é 1234.";
-
-    $("passwordInput").value = "";
-
-    $("passwordInput").focus();
-
-  }
-}
-
-$("loginButton")
-  .addEventListener("click",login);
-
-$("passwordInput")
-  .addEventListener("keydown",event=>{
-    if(event.key === "Enter"){
-      login();
-    }
-  });
-
-$("logoutButton")
-  .addEventListener("click",()=>{
-
-    sessionStorage.removeItem(
-      "vitra_logged"
-    );
-
-    location.reload();
-
-  });
-
-/* =========================
-   BOTÕES
-========================= */
-
-$("addProductButton")
-  .addEventListener("click",addProduct);
-
-$("clearProductButton")
-  .addEventListener("click",limparProduto);
-
-$("generateScriptButton")
-  .addEventListener("click",generateScript);
-
-$("generateCaptionButton")
-  .addEventListener("click",generateCaption);
-
-$("copyContentButton")
-  .addEventListener("click",()=>{
-
-    const text =
-      $("contentResult").value;
-
-    if(!text){
-      toast("Nada para copiar.");
-      return;
-    }
-
-    navigator.clipboard.writeText(text)
-      .then(()=>{
-        toast("Conteúdo copiado! 📋");
-      })
-      .catch(()=>{
-        $("contentResult").select();
-        document.execCommand("copy");
-        toast("Conteúdo copiado! 📋");
+        var remove = document.createElement("button");
+        remove.className = "secondary";
+        remove.textContent = "Excluir produto";
+        remove.addEventListener("click", function() {
+          products.splice(index, 1);
+          localStorage.setItem("vitra_produtos_v1", JSON.stringify(products));
+          renderProducts();
+        });
+        card.appendChild(remove);
+        area.appendChild(card);
       });
+    }
 
-  });
+    document.getElementById("logout").addEventListener("click", function() {
+      sessionStorage.removeItem("vitra_logged");
+      document.getElementById("dashboard").classList.add("hidden");
+      document.getElementById("loginScreen").classList.remove("hidden");
+      document.getElementById("pin").value = "";
+    });
 
-$("generateStoreButton")
-  .addEventListener(
-    "click",
-    generatePublicStore
-  );
-
-$("saveAutoButton")
-  .addEventListener("click",()=>{
-
-    autoConfig = {
-      enabled:$("autoEnabled").checked,
-      time:$("autoTime").value
-    };
-
-    salvarAuto();
-    renderAuto();
-    renderDashboard();
-
-    toast("Rotina salva! 🚀");
-
-  });
-
-/* =========================
-   INICIALIZAÇÃO
-========================= */
-
-(function init(){
-
-  /*
-    Primeiro verificamos se este link é uma
-    VITRINE PÚBLICA.
-  */
-
-  const params =
-    new URLSearchParams(
-      window.location.search
-    );
-
-  const vitrine =
-    params.get("vitrine");
-
-  if(vitrine){
-
-    showPublicStore(vitrine);
-    return;
-
-  }
-
-  /*
-    Caso contrário, abrimos o painel normal.
-  */
-
-  const logged =
-    sessionStorage.getItem(
-      "vitra_logged"
-    ) === "true";
-
-  if(logged){
-
-    $("loginScreen")
-      .classList.add("hidden");
-
-    $("app")
-      .classList.remove("hidden");
-
-    carregarTudo();
-
-  }
-
-})();
-
-</script>
-
+    if (sessionStorage.getItem("vitra_logged") === "true") {
+      showDashboard();
+    }
+  </script>
 </body>
 </html>
