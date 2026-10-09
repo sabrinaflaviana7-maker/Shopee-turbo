@@ -1,257 +1,250 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#111111">
-  <title>VITRA</title>
-  <style>
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #080810;
-      color: white;
-      min-height: 100vh;
-    }
-    .container {
-      max-width: 480px;
-      margin: auto;
-      padding: 24px 18px;
-    }
-    .logo {
-      font-size: 58px;
-      font-weight: 900;
-      letter-spacing: 2px;
-      text-align: center;
-      margin: 25px 0 8px;
-      background: linear-gradient(90deg,#ff7900,#ff168c,#8b32ff,#00cfff,#35e66a);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-    }
-    .tagline {
-      text-align: center;
-      color: #ddd;
-      margin-bottom: 30px;
-    }
-    .panel {
-      background: #12121e;
-      border: 1px solid #39394b;
-      border-radius: 20px;
-      padding: 22px;
-      margin-bottom: 18px;
-    }
-    h2 { margin-top: 0; }
-    input, select, textarea {
-      width: 100%;
-      padding: 14px;
-      margin: 8px 0 14px;
-      border-radius: 10px;
-      border: 1px solid #55556b;
-      background: #080810;
-      color: white;
-      font-size: 16px;
-    }
-    button {
-      width: 100%;
-      padding: 14px;
-      border: 0;
-      border-radius: 12px;
-      font-size: 16px;
-      font-weight: bold;
-      color: white;
-      background: linear-gradient(90deg,#ff7900,#f000a8,#702cff);
-      cursor: pointer;
-      margin: 5px 0;
-    }
-    .secondary {
-      background: #242437;
-      border: 1px solid #44445b;
-    }
-    .hidden { display: none !important; }
-    .platforms {
-      display: grid;
-      grid-template-columns: repeat(2,minmax(0,1fr));
-      gap: 10px;
-    }
-    .platform {
-      padding: 15px 5px;
-      text-align: center;
-      border-radius: 12px;
-      background: #202033;
-      border: 1px solid #41415a;
-    }
-    .message {
-      color: #ff8585;
-      min-height: 20px;
-      text-align: center;
-    }
-    .small { color: #aaa; font-size: 13px; text-align: center; }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#111111">
+<title>VITRA</title>
+
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#080810;color:white;font-family:Arial,sans-serif}
+.container{max-width:480px;margin:auto;padding:20px 16px}
+.logo{font-size:56px;font-weight:900;text-align:center;margin:24px 0 6px;
+background:linear-gradient(90deg,#ff7900,#ff168c,#8b32ff,#00cfff,#35e66a);
+-webkit-background-clip:text;background-clip:text;color:transparent}
+.tagline{text-align:center;color:#ddd;margin-bottom:28px}
+.panel{background:#141421;border:1px solid #39394b;border-radius:18px;padding:18px;margin-bottom:16px}
+input,select,textarea{width:100%;padding:13px;margin:7px 0 13px;border-radius:10px;border:1px solid #55556b;background:#080810;color:white;font-size:16px}
+button{width:100%;padding:14px;border:0;border-radius:11px;background:linear-gradient(90deg,#ff7900,#f000a8,#702cff);color:white;font-size:16px;font-weight:bold;margin:5px 0;cursor:pointer}
+.secondary{background:#28283b;border:1px solid #45455b}
+.hidden{display:none!important}
+.platforms{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.platform{background:#202033;border:1px solid #41415a;padding:14px 8px;text-align:center;border-radius:12px;overflow-wrap:anywhere}
+.small{text-align:center;color:#aaa;font-size:13px}
+.message{text-align:center;color:#ff8585;min-height:20px}
+.product{border:1px solid #41415a;padding:13px;border-radius:12px;margin-top:10px;overflow-wrap:anywhere}
+a{color:#55d9ff}
+</style>
 </head>
+
 <body>
-  <main class="container">
-    <section id="loginScreen">
-      <div class="logo">VITRA</div>
-      <div class="tagline">Tudo que você encontra. Em um só lugar.</div>
+<main class="container">
 
-      <div class="panel">
-        <h2>🔐 Acesso ao painel</h2>
-        <p>Entre para organizar seus produtos e links.</p>
-        <form id="loginForm">
-          <input id="pin" type="password" placeholder="Digite seu PIN"
-                 inputmode="numeric" autocomplete="current-password" required>
-          <button type="submit">ENTRAR 🚀</button>
-        </form>
-        <div id="error" class="message"></div>
-        <div class="small">VITRA • Seu espaço de produtos</div>
-      </div>
-    </section>
+<section id="loginScreen">
+  <div class="logo">VITRA</div>
+  <div class="tagline">Tudo que você encontra. Em um só lugar.</div>
+  <div class="panel">
+    <h2>🔐 Acesso ao painel</h2>
+    <p>Entre para organizar seus produtos e links.</p>
+    <form id="loginForm">
+      <input id="pin" type="password" placeholder="Digite seu PIN" inputmode="numeric" required>
+      <button type="submit">ENTRAR 🚀</button>
+    </form>
+    <div id="error" class="message"></div>
+    <p class="small">VITRA • Seu espaço de produtos</p>
+  </div>
+</section>
 
-    <section id="dashboard" class="hidden">
-      <div class="logo">VITRA</div>
-      <div class="tagline">Tudo que você encontra. Em um só lugar.</div>
+<section id="dashboard" class="hidden">
+  <div class="logo">VITRA</div>
+  <div class="tagline">Tudo que você encontra. Em um só lugar.</div>
 
-      <div class="panel">
-        <h2>Olá! 👋</h2>
-        <p>Bem-vinda ao seu painel VITRA.</p>
-        <h3>🛍️ Suas plataformas</h3>
-        <div class="platforms">
-          <div class="platform">🟠 Shopee</div>
-          <div class="platform">🟡 Mercado Livre</div>
-          <div class="platform">⚫ TikTok Shop</div>
-          <div class="platform">🔵 Amazon</div>
-          <div class="platform">🔷 Magalu</div>
-          <div class="platform">🟣 Outra</div>
-        </div>
-      </div>
+  <div class="panel">
+    <h2>Olá! 👋</h2>
+    <p>Bem-vinda ao seu painel VITRA.</p>
+    <h3>🛍️ Suas plataformas</h3>
+    <div id="platforms" class="platforms"></div>
+  </div>
 
-      <div class="panel">
-        <h3>📦 Cadastrar produto</h3>
-        <form id="productForm">
-          <input id="productName" placeholder="Nome do produto" required>
-          <select id="platform">
-            <option value="Shopee">Shopee</option>
-            <option value="Mercado Livre">Mercado Livre</option>
-            <option value="TikTok Shop">TikTok Shop</option>
-            <option value="Amazon">Amazon</option>
-            <option value="Magalu">Magalu</option>
-            <option value="Outra">Outra</option>
-          </select>
-          <input id="price" placeholder="Preço (ex.: 29,90)">
-          <input id="link" type="url" placeholder="Link de afiliado">
-          <button type="submit">SALVAR PRODUTO</button>
-        </form>
-      </div>
+  <div class="panel">
+    <h3>➕ Adicionar plataforma</h3>
+    <form id="platformForm">
+      <input id="newPlatform" placeholder="Nome da plataforma" required>
+      <button type="submit">ADICIONAR PLATAFORMA</button>
+    </form>
+    <p class="small">Você pode cadastrar novas plataformas quando quiser.</p>
+  </div>
 
-      <div class="panel">
-        <h3>🧺 Meus produtos</h3>
-        <div id="products">Nenhum produto cadastrado.</div>
-      </div>
+  <div class="panel">
+    <h3>📦 Cadastrar produto</h3>
+    <form id="productForm">
+      <input id="productName" placeholder="Nome do produto" required>
+      <select id="platformSelect"></select>
+      <input id="price" placeholder="Preço (ex.: 29,90)">
+      <input id="link" type="url" placeholder="Link do produto ou afiliado">
+      <button type="submit">SALVAR PRODUTO</button>
+    </form>
+  </div>
 
-      <button class="secondary" id="logout">SAIR DO PAINEL</button>
-      <p class="small">VITRA © 2026</p>
-    </section>
-  </main>
+  <div class="panel">
+    <h3>🧺 Meus produtos</h3>
+    <div id="products">Nenhum produto cadastrado.</div>
+  </div>
 
-  <script>
-    var products = [];
+  <button class="secondary" id="logout">SAIR DO PAINEL</button>
+  <p class="small">VITRA © 2026</p>
+</section>
 
-    try {
-      products = JSON.parse(localStorage.getItem("vitra_produtos_v1") || "[]");
-      if (!Array.isArray(products)) products = [];
-    } catch (e) {
-      products = [];
+</main>
+
+<script>
+var defaultPlatforms = ["Shopee","Mercado Livre","TikTok Shop","Outra"];
+
+function readStorage(key, fallback) {
+  try {
+    var value = JSON.parse(localStorage.getItem(key));
+    return value === null ? fallback : value;
+  } catch(e) {
+    return fallback;
+  }
+}
+
+var platforms = readStorage("vitra_platforms_v1", defaultPlatforms);
+var products = readStorage("vitra_produtos_v1", []);
+
+if (!Array.isArray(platforms)) platforms = defaultPlatforms.slice();
+if (!Array.isArray(products)) products = [];
+
+defaultPlatforms.forEach(function(name) {
+  if (!platforms.includes(name)) platforms.push(name);
+});
+
+function savePlatforms() {
+  localStorage.setItem("vitra_platforms_v1", JSON.stringify(platforms));
+}
+
+function renderPlatforms() {
+  var area = document.getElementById("platforms");
+  var select = document.getElementById("platformSelect");
+
+  area.textContent = "";
+  select.textContent = "";
+
+  platforms.forEach(function(name) {
+    var card = document.createElement("div");
+    card.className = "platform";
+    card.textContent = name;
+    area.appendChild(card);
+
+    var option = document.createElement("option");
+    option.value = name;
+    option.textContent = name;
+    select.appendChild(option);
+  });
+}
+
+function showDashboard() {
+  document.getElementById("loginScreen").classList.add("hidden");
+  document.getElementById("dashboard").classList.remove("hidden");
+  renderPlatforms();
+  renderProducts();
+}
+
+document.getElementById("loginForm").addEventListener("submit",function(e) {
+  e.preventDefault();
+
+  if (document.getElementById("pin").value === "1234") {
+    sessionStorage.setItem("vitra_logged","true");
+    document.getElementById("error").textContent = "";
+    showDashboard();
+  } else {
+    document.getElementById("error").textContent = "PIN incorreto. Tente novamente.";
+  }
+});
+
+document.getElementById("platformForm").addEventListener("submit",function(e) {
+  e.preventDefault();
+
+  var field = document.getElementById("newPlatform");
+  var name = field.value.trim();
+
+  if (!name) return;
+
+  if (platforms.some(function(p) {
+    return p.toLowerCase() === name.toLowerCase();
+  })) {
+    alert("Essa plataforma já está cadastrada.");
+    return;
+  }
+
+  platforms.push(name);
+  savePlatforms();
+  renderPlatforms();
+  field.value = "";
+});
+
+document.getElementById("productForm").addEventListener("submit",function(e) {
+  e.preventDefault();
+
+  products.push({
+    name: document.getElementById("productName").value.trim(),
+    platform: document.getElementById("platformSelect").value,
+    price: document.getElementById("price").value.trim(),
+    link: document.getElementById("link").value.trim()
+  });
+
+  localStorage.setItem("vitra_produtos_v1",JSON.stringify(products));
+  this.reset();
+  renderProducts();
+});
+
+function renderProducts() {
+  var area = document.getElementById("products");
+  area.textContent = "";
+
+  if (!products.length) {
+    area.textContent = "Nenhum produto cadastrado.";
+    return;
+  }
+
+  products.forEach(function(p,index) {
+    var card = document.createElement("div");
+    card.className = "product";
+
+    var title = document.createElement("strong");
+    title.textContent = p.name;
+    card.appendChild(title);
+
+    var info = document.createElement("p");
+    info.textContent = p.platform + (p.price ? " • R$ " + p.price : "");
+    card.appendChild(info);
+
+    if (p.link) {
+      var link = document.createElement("a");
+      link.href = p.link;
+      link.target = "_blank";
+      link.rel = "noopener noreferrer";
+      link.textContent = "Abrir link do produto";
+      card.appendChild(link);
     }
 
-    function showDashboard() {
-      document.getElementById("loginScreen").classList.add("hidden");
-      document.getElementById("dashboard").classList.remove("hidden");
+    var remove = document.createElement("button");
+    remove.className = "secondary";
+    remove.textContent = "Excluir produto";
+    remove.addEventListener("click",function() {
+      products.splice(index,1);
+      localStorage.setItem("vitra_produtos_v1",JSON.stringify(products));
       renderProducts();
-    }
-
-    document.getElementById("loginForm").addEventListener("submit", function(e) {
-      e.preventDefault();
-      var pin = document.getElementById("pin").value;
-      if (pin === "1234") {
-        sessionStorage.setItem("vitra_logged", "true");
-        document.getElementById("error").textContent = "";
-        showDashboard();
-      } else {
-        document.getElementById("error").textContent = "PIN incorreto. Tente novamente.";
-      }
     });
 
-    document.getElementById("productForm").addEventListener("submit", function(e) {
-      e.preventDefault();
+    card.appendChild(remove);
+    area.appendChild(card);
+  });
+}
 
-      products.push({
-        name: document.getElementById("productName").value.trim(),
-        platform: document.getElementById("platform").value,
-        price: document.getElementById("price").value.trim(),
-        link: document.getElementById("link").value.trim()
-      });
+document.getElementById("logout").addEventListener("click",function() {
+  sessionStorage.removeItem("vitra_logged");
+  document.getElementById("dashboard").classList.add("hidden");
+  document.getElementById("loginScreen").classList.remove("hidden");
+  document.getElementById("pin").value = "";
+});
 
-      localStorage.setItem("vitra_produtos_v1", JSON.stringify(products));
-      this.reset();
-      renderProducts();
-    });
+savePlatforms();
 
-    function renderProducts() {
-      var area = document.getElementById("products");
-      area.textContent = "";
-
-      if (products.length === 0) {
-        area.textContent = "Nenhum produto cadastrado.";
-        return;
-      }
-
-      products.forEach(function(p, index) {
-        var card = document.createElement("div");
-        card.className = "panel";
-
-        var title = document.createElement("strong");
-        title.textContent = p.name;
-        card.appendChild(title);
-
-        var details = document.createElement("p");
-        details.textContent = p.platform + (p.price ? " • R$ " + p.price : "");
-        card.appendChild(details);
-
-        if (p.link) {
-          var link = document.createElement("a");
-          link.href = p.link;
-          link.target = "_blank";
-          link.rel = "noopener noreferrer";
-          link.textContent = "Abrir link do produto";
-          link.style.color = "#55d9ff";
-          card.appendChild(link);
-        }
-
-        var remove = document.createElement("button");
-        remove.className = "secondary";
-        remove.textContent = "Excluir produto";
-        remove.addEventListener("click", function() {
-          products.splice(index, 1);
-          localStorage.setItem("vitra_produtos_v1", JSON.stringify(products));
-          renderProducts();
-        });
-        card.appendChild(remove);
-        area.appendChild(card);
-      });
-    }
-
-    document.getElementById("logout").addEventListener("click", function() {
-      sessionStorage.removeItem("vitra_logged");
-      document.getElementById("dashboard").classList.add("hidden");
-      document.getElementById("loginScreen").classList.remove("hidden");
-      document.getElementById("pin").value = "";
-    });
-
-    if (sessionStorage.getItem("vitra_logged") === "true") {
-      showDashboard();
-    }
-  </script>
+if (sessionStorage.getItem("vitra_logged") === "true") {
+  showDashboard();
+}
+</script>
 </body>
 </html>
