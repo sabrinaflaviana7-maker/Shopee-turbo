@@ -2,593 +2,297 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#171126">
-<title>VITRA | Sua vitrine de ofertas</title>
-
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#ee4d2d">
+<title>VITRA | Achadinhos Shopee</title>
 <style>
-:root {
-  --bg: #f7f5fc;
-  --text: #211b32;
-  --muted: #716b80;
-  --card: #ffffff;
-  --border: #e9e3f2;
-  --pink: #ef3caa;
-  --purple: #7939e8;
-  --orange: #ff8118;
-  --green: #159b65;
-}
-* { box-sizing: border-box; }
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  color: var(--text);
-  background: var(--bg);
-}
-button, input, select { font: inherit; }
-button, a { -webkit-tap-highlight-color: transparent; }
-button { cursor: pointer; }
-.topbar {
-  padding: 17px 20px;
-  color: white;
-  background: #171126;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-}
-.brand {
-  font-size: 30px;
-  font-weight: 900;
-  letter-spacing: 1px;
-  background: linear-gradient(90deg,#ff9635,#ff49a7,#a77aff,#56d7ff,#68ec9b);
-  color: transparent;
-  background-clip: text;
-}
-.cart-button {
-  border: 1px solid #655276;
-  background: #2b203d;
-  color: white;
-  padding: 11px 14px;
-  border-radius: 12px;
-  font-weight: bold;
-}
-.hero {
-  padding: 34px 20px 30px;
-  color: white;
-  background: linear-gradient(120deg,#ff8118,#ed3ca7 48%,#7939e8);
-}
-.hero-inner, main {
-  width: min(100% - 32px, 1050px);
-  margin: auto;
-}
-.hero h1 {
-  margin: 0 0 12px;
-  font-size: clamp(29px,6vw,45px);
-  line-height: 1.1;
-}
-.hero p { line-height: 1.5; margin: 0; max-width: 550px; }
-main { padding-top: 22px; padding-bottom: 45px; }
-.tools {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-  margin-bottom: 20px;
-}
-.tools input, .tools select {
-  flex: 1 1 180px;
-  min-width: 0;
-  padding: 13px;
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  background: white;
-  color: var(--text);
-}
-.section-heading {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 10px;
-  margin: 20px 0 15px;
-}
-.section-heading h2 { margin: 0; font-size: 22px; }
-.muted { color: var(--muted); font-size: 14px; }
-.grid {
-  display: grid;
-  grid-template-columns: repeat(2,minmax(0,1fr));
-  gap: 13px;
-}
-.card {
-  min-width: 0;
-  overflow: hidden;
-  border: 1px solid var(--border);
-  border-radius: 17px;
-  background: var(--card);
-  box-shadow: 0 5px 20px #33204b0a;
-}
-.product-image {
-  width: 100%;
-  aspect-ratio: 1 / 1;
-  object-fit: cover;
-  display: block;
-  background: #eee8f8;
-}
-.image-placeholder {
-  aspect-ratio: 1 / 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 54px;
-  background: linear-gradient(135deg,#ffe4d1,#f9d9f0,#e5ddff);
-}
-.card-body { padding: 12px; }
-.platform {
-  display: inline-block;
-  padding: 6px 8px;
-  border-radius: 20px;
-  background: #f0e8ff;
-  color: #6c2bc7;
-  font-size: 11px;
-  font-weight: bold;
-  margin-bottom: 9px;
-}
-.product-name {
-  font-size: 15px;
-  font-weight: bold;
-  line-height: 1.35;
-  overflow-wrap: anywhere;
-}
-.product-description {
-  font-size: 13px;
-  line-height: 1.4;
-  color: var(--muted);
-  margin-top: 7px;
-  overflow-wrap: anywhere;
-}
-.price {
-  color: #21152f;
-  font-weight: 900;
-  font-size: 21px;
-  margin: 12px 0;
-}
-.action {
-  display: block;
-  width: 100%;
-  padding: 12px 8px;
-  margin-top: 8px;
-  border: 0;
-  border-radius: 10px;
-  text-align: center;
-  text-decoration: none;
-  font-size: 14px;
-  font-weight: bold;
-}
-.add {
-  color: white;
-  background: linear-gradient(100deg,var(--pink),var(--purple));
-}
-.buy {
-  color: #5630a5;
-  background: #f0e8ff;
-}
-.empty {
-  padding: 32px 17px;
-  text-align: center;
-  border: 1px dashed #d4c6e7;
-  border-radius: 17px;
-  background: white;
-}
-.empty .emoji { font-size: 44px; }
-.empty h3 { margin-bottom: 8px; }
-.empty p { color: var(--muted); line-height: 1.5; }
-.cart-panel {
-  margin-top: 26px;
-  padding: 18px;
-  border: 1px solid var(--border);
-  border-radius: 17px;
-  background: white;
-}
-.cart-panel h2 { margin-top: 0; }
-.cart-item {
-  padding: 13px 0;
-  border-bottom: 1px solid var(--border);
-}
-.cart-item:last-child { border-bottom: 0; }
-.cart-item-top {
-  display: flex;
-  justify-content: space-between;
-  gap: 12px;
-}
-.cart-item-name { font-weight: bold; overflow-wrap: anywhere; }
-.qty-row {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-top: 10px;
-  flex-wrap: wrap;
-}
-.qty-row button {
-  min-width: 38px;
-  min-height: 38px;
-  border: 1px solid var(--border);
-  border-radius: 9px;
-  background: #f5f0fc;
-}
-.remove { color: #b42354; }
-.total {
-  display: flex;
-  justify-content: space-between;
-  gap: 12px;
-  font-size: 19px;
-  font-weight: bold;
-  padding-top: 16px;
-}
-.notice {
-  padding: 12px;
-  border-radius: 10px;
-  background: #fff4df;
-  color: #794a09;
-  font-size: 13px;
-  line-height: 1.5;
-  margin-top: 14px;
-}
-footer {
-  padding: 25px 15px;
-  background: #171126;
-  color: #d7cfe5;
-  text-align: center;
-  font-size: 13px;
-  line-height: 1.6;
-}
-.hidden { display: none !important; }
-
-@media(min-width:650px) {
-  .grid { grid-template-columns: repeat(3,minmax(0,1fr)); gap: 18px; }
-  .card-body { padding: 16px; }
-}
-@media(min-width:900px) {
-  .grid { grid-template-columns: repeat(4,minmax(0,1fr)); }
-}
+*{box-sizing:border-box}
+body{margin:0;background:#fff8f5;color:#30202a;font-family:Arial,sans-serif}
+button,input,select{font:inherit}
+button,a{-webkit-tap-highlight-color:transparent}
+header{background:#21121b;color:white;padding:15px 18px;display:flex;align-items:center;justify-content:space-between;gap:10px}
+.logo{font-size:34px;font-weight:900;background:linear-gradient(90deg,#ffbd59,#ff526c,#e8a0ff);color:transparent;background-clip:text}
+.tagline{font-size:12px;color:#f4dce6;margin-top:2px}
+.cartButton{border:1px solid #76505e;background:#3a2030;color:white;padding:12px;border-radius:12px;font-weight:bold;white-space:nowrap}
+.hero{padding:32px 20px;color:white;background:linear-gradient(120deg,#ff8a20,#ee4d2d 48%,#f23e89)}
+.hero h1{font-size:clamp(28px,7vw,42px);line-height:1.1;margin:0 0 12px}
+.hero p{line-height:1.5;margin:0}
+main{max-width:1050px;margin:auto;padding:22px 15px 40px}
+.heading{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:12px 0 16px}
+.heading h2{margin:0;font-size:22px}
+.muted{font-size:13px;color:#806c77;line-height:1.5}
+.tools{display:grid;gap:10px;margin-bottom:18px}
+input,select{width:100%;padding:13px;border:1px solid #efdce3;border-radius:11px;background:white;color:#30202a}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.card{min-width:0;overflow:hidden;background:white;border:1px solid #f1dfe5;border-radius:16px;box-shadow:0 5px 18px #7c2b420b}
+.image{width:100%;aspect-ratio:1/1;object-fit:contain;background:#fff0e9;display:block}
+.placeholder{aspect-ratio:1/1;display:flex;align-items:center;justify-content:center;font-size:52px;background:linear-gradient(135deg,#ffe6c9,#ffd9e8)}
+.body{padding:11px}
+.badge{display:inline-block;background:#ffebe3;color:#d84727;font-size:11px;font-weight:bold;padding:6px 8px;border-radius:20px;margin-bottom:8px}
+.name{font-weight:bold;line-height:1.35;overflow-wrap:anywhere}
+.description{font-size:13px;color:#806c77;line-height:1.4;margin-top:7px;overflow-wrap:anywhere}
+.price{font-size:20px;font-weight:900;margin:12px 0;color:#d73c27}
+.btn{display:block;width:100%;border:0;border-radius:10px;padding:12px 7px;margin-top:8px;text-align:center;text-decoration:none;font-size:13px;font-weight:bold;cursor:pointer}
+.primary{background:linear-gradient(90deg,#ff7a24,#ee4d2d,#ef387b);color:white}
+.secondary{background:#fff0e9;color:#d53e29}
+.empty{padding:28px 15px;background:white;border:1px dashed #e9c6d2;border-radius:15px;text-align:center}
+.empty .emoji{font-size:43px}
+.empty h3{margin:10px 0}
+.empty p{color:#806c77;line-height:1.5}
+.hidden{display:none!important}
+.cart{margin-top:27px;background:white;border:1px solid #f1dfe5;border-radius:16px;padding:16px}
+.cartItem{padding:13px 0;border-bottom:1px solid #f1dfe5}
+.cartItem:last-child{border-bottom:0}
+.cartTop{display:flex;justify-content:space-between;gap:10px}
+.itemName{font-weight:bold;overflow-wrap:anywhere}
+.qty{display:flex;align-items:center;gap:9px;flex-wrap:wrap;margin-top:10px}
+.qty button{min-width:38px;min-height:38px;border:1px solid #efdce3;border-radius:9px;background:#fff3ed}
+.remove{color:#bd3156}
+.total{display:flex;justify-content:space-between;gap:10px;font-size:19px;font-weight:bold;padding-top:16px}
+.notice{background:#fff3df;color:#795018;padding:12px;border-radius:10px;font-size:12px;line-height:1.5;margin-top:13px}
+footer{background:#21121b;color:#e8d7df;text-align:center;padding:23px 15px;font-size:13px;line-height:1.6}
+@media(min-width:650px){.grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:17px}.body{padding:15px}}
+@media(min-width:900px){.grid{grid-template-columns:repeat(4,minmax(0,1fr))}}
 </style>
 </head>
-
 <body>
-
-<header class="topbar">
+<header>
   <div>
-    <div class="brand">VITRA</div>
-    <div style="font-size:12px;color:#d7cfe5">SUA VITRINE DIGITAL</div>
+    <div class="logo">VITRA</div>
+    <div class="tagline">ACHADINHOS DA SHOPEE 🧡</div>
   </div>
-  <button class="cart-button" id="goCart">
-    🛒 Carrinho <span id="cartCount">0</span>
-  </button>
+  <button class="cartButton" id="goCart">🛒 Carrinho <span id="count">0</span></button>
 </header>
 
 <section class="hero">
-  <div class="hero-inner">
-    <h1>Encontre algo que você vai amar! ✨</h1>
-    <p>Confira os produtos selecionados, descubra ofertas e encontre tudo em um só lugar.</p>
+  <div style="max-width:1000px;margin:auto">
+    <h1>Achadinhos que você vai amar! 🧡</h1>
+    <p>Descubra produtos selecionados e confira cada oferta diretamente na Shopee.</p>
   </div>
 </section>
 
 <main>
-  <div class="section-heading">
-    <h2>🛍️ Nossa vitrine</h2>
-    <span class="muted" id="productCount">0 produtos</span>
+  <div class="heading">
+    <h2>🛍️ Vitrine Shopee</h2>
+    <span class="muted" id="number">0 produtos</span>
   </div>
 
   <div class="tools">
-    <input id="search" type="search" placeholder="🔎 Buscar produto...">
-    <select id="filterPlatform">
-      <option value="">Todas as plataformas</option>
+    <input id="search" type="search" placeholder="🔎 Buscar achadinho...">
+    <select id="sort">
+      <option value="default">Ordenar produtos</option>
+      <option value="low">Menor preço primeiro</option>
+      <option value="high">Maior preço primeiro</option>
+      <option value="name">Nome A–Z</option>
     </select>
   </div>
 
-  <div id="productGrid" class="grid"></div>
-  <div id="emptyStore" class="empty hidden">
+  <div id="grid" class="grid"></div>
+
+  <div id="empty" class="empty hidden">
     <div class="emoji">🛍️</div>
-    <h3>Sua vitrine está sendo preparada!</h3>
-    <p>Os produtos aparecerão aqui assim que forem cadastrados e adicionados ao link público da VITRA.</p>
+    <h3>Sua vitrine está vazia</h3>
+    <p>O responsável pela vitrine ainda não adicionou produtos. Volte mais tarde para conferir os achadinhos!</p>
   </div>
 
   <div id="noResults" class="empty hidden">
     <div class="emoji">🔎</div>
     <h3>Nenhum produto encontrado</h3>
-    <p>Tente outra busca ou escolha uma plataforma diferente.</p>
+    <p>Tente buscar por outro nome.</p>
   </div>
 
-  <section id="cart" class="cart-panel">
-    <div class="section-heading">
+  <section class="cart" id="cart">
+    <div class="heading">
       <h2>🛒 Meu carrinho</h2>
-      <button id="clearCart" class="action buy" style="width:auto;margin:0">Limpar</button>
+      <button id="clear" class="btn secondary" style="width:auto;margin:0">Limpar</button>
     </div>
-
-    <div id="cartItems"></div>
-    <div id="emptyCart" class="muted">Seu carrinho ainda está vazio.</div>
-
-    <div class="total">
-      <span>Total estimado</span>
-      <span id="cartTotal">R$ 0,00</span>
-    </div>
-
-    <div class="notice">
-      Este carrinho é uma lista de produtos para facilitar sua escolha.
-      A compra e o pagamento são realizados diretamente na loja de cada produto.
-      Preços, frete e disponibilidade podem mudar no site oficial.
-    </div>
-    <button id="buyAll" class="action add">IR PARA AS LOJAS DOS PRODUTOS</button>
+    <div id="items"></div>
+    <div id="emptyCart" class="muted">Você ainda não adicionou produtos.</div>
+    <div class="total"><span>Total estimado</span><span id="total">R$ 0,00</span></div>
+    <div class="notice">O carrinho é uma lista para organizar sua escolha. A compra, o frete e o pagamento são realizados na Shopee. Preços e disponibilidade podem mudar.</div>
+    <button id="checkout" class="btn primary">ABRIR PRODUTOS NA SHOPEE</button>
   </section>
 </main>
 
 <footer>
-  <strong>VITRA</strong><br>
+  <strong>VITRA • ACHADINHOS SHOPEE</strong><br>
   Tudo que você encontra. Em um só lugar.<br>
-  As compras são finalizadas nas plataformas oficiais.
+  As compras são realizadas diretamente na plataforma Shopee.
 </footer>
 
 <script>
-(function() {
-  "use strict";
+(function(){
+"use strict";
+var products=[];
+var cart=[];
+var params=new URLSearchParams(location.search);
 
-  var params = new URLSearchParams(window.location.search);
-  var products = [];
-  var cart = [];
-
-  try {
-    var raw = params.get("vitrine");
-    if (raw) {
-      var parsed = JSON.parse(raw);
-      if (Array.isArray(parsed)) products = parsed;
-      else if (parsed && Array.isArray(parsed.produtos)) products = parsed.produtos;
-    }
-  } catch (e) {
-    products = [];
+try{
+  var data=params.get("vitrine");
+  if(data){
+    var parsed=JSON.parse(data);
+    if(Array.isArray(parsed))products=parsed;
+    else if(parsed&&Array.isArray(parsed.produtos))products=parsed.produtos;
   }
+}catch(e){
+  products=[];
+}
 
-  products = products.filter(function(p) {
-    return p && typeof p === "object" &&
-      typeof p.name === "string" && p.name.trim() &&
-      typeof p.link === "string" && /^https?:\/\//i.test(p.link);
-  }).map(function(p, i) {
-    return {
-      id: String(p.id || ("produto-" + i)),
-      name: p.name.trim(),
-      platform: String(p.platform || "Outra"),
-      price: Number(String(p.price || "0").replace(",", ".")) || 0,
-      description: String(p.description || ""),
-      image: typeof p.image === "string" &&
-        /^https:\/\//i.test(p.image) ? p.image : "",
-      link: p.link
-    };
-  });
+products=products.filter(function(p){
+  return p&&typeof p.name==="string"&&p.name.trim()&&
+    typeof p.link==="string"&&/^https:\/\//i.test(p.link);
+}).map(function(p,i){
+  var image="";
+  try{
+    var u=new URL(p.image||"");
+    if(u.protocol==="https:")image=u.href;
+  }catch(e){}
+  return {
+    id:String(p.id||("produto-"+i)),
+    name:p.name.trim(),
+    platform:"Shopee",
+    price:Math.max(0,Number(String(p.price||"0").replace(",","."))||0),
+    description:String(p.description||""),
+    image:image,
+    link:p.link
+  };
+});
 
-  try {
-    cart = JSON.parse(localStorage.getItem("vitra_public_cart") || "[]");
-    if (!Array.isArray(cart)) cart = [];
-  } catch (e) {
-    cart = [];
-  }
+try{
+  cart=JSON.parse(localStorage.getItem("vitra_shopee_cart")||"[]");
+  if(!Array.isArray(cart))cart=[];
+}catch(e){cart=[]}
 
-  function money(value) {
-    return value.toLocaleString("pt-BR", {
-      style: "currency",
-      currency: "BRL"
-    });
-  }
-
-  function saveCart() {
-    try {
-      localStorage.setItem("vitra_public_cart", JSON.stringify(cart));
-    } catch (e) {}
-  }
-
-  function el(id) {
-    return document.getElementById(id);
-  }
-
-  function make(tag, className, text) {
-    var node = document.createElement(tag);
-    if (className) node.className = className;
-    if (text !== undefined) node.textContent = text;
-    return node;
-  }
-
-  function addProductToCart(id) {
-    var product = products.find(function(p) { return p.id === id; });
-    if (!product) return;
-
-    var existing = cart.find(function(item) { return item.id === id; });
-    if (existing) existing.qty++;
-    else cart.push({ id: id, qty: 1 });
-
-    saveCart();
-    renderCart();
-  }
-
-  function renderProducts() {
-    var grid = el("productGrid");
-    var query = el("search").value.trim().toLowerCase();
-    var selected = el("filterPlatform").value;
-    grid.textContent = "";
-
-    var filtered = products.filter(function(p) {
-      return (!selected || p.platform === selected) &&
-        (p.name.toLowerCase().includes(query) ||
-         p.description.toLowerCase().includes(query) ||
-         p.platform.toLowerCase().includes(query));
-    });
-
-    el("productCount").textContent =
-      filtered.length + (filtered.length === 1 ? " produto" : " produtos");
-
-    el("emptyStore").classList.toggle("hidden", products.length > 0);
-    el("noResults").classList.toggle("hidden",
-      products.length === 0 || filtered.length > 0);
-
-    filtered.forEach(function(p) {
-      var card = make("article", "card");
-
-      if (p.image) {
-        var img = make("img", "product-image");
-        img.src = p.image;
-        img.alt = p.name;
-        img.loading = "lazy";
-        img.onerror = function() {
-          var placeholder = make("div", "image-placeholder", "🛍️");
-          img.replaceWith(placeholder);
-        };
-        card.appendChild(img);
-      } else {
-        card.appendChild(make("div", "image-placeholder", "🛍️"));
-      }
-
-      var body = make("div", "card-body");
-      body.appendChild(make("span", "platform", p.platform));
-      body.appendChild(make("div", "product-name", p.name));
-
-      if (p.description) {
-        body.appendChild(make("div", "product-description", p.description));
-      }
-
-      var price = make("div", "price",
-        p.price > 0 ? money(p.price) : "Confira o preço");
-      body.appendChild(price);
-
-      var add = make("button", "action add", "🛒 Adicionar ao carrinho");
-      add.type = "button";
-      add.addEventListener("click", function() {
-        addProductToCart(p.id);
-      });
-      body.appendChild(add);
-
-      var buy = make("a", "action buy", "Ver na loja oficial ↗");
-      buy.href = p.link;
-      buy.target = "_blank";
-      buy.rel = "noopener noreferrer";
-      body.appendChild(buy);
-
-      card.appendChild(body);
-      grid.appendChild(card);
-    });
-  }
-
-  function renderCart() {
-    var area = el("cartItems");
-    area.textContent = "";
-
-    cart = cart.filter(function(item) {
-      return products.some(function(p) { return p.id === item.id; }) &&
-        Number(item.qty) > 0;
-    });
-
-    var count = cart.reduce(function(sum, item) {
-      return sum + item.qty;
-    }, 0);
-
-    var total = 0;
-
-    cart.forEach(function(item) {
-      var p = products.find(function(product) { return product.id === item.id; });
-      if (!p) return;
-      total += p.price * item.qty;
-
-      var row = make("div", "cart-item");
-      var top = make("div", "cart-item-top");
-      top.appendChild(make("div", "cart-item-name", p.name));
-      top.appendChild(make("strong", "", money(p.price * item.qty)));
-      row.appendChild(top);
-
-      row.appendChild(make("div", "muted", p.platform));
-
-      var qty = make("div", "qty-row");
-      qty.appendChild(make("span", "", "Quantidade:"));
-
-      var minus = make("button", "", "−");
-      minus.type = "button";
-      minus.setAttribute("aria-label", "Diminuir quantidade");
-      minus.addEventListener("click", function() {
-        item.qty--;
-        renderCart();
-      });
-      qty.appendChild(minus);
-      qty.appendChild(make("strong", "", String(item.qty)));
-
-      var plus = make("button", "", "+");
-      plus.type = "button";
-      plus.setAttribute("aria-label", "Aumentar quantidade");
-      plus.addEventListener("click", function() {
-        item.qty++;
-        renderCart();
-      });
-      qty.appendChild(plus);
-
-      var remove = make("button", "remove", "Remover");
-      remove.type = "button";
-      remove.addEventListener("click", function() {
-        cart = cart.filter(function(c) { return c.id !== item.id; });
-        renderCart();
-      });
-      qty.appendChild(remove);
-      row.appendChild(qty);
-      area.appendChild(row);
-    });
-
-    el("cartCount").textContent = String(count);
-    el("cartTotal").textContent = money(total);
-    el("emptyCart").classList.toggle("hidden", cart.length > 0);
-    el("buyAll").disabled = cart.length === 0;
-    el("buyAll").style.opacity = cart.length === 0 ? ".5" : "1";
-    saveCart();
-  }
-
-  function renderFilters() {
-    var select = el("filterPlatform");
-    var names = [];
-
-    products.forEach(function(p) {
-      if (!names.includes(p.platform)) names.push(p.platform);
-    });
-
-    names.sort().forEach(function(name) {
-      var option = make("option", "", name);
-      option.value = name;
-      select.appendChild(option);
-    });
-  }
-
-  el("search").addEventListener("input", renderProducts);
-  el("filterPlatform").addEventListener("change", renderProducts);
-
-  el("goCart").addEventListener("click", function() {
-    el("cart").scrollIntoView({ behavior: "smooth", block: "start" });
-  });
-
-  el("clearCart").addEventListener("click", function() {
-    cart = [];
-    renderCart();
-  });
-
-  el("buyAll").addEventListener("click", function() {
-    var links = [];
-    cart.forEach(function(item) {
-      var p = products.find(function(product) { return product.id === item.id; });
-      if (p && !links.includes(p.link)) links.push(p.link);
-    });
-
-    if (!links.length) return;
-
-    if (links.length > 1) {
-      alert("Você será direcionado para a loja de cada produto. Por segurança, abra os links um por vez.");
-    }
-
-    window.open(links[0], "_blank", "noopener,noreferrer");
-  });
-
-  renderFilters();
-  renderProducts();
+function $(id){return document.getElementById(id)}
+function make(tag,cls,text){
+  var n=document.createElement(tag);
+  if(cls)n.className=cls;
+  if(text!==undefined)n.textContent=text;
+  return n;
+}
+function money(n){
+  return n.toLocaleString("pt-BR",{style:"currency",currency:"BRL"});
+}
+function saveCart(){
+  try{localStorage.setItem("vitra_shopee_cart",JSON.stringify(cart))}catch(e){}
+}
+function add(id){
+  var item=cart.find(function(x){return x.id===id});
+  if(item)item.qty++;
+  else cart.push({id:id,qty:1});
   renderCart();
+}
+function renderProducts(){
+  var grid=$("grid");
+  grid.textContent="";
+  var q=$("search").value.trim().toLowerCase();
+  var list=products.filter(function(p){
+    return (p.name+" "+p.description).toLowerCase().includes(q);
+  });
+
+  if($("sort").value==="low")list.sort(function(a,b){return a.price-b.price});
+  if($("sort").value==="high")list.sort(function(a,b){return b.price-a.price});
+  if($("sort").value==="name")list.sort(function(a,b){return a.name.localeCompare(b.name,"pt-BR")});
+
+  $("number").textContent=list.length+(list.length===1?" produto":" produtos");
+  $("empty").classList.toggle("hidden",products.length>0);
+  $("noResults").classList.toggle("hidden",products.length===0||list.length>0);
+
+  list.forEach(function(p){
+    var card=make("article","card");
+    if(p.image){
+      var img=make("img","image");
+      img.src=p.image;img.alt=p.name;img.loading="lazy";
+      img.onerror=function(){img.replaceWith(make("div","placeholder","🛍️"))};
+      card.appendChild(img);
+    }else{
+      card.appendChild(make("div","placeholder","🛍️"));
+    }
+
+    var body=make("div","body");
+    body.appendChild(make("span","badge","🧡 PRODUTO SHOPEE"));
+    body.appendChild(make("div","name",p.name));
+    if(p.description)body.appendChild(make("div","description",p.description));
+    body.appendChild(make("div","price",p.price>0?money(p.price):"Confira o preço"));
+
+    var addButton=make("button","btn primary","🛒 Adicionar ao carrinho");
+    addButton.type="button";
+    addButton.addEventListener("click",function(){add(p.id)});
+    body.appendChild(addButton);
+
+    var buy=make("a","btn secondary","VER NA SHOPEE ↗");
+    buy.href=p.link;buy.target="_blank";buy.rel="noopener noreferrer";
+    body.appendChild(buy);
+    card.appendChild(body);
+    grid.appendChild(card);
+  });
+}
+function renderCart(){
+  $("items").textContent="";
+  cart=cart.filter(function(item){
+    return products.some(function(p){return p.id===item.id})&&item.qty>0;
+  });
+  var total=0,count=0;
+
+  cart.forEach(function(item){
+    var p=products.find(function(x){return x.id===item.id});
+    if(!p)return;
+    total+=p.price*item.qty;
+    count+=item.qty;
+
+    var row=make("div","cartItem");
+    var top=make("div","cartTop");
+    top.appendChild(make("div","itemName",p.name));
+    top.appendChild(make("strong","",money(p.price*item.qty)));
+    row.appendChild(top);
+    row.appendChild(make("div","muted","Shopee"));
+
+    var controls=make("div","qty");
+    controls.appendChild(make("span","","Quantidade:"));
+    var minus=make("button","","−");
+    minus.type="button";
+    minus.addEventListener("click",function(){item.qty--;renderCart()});
+    controls.appendChild(minus);
+    controls.appendChild(make("strong","",String(item.qty)));
+    var plus=make("button","","+");
+    plus.type="button";
+    plus.addEventListener("click",function(){item.qty++;renderCart()});
+    controls.appendChild(plus);
+    var remove=make("button","remove","Remover");
+    remove.type="button";
+    remove.addEventListener("click",function(){
+      cart=cart.filter(function(x){return x.id!==item.id});
+      renderCart();
+    });
+    controls.appendChild(remove);
+    row.appendChild(controls);
+    $("items").appendChild(row);
+  });
+
+  $("count").textContent=String(count);
+  $("total").textContent=money(total);
+  $("emptyCart").classList.toggle("hidden",cart.length>0);
+  $("checkout").disabled=cart.length===0;
+  $("checkout").style.opacity=cart.length===0?".5":"1";
+  saveCart();
+}
+
+$("search").addEventListener("input",renderProducts);
+$("sort").addEventListener("change",renderProducts);
+$("goCart").addEventListener("click",function(){
+  $("cart").scrollIntoView({behavior:"smooth",block:"start"});
+});
+$("clear").addEventListener("click",function(){cart=[];renderCart()});
+$("checkout").addEventListener("click",function(){
+  var p=cart.length?products.find(function(x){return x.id===cart[0].id}):null;
+  if(!p)return;
+  if(cart.length>1)alert("Você adicionou produtos diferentes. Vamos abrir o primeiro link; os demais podem ser acessados pelos botões da vitrine.");
+  window.open(p.link,"_blank","noopener,noreferrer");
+});
+
+renderProducts();
+renderCart();
 })();
 </script>
-
 </body>
 </html>
