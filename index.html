@@ -4,15 +4,78 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#ff5a00">
-  <title>Shopee Turbo</title>
+  <meta name="robots" content="noindex">
+  <title>VITRA — Painel</title>
+
   <meta http-equiv="refresh" content="0; url=./shopee_turbo_final.html">
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      background: #111111;
+      color: #ffffff;
+      font-family: Arial, sans-serif;
+      text-align: center;
+    }
+
+    .painel {
+      width: 100%;
+      max-width: 420px;
+    }
+
+    .logo {
+      color: #ff5a00;
+      font-size: 42px;
+      font-weight: 900;
+      letter-spacing: 5px;
+    }
+
+    p {
+      color: #cccccc;
+      line-height: 1.6;
+    }
+
+    a {
+      display: inline-block;
+      margin-top: 16px;
+      padding: 15px 24px;
+      border-radius: 10px;
+      background: #ff5a00;
+      color: #ffffff;
+      font-weight: bold;
+      text-decoration: none;
+    }
+  </style>
 </head>
 
 <body>
-  <p>Abrindo Shopee Turbo...</p>
+  <main class="painel">
+    <div class="logo">VITRA</div>
+    <p>Abrindo seu painel...</p>
+    <p>Se a página não abrir automaticamente, toque no botão abaixo.</p>
+
+    <a href="./shopee_turbo_final.html">
+      ENTRAR NO VITRA
+    </a>
+  </main>
 
   <script>
-    window.location.replace("./shopee_turbo_final.html");
+    (function () {
+      var destino = "./shopee_turbo_final.html";
+
+      window.setTimeout(function () {
+        window.location.replace(destino);
+      }, 500);
+    })();
   </script>
 </body>
 </html>
